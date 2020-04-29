@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import user from '@/views/user/user'
-import userList from '@/views/user/user-list'
+import admin from '@/views/admin'
 Vue.use(VueRouter)
 
 const VueRouterPush = VueRouter.prototype.push
@@ -12,21 +11,32 @@ VueRouter.prototype.push = function push(to) {
 
 const routes = [
     {
-        path: '/user',
-        redirect: '/user/userlist',
-        name: '用户管理',
-        component: user,
-        children: [
-            {
-                path: 'userlist',
-                name: '用户列表',
-                component: userList
-            },
-            {
-                path: 'userAdd',
-                name: '用户新增',
-                component: () => import('@/views/user/user-add')
-            }]
+        path: '/admin',
+        alias: '/',
+        redirect: '/admin/home',
+        name: '后台',
+        component: admin,
+        children: [{
+            path: 'home',
+            name: '首页',
+            component: () => import('@/views/home')
+        }, {
+            path: 'user',
+            redirect: 'user/userlist',
+            name: '用户管理',
+            component: () => import('@/views/user/user'),
+            children: [
+                {
+                    path: 'userlist',
+                    name: '用户列表',
+                    component: () => import('@/views/user/user-list')
+                },
+                {
+                    path: 'userAdd',
+                    name: '用户新增',
+                    component: () => import('@/views/user/user-add')
+                }]
+        }]
     }
 ]
 

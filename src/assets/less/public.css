@@ -41,3 +41,7 @@ td, th {
     padding: 0;
     text-align: left;
 }
+
+a {
+    text-decoration: none;
+}

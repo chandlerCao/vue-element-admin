@@ -10,17 +10,17 @@
 			style="height: 100%"
 			:collapse="isCollapse"
 		>
-			<el-menu-item index="/home">
+			<el-menu-item index="/admin/home">
 				<i class="el-icon-s-home"></i>
 				<span slot="title">首页</span>
 			</el-menu-item>
-			<el-submenu index="/user/userlist">
+			<el-submenu index="/admin/user/userlist">
 				<template slot="title">
 					<i class="el-icon-user-solid"></i>
 					<span>用户管理</span>
 				</template>
-				<el-menu-item index="/user/userlist">用户列表</el-menu-item>
-				<el-menu-item index="/user/useradd">用户新增</el-menu-item>
+				<el-menu-item index="/admin/user/userlist">用户列表</el-menu-item>
+				<el-menu-item index="/admin/user/useradd">用户新增</el-menu-item>
 			</el-submenu>
 		</el-menu>
 	</div>
