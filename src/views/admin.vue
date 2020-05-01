@@ -17,7 +17,9 @@
 						<tabs></tabs>
 					</el-header>
 					<el-main>
-						<router-view style="padding: 15px;"></router-view>
+						<transition name="slide-fade">
+							<router-view style="padding: 15px;"></router-view>
+						</transition>
 					</el-main>
 				</el-container>
 			</el-main>
