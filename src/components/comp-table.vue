@@ -30,6 +30,7 @@
 				background
 				@size-change="reloadTableHandle"
 				@current-change="reloadTableHandle"
+				hide-on-single-page
 			></el-pagination>
 		</div>
 	</div>
@@ -56,7 +57,7 @@ export default {
 	data() {
 		return {
 			formDataVal: {}, // 查询表格的参数
-			tableData: new Array(30).fill({
+			tableData: new Array(10).fill({
 				date: '2020-04-29 17:53:00',
 				name: '曹贱贱',
 				age: 23,
@@ -72,10 +73,9 @@ export default {
 		}
 	},
 	mounted() {
-		this.tableHeight = this.$el.offsetHeight - 50
-		window.onresize = () => {
-			this.tableHeight = this.$el.offsetHeight - 50
-		}
+		this.tableHeight =
+			this.$el.offsetHeight -
+			this.$el.getElementsByClassName('pagination-box')[0].offsetHeight
 	},
 	methods: {
 		handleSizeChange() {},
@@ -101,8 +101,7 @@ export default {
 	height: 100%;
 }
 .pagination-box {
-	background-color: #fff;
-	padding-top: 10px;
 	text-align: right;
+	padding-top: 15px;
 }
 </style>

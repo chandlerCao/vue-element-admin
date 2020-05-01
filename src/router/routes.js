@@ -7,6 +7,7 @@ export default [{
     component: () => import('@/views/home')
 }, {
     path: 'system',
+    redirect: 'system/user',
     name: '系统管理',
     meta: {
         icon: 'el-icon-s-tools'
