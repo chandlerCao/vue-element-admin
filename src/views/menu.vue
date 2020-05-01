@@ -16,11 +16,10 @@
 			</el-menu-item>
 			<el-submenu index="/admin/user/userlist">
 				<template slot="title">
-					<i class="el-icon-user-solid"></i>
-					<span>用户管理</span>
+					<i class="el-icon-s-tools"></i>
+					<span>系统管理</span>
 				</template>
-				<el-menu-item index="/admin/user/userlist">用户列表</el-menu-item>
-				<el-menu-item index="/admin/user/useradd">用户新增</el-menu-item>
+				<el-menu-item index="/admin/system/user">用户管理</el-menu-item>
 			</el-submenu>
 		</el-menu>
 	</div>

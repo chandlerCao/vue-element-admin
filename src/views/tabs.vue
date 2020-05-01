@@ -1,5 +1,5 @@
 <template>
-	<div class="tabs">
+	<div class="tabs comp-shadow">
 		<div class="tabs-box">
 			<div
 				class="tabs-item"
@@ -66,7 +66,6 @@ export default {
 .tabs {
 	padding: 8px;
 	background-color: #fff;
-	box-shadow: 0 0 18px rgba(145, 171, 213, 0.5);
 }
 .tabs-box {
 	display: inline-flex;

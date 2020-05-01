@@ -5,10 +5,12 @@ import store from './store'
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import '@/assets/less/public.css'
+import '@/assets/css/public.css'
 
 import request from './utils/request.axios'
 import api from './api'
+
+import 'default-passive-events'
 
 Vue.use(ElementUI);
 

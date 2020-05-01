@@ -45,3 +45,26 @@ td, th {
 a {
     text-decoration: none;
 }
+
+.el-aside {
+    overflow: hidden;
+}
+
+.el-container {
+    height: 100%;
+}
+
+.el-main, .el-header {
+    padding: 0;
+}
+
+.comp-shadow {
+    box-shadow: 0 0 18px rgba(145, 171, 213, 0.5);
+}
+
+.comp-box {
+    padding: 8px 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 18px rgba(145, 171, 213, 0.5);
+}

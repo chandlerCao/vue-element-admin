@@ -1,12 +1,10 @@
 <template>
-	<div id="user-manager">
-		<router-view></router-view>
-	</div>
+	<router-view id="system"></router-view>
 </template>
 
 <script>
 export default {
-	name: 'userManager'
+	name: 'system'
 }
 </script>
 

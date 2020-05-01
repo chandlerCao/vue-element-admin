@@ -4,7 +4,7 @@
 			<nav-menu></nav-menu>
 		</el-aside>
 		<el-container>
-			<el-header style="height: 50px;">
+			<el-header id="comp-header" style="height: 50px;">
 				<div class="nav-menu-fold" @click="collapseHandle">
 					<i v-if="isCollapse" class="el-icon-s-unfold"></i>
 					<i v-else class="el-icon-s-fold"></i>
@@ -12,10 +12,14 @@
 				<breadcrumb style="margin-left: 10px;"></breadcrumb>
 			</el-header>
 			<el-main>
-				<tabs></tabs>
-				<transition name="slide">
-					<router-view style="padding: 15px;"></router-view>
-				</transition>
+				<el-container>
+					<el-header>
+						<tabs></tabs>
+					</el-header>
+					<el-main>
+						<router-view style="padding: 15px;"></router-view>
+					</el-main>
+				</el-container>
 			</el-main>
 		</el-container>
 	</el-container>
@@ -48,23 +52,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.el-aside {
-	overflow: hidden;
-}
-
-.el-main {
-	padding: 0;
-	background-color: #f1f6fa;
-}
-
-.el-header {
+#comp-header {
 	display: flex;
 	align-items: center;
 	padding-left: 0;
 	border-bottom: 1px solid #dcdfe6;
-}
-body > .el-container {
-	margin-bottom: 40px;
 }
 .nav-menu-fold {
 	width: 50px;

@@ -21,21 +21,17 @@ const routes = [
             name: '首页',
             component: () => import('@/views/home')
         }, {
-            path: 'user',
-            redirect: 'user/userlist',
-            name: '用户管理',
-            component: () => import('@/views/user/user'),
+            path: 'system',
+            redirect: 'system/user',
+            name: '系统管理',
+            component: () => import('@/views/system/system'),
             children: [
                 {
-                    path: 'userlist',
-                    name: '用户列表',
-                    component: () => import('@/views/user/user-list')
-                },
-                {
-                    path: 'userAdd',
-                    name: '用户新增',
-                    component: () => import('@/views/user/user-add')
-                }]
+                    path: 'user',
+                    name: '用户管理',
+                    component: () => import('@/views/system/user')
+                }
+            ]
         }]
     }
 ]
