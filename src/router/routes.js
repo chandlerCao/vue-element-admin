@@ -4,7 +4,7 @@ export default [{
     meta: {
         icon: 'el-icon-s-home'
     },
-    component: () => import('@/views/home')
+    component: () => import('@/views/admin/home')
 }, {
     path: 'system',
     redirect: 'system/user',

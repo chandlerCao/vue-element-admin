@@ -15,10 +15,14 @@ export default {
             formData: {
                 formData: {
                     name: {
-                        label: '姓名',
-                        rule: [
-                            { required: true, message: '123', trigger: 'blur' }
-                        ]
+                        label: '姓名'
+                        // rule: [
+                        //     {
+                        //         required: true,
+                        //         message: '请输入活动名称',
+                        //         trigger: 'blur'
+                        //     }
+                        // ]
                     },
                     age: {
                         label: '年龄',

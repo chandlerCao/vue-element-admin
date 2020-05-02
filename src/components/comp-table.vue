@@ -36,7 +36,6 @@
                 background
                 @size-change="reloadTableHandle"
                 @current-change="reloadTableHandle"
-                hide-on-single-page
                 :disabled="tableLoading"
             ></el-pagination>
         </div>

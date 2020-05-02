@@ -1,3 +1,4 @@
+<!-- tab标签页 -->
 <template>
 	<div class="tabs comp-shadow">
 		<div class="tabs-box">

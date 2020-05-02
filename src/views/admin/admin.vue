@@ -29,9 +29,9 @@
 
 <script>
 import eventBus from '@/utils/event-bus'
-import navMenu from '@/views/menu'
-import breadcrumb from '@/views/breadcrumb'
-import tabs from '@/views/tabs'
+import navMenu from './menu'
+import breadcrumb from './breadcrumb'
+import tabs from './tabs'
 export default {
 	name: 'app',
 	components: {

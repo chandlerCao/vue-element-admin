@@ -57,9 +57,9 @@ export default {
     },
     computed: {
         rules() {
-            return Object.values(this.formData).reduce((prev, item) => {
-                prev[item.prop] = item.rule || []
-                return prev
+            return Object.entries(this.formData).reduce((rules, item) => {
+                rules[item[0]] = item[1].rule || []
+                return rules
             }, {})
         }
     },
