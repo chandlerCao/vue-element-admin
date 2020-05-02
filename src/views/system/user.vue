@@ -1,8 +1,8 @@
 <template>
     <comp-complex-table
-        id="user-list"
         :form-data="formData"
         :table-data="tableData"
+        :add-form-data="userAddFormData"
         :requst-method="async (args) => $req($api.user.getUserList, args)"
     ></comp-complex-table>
 </template>
@@ -12,6 +12,7 @@ export default {
     name: 'userList',
     data() {
         return {
+            // 查询表单
             formData: {
                 formData: {
                     name: {
@@ -58,8 +59,16 @@ export default {
                     inline: true,
                     labelWidth: '60px'
                 },
-                submitBtnText: '查询'
+                submitBtn: {
+                    name: '查询',
+                    attrs: {
+                        type: 'primary',
+                        size: 'mini',
+                        icon: 'el-icon-search'
+                    }
+                }
             },
+            // 表格数据
             tableData: {
                 // 表头
                 tableColumn: [
@@ -84,28 +93,63 @@ export default {
                 handleBtns: [
                     {
                         name: '编辑',
-                        type: 'primary',
-                        size: 'mini',
-                        icon: 'el-icon-edit',
-                        handler(index, row) {
-                            console.log(row)
-                        }
+                        attrs: {
+                            type: 'primary',
+                            size: 'mini',
+                            icon: 'el-icon-edit'
+                        },
+                        handler: () => {}
                     },
                     {
                         name: '删除',
-                        type: 'danger',
-                        size: 'mini',
-                        icon: 'el-icon-delete-solid',
-                        handler(index, row) {
-                            console.log(row)
-                        }
+                        attrs: {
+                            type: 'danger',
+                            size: 'mini',
+                            icon: 'el-icon-delete-solid'
+                        },
+                        handler: () => {}
                     }
                 ]
+            },
+            // 新增表单数据
+            userAddFormData: {
+                formData: {
+                    name: {
+                        label: '姓名'
+                    },
+                    age: {
+                        label: '年龄'
+                    },
+                    sex: {
+                        label: '性别',
+                        el: 'select',
+                        options: [
+                            {
+                                label: '男',
+                                value: '1'
+                            },
+                            {
+                                label: '女',
+                                value: '2'
+                            }
+                        ]
+                    }
+                },
+                formAttrs: {
+                    labelWidth: '60px'
+                },
+                submitBtn: {
+                    attrs: {
+                        type: 'primary'
+                    }
+                },
+                requstMethod: async args => {
+                    return await this.$req(this.$api.user.getUserList, args)
+                }
             }
         }
     }
 }
 </script>
 
-<style lang="less">
-</style>
+<style lang="less"></style>

@@ -1,12 +1,12 @@
 <template>
-	<transition name="slide-fade">
-		<router-view id="system"></router-view>
-	</transition>
+    <transition name="slide-fade">
+        <router-view class="comp-container"></router-view>
+    </transition>
 </template>
 
 <script>
 export default {
-	name: 'system'
+    name: 'system'
 }
 </script>
 

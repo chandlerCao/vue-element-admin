@@ -4,7 +4,7 @@
             v-if="tableHeight"
             :data="tableData"
             :height="tableHeight"
-            v-loading="tableLoading"
+            v-loading="tableDisabled"
         >
             <el-table-column
                 v-for="item in tableColumn"
@@ -19,8 +19,7 @@
                     <el-button
                         v-for="btnItem in handleBtns"
                         :key="btnItem.name"
-                        :icon="btnItem.icon"
-                        v-bind="btnItem"
+                        v-bind="btnItem.attrs"
                         @click="btnItem.handler(scope.$index, scope.row)"
                     >{{btnItem.name}}</el-button>
                 </template>
@@ -36,7 +35,7 @@
                 background
                 @size-change="reloadTableHandle"
                 @current-change="reloadTableHandle"
-                :disabled="tableLoading"
+                :disabled="tableDisabled"
             ></el-pagination>
         </div>
     </div>
@@ -58,6 +57,11 @@ export default {
         requstMethod: {
             type: Function,
             default: async () => null
+        },
+        // 遮罩
+        tableDisabled: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -75,8 +79,7 @@ export default {
                 total: 50,
                 pageSizes: [10, 20, 30, 40, 50],
                 pageSize: 10
-            }, // 表格的分页信息
-            tableLoading: false // 表格loading图
+            } // 表格的分页信息
         }
     },
     mounted() {
@@ -88,7 +91,7 @@ export default {
         handleSizeChange() {},
         handleCurrentChange() {},
         async reloadTableHandle() {
-            this.tableLoading = true
+            this.$emit('update:table-disabled', true)
             // console.log(this.pagination.currentPage)
             // console.log(this.pagination.pageSize)
             // console.log(this.formData)
@@ -97,7 +100,7 @@ export default {
                 id: '5bf57a8f85e0f13af26e579b',
                 type: 1
             })
-            this.tableLoading = false
+            this.$emit('update:table-disabled', false)
         }
     }
 }

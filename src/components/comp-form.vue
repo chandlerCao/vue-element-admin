@@ -19,22 +19,30 @@
                     v-bind="$attrs.elAttrs"
                 >
                     <!-- 如果为下拉框 -->
-                    <el-option
-                        v-for="opt in value.options"
-                        :key="opt.value"
-                        :label="opt.label"
-                        :value="opt.value"
-                    ></el-option>
+                    <template v-if="value.el === 'select'">
+                        <el-option
+                            v-for="opt in value.options"
+                            :key="opt.value"
+                            :label="opt.label"
+                            :value="opt.value"
+                        ></el-option>
+                    </template>
                 </component>
             </el-form-item>
-            <!-- 提交按钮 -->
             <el-form-item>
+                <!-- 提交按钮 -->
                 <el-button
                     :loading="queryBtnLoading"
-                    type="primary"
+                    v-bind="$attrs.submitBtn && $attrs.submitBtn.attrs"
                     @click="submitForm"
-                    :size="$attrs.elAttrs.size"
-                >{{$attrs.submitBtnText || '提交'}}</el-button>
+                >{{$attrs.submitBtn && $attrs.submitBtn.name || '提交'}}</el-button>
+                <!-- 自定义按钮组 -->
+                <el-button
+                    v-for="btnItem in $attrs.customFormBtns"
+                    :key="btnItem.name"
+                    v-bind="btnItem.attrs"
+                    @click="btnItem.handler"
+                >{{btnItem.name}}</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -42,17 +50,28 @@
 <script>
 export default {
     name: 'compForm',
+    inheritAttrs: false,
     props: {
         // 表单数据
         formData: {
             type: Object,
             default: () => {}
+        },
+        // 查询按钮loading
+        submitDisabled: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
         return {
-            formDataVal: {},
-            queryBtnLoading: false
+            queryBtnLoading: false,
+            formDataVal: {}
+        }
+    },
+    watch: {
+        submitDisabled(submitDisabled) {
+            this.queryBtnLoading = submitDisabled
         }
     },
     computed: {
@@ -82,12 +101,12 @@ export default {
             this.$refs.compForm.validate(valid => {
                 if (valid) {
                     this.queryBtnLoading = true
-                    this.$emit('submit-form', this.formDataVal)
+                    this.$emit('submit-form-handler', this.formDataVal)
                 }
             })
         },
         resetForm() {
-            // this.$refs[formName].resetFields()
+            this.$refs.compForm.resetFields()
         }
     }
 }

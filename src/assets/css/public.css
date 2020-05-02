@@ -85,3 +85,8 @@ a {
     border-radius: 8px;
     box-shadow: 0 0 18px rgba(145, 171, 213, 0.5);
 }
+
+.comp-container {
+    height: 100%;
+    box-sizing: border-box;
+}
