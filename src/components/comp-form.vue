@@ -44,7 +44,7 @@
                 <el-button v-bind="$attrs.submitBtn && $attrs.submitBtn.attrs" @click="resetForm">重置</el-button>
                 <!-- 自定义按钮组 -->
                 <el-button
-                    v-for="btnItem in $attrs.customFormBtns"
+                    v-for="btnItem in $attrs['custom-form-btns']"
                     :key="btnItem.name"
                     v-bind="btnItem.attrs"
                     @click="btnItem.handler"

@@ -2,7 +2,6 @@
     <comp-complex-table
         :form-data="formData"
         :table-data="tableData"
-        :add-form-data="userAddFormData"
         :requst-method="async (args) => $req($api.user.getUserList, args)"
     ></comp-complex-table>
 </template>
@@ -69,18 +68,7 @@ export default {
                         size: 'mini',
                         icon: 'el-icon-search'
                     }
-                },
-                customFormBtns: [
-                    {
-                        name: '导出excel',
-                        attrs: {
-                            type: 'primary',
-                            size: 'mini',
-                            icon: 'el-icon-document-add'
-                        },
-                        handler: () => {}
-                    }
-                ]
+                }
             },
             // 表格数据
             tableData: {
@@ -123,43 +111,60 @@ export default {
                         },
                         handler: () => {}
                     }
-                ]
-            },
-            // 新增表单数据
-            userAddFormData: {
-                title: '新增用户',
-                formData: {
-                    name: {
-                        label: '姓名'
-                    },
-                    age: {
-                        label: '年龄'
-                    },
-                    sex: {
-                        label: '性别',
-                        el: 'select',
-                        options: [
-                            {
-                                label: '男',
-                                value: '1'
+                ],
+                tableOperationBtns: {
+                    // 新增功能
+                    add: {
+                        // name: '新增啊',
+                        // attrs: { type: 'danger' },,
+                        // handler: () => {
+                        //     console.log('嘿嘿')
+                        // },
+                        formData: {
+                            title: '新增用户',
+                            formData: {
+                                name: {
+                                    label: '姓名'
+                                },
+                                age: {
+                                    label: '年龄'
+                                },
+                                sex: {
+                                    label: '性别',
+                                    el: 'select',
+                                    options: [
+                                        {
+                                            label: '男',
+                                            value: '1'
+                                        },
+                                        {
+                                            label: '女',
+                                            value: '2'
+                                        }
+                                    ]
+                                }
                             },
-                            {
-                                label: '女',
-                                value: '2'
+                            formAttrs: {
+                                labelWidth: '60px'
+                            },
+                            submitBtn: {
+                                attrs: {
+                                    type: 'primary'
+                                }
+                            },
+                            requstMethod: async args => {
+                                return await this.$req(
+                                    this.$api.user.getUserList,
+                                    args
+                                )
                             }
-                        ]
+                        }
+                    },
+                    // 导出excel
+                    export: {
+                        // name: '导出啊',
+                        // attrs: { type: 'warning' }
                     }
-                },
-                formAttrs: {
-                    labelWidth: '60px'
-                },
-                submitBtn: {
-                    attrs: {
-                        type: 'primary'
-                    }
-                },
-                requstMethod: async args => {
-                    return await this.$req(this.$api.user.getUserList, args)
                 }
             }
         }

@@ -1,7 +1,7 @@
 <template>
-    <transition name="slide-fade">
-        <router-view id="system" class="comp-container"></router-view>
-    </transition>
+    <el-container>
+        <router-view id="system"></router-view>
+    </el-container>
 </template>
 
 <script>
