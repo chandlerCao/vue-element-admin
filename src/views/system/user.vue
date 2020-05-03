@@ -66,7 +66,18 @@ export default {
                         size: 'mini',
                         icon: 'el-icon-search'
                     }
-                }
+                },
+                customFormBtns: [
+                    {
+                        name: '导出excel',
+                        attrs: {
+                            type: 'primary',
+                            size: 'mini',
+                            icon: 'el-icon-document-add'
+                        },
+                        handler: () => {}
+                    }
+                ]
             },
             // 表格数据
             tableData: {

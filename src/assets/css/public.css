@@ -62,10 +62,6 @@ a {
     padding: 0;
 }
 
-.comp-shadow {
-    box-shadow: 0 0 18px rgba(145, 171, 213, 0.5);
-}
-
 .slide-fade-enter-active {
     transition: all 0.15s;
 }
@@ -75,8 +71,13 @@ a {
 }
 
 .slide-fade-enter, .slide-fade-leave-to {
+    position: absolute;
     transform: translateX(20px);
     opacity: 0;
+}
+
+.comp-shadow {
+    box-shadow: 0 0 18px rgba(145, 171, 213, 0.5);
 }
 
 .comp-box {

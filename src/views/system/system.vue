@@ -1,6 +1,6 @@
 <template>
     <transition name="slide-fade">
-        <router-view class="comp-container"></router-view>
+        <router-view id="system" class="comp-container"></router-view>
     </transition>
 </template>
 

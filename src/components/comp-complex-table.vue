@@ -1,15 +1,14 @@
 <template>
     <div>
-        <el-container>
+        <el-container class="comp-box">
             <el-header v-if="$attrs['form-data']" style="height: auto;">
                 <comp-form
                     ref="queryForm"
                     v-bind="$attrs['form-data']"
-                    v-bind:[isAddFormBtn]="customFormBtns"
+                    v-bind:[isAddFormBtn]="newCustomFormBtns"
                     :submit-disabled.sync="tableDisabled"
                     @submit-form-handler="submitFormHandler"
                 ></comp-form>
-                <el-divider></el-divider>
             </el-header>
             <el-main>
                 <comp-table
@@ -44,25 +43,31 @@ export default {
     data() {
         return {
             dialogFormVisible: false,
-            tableDisabled: false,
-            customFormBtns: [
-                {
-                    name: '新增',
-                    attrs: {
-                        type: 'success',
-                        size: 'mini',
-                        icon: 'el-icon-document-add'
-                    },
-                    handler: () => {
-                        this.dialogFormVisible = true
-                    }
-                }
-            ]
+            tableDisabled: false
         }
     },
     computed: {
         isAddFormBtn() {
             return this.addFormData ? 'customFormBtns' : null
+        },
+        // 表单自定义按钮
+        newCustomFormBtns() {
+            return (this.addFormData
+                ? [
+                      {
+                          name: '新增',
+                          attrs: {
+                              type: 'primary',
+                              size: 'mini',
+                              icon: 'el-icon-document-add'
+                          },
+                          handler: () => {
+                              this.dialogFormVisible = true
+                          }
+                      }
+                  ]
+                : []
+            ).concat(this.$attrs['form-data'].customFormBtns || [])
         }
     },
     methods: {
