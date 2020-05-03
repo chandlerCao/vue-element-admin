@@ -1,6 +1,6 @@
 <template>
-    <el-container>
-        <el-container class="comp-table">
+    <el-container class="comp-table">
+        <el-container>
             <el-header v-if="newTableOperationBtns.length" style="height: 40px;">
                 <el-button
                     v-for="item in newTableOperationBtns"
