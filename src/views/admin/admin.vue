@@ -4,7 +4,7 @@
             <nav-menu></nav-menu>
         </el-aside>
         <el-container>
-            <el-header id="comp-header" style="height: 50px;">
+            <el-header id="comp-header" class="comp-shadow" style="height: 50px;">
                 <div class="nav-menu-fold" @click="collapseHandle">
                     <i v-if="isCollapse" class="el-icon-s-unfold"></i>
                     <i v-else class="el-icon-s-fold"></i>
@@ -58,7 +58,6 @@ export default {
     display: flex;
     align-items: center;
     padding-left: 0;
-    border-bottom: 1px solid #dcdfe6;
 }
 .el-main {
     background-color: #f1f6fa;

@@ -1,6 +1,7 @@
 <template>
-    <div>
+    <div class="comp-complex-table">
         <el-container class="comp-box">
+            <!-- 表格查询表单 -->
             <el-header v-if="$attrs['form-data']" style="height: auto;">
                 <comp-form
                     ref="queryForm"
@@ -10,6 +11,7 @@
                     @submit-form-handler="submitFormHandler"
                 ></comp-form>
             </el-header>
+            <!-- 表格 -->
             <el-main>
                 <comp-table
                     ref="compTable"
