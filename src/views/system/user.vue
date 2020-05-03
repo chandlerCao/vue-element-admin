@@ -20,10 +20,13 @@ export default {
                         // rule: [
                         //     {
                         //         required: true,
-                        //         message: '请输入活动名称',
+                        //         message: '请输入姓名',
                         //         trigger: 'blur'
                         //     }
                         // ]
+                    },
+                    idcard: {
+                        label: '身份证'
                     },
                     age: {
                         label: '年龄',
@@ -57,7 +60,7 @@ export default {
                 },
                 formAttrs: {
                     inline: true,
-                    labelWidth: '60px'
+                    labelWidth: '70px'
                 },
                 submitBtn: {
                     name: '查询',
@@ -124,6 +127,7 @@ export default {
             },
             // 新增表单数据
             userAddFormData: {
+                title: '新增用户',
                 formData: {
                     name: {
                         label: '姓名'

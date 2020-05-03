@@ -1,22 +1,25 @@
 <template>
     <div class="comp-form">
+        <!-- 表单 -->
         <el-form
             :model="formDataVal"
             ref="compForm"
             v-bind="$attrs.formAttrs"
             class="demo-ruleForm"
             :rules="rules"
+            @keyup.enter.native="submitForm"
         >
+            <!-- 表单元素 -->
             <el-form-item
                 v-for="(value, key) in formData"
                 :key="key"
-                :label="value.label"
                 :prop="key"
+                :label="value.label"
             >
                 <component
                     :is="`el-${value.el || 'input'}`"
                     v-model="formDataVal[key]"
-                    v-bind="$attrs.elAttrs"
+                    v-bind="Object.assign(Object.assign({}, $attrs.elAttrs), value.attrs)"
                 >
                     <!-- 如果为下拉框 -->
                     <template v-if="value.el === 'select'">
@@ -29,6 +32,7 @@
                     </template>
                 </component>
             </el-form-item>
+            <!-- 按钮组 -->
             <el-form-item>
                 <!-- 提交按钮 -->
                 <el-button
@@ -36,6 +40,8 @@
                     v-bind="$attrs.submitBtn && $attrs.submitBtn.attrs"
                     @click="submitForm"
                 >{{$attrs.submitBtn && $attrs.submitBtn.name || '提交'}}</el-button>
+                <!-- 重置按钮 -->
+                <el-button v-bind="$attrs.submitBtn && $attrs.submitBtn.attrs" @click="resetForm">重置</el-button>
                 <!-- 自定义按钮组 -->
                 <el-button
                     v-for="btnItem in $attrs.customFormBtns"
@@ -75,6 +81,7 @@ export default {
         }
     },
     computed: {
+        // 表单验证规则
         rules() {
             return Object.entries(this.formData).reduce((rules, item) => {
                 rules[item[0]] = item[1].rule || []
@@ -105,6 +112,7 @@ export default {
                 }
             })
         },
+        // 重置表单
         resetForm() {
             this.$refs.compForm.resetFields()
         }

@@ -66,7 +66,7 @@ export default {
     data() {
         return {
             formDataVal: {}, // 查询表格的参数
-            tableData: new Array(10).fill({
+            tableData: new Array(20).fill({
                 date: '2020-04-29 17:53:00',
                 name: '曹贱贱',
                 age: 23,

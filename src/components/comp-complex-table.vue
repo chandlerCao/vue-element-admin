@@ -21,7 +21,11 @@
                 ></comp-table>
             </el-main>
         </el-container>
-        <el-dialog v-if="addFormData" title="嘿嘿" :visible.sync="dialogFormVisible">
+        <el-dialog
+            v-if="addFormData"
+            :title="addFormData.title || '新增'"
+            :visible.sync="dialogFormVisible"
+        >
             <comp-form
                 ref="addForm"
                 v-bind="addFormData"
