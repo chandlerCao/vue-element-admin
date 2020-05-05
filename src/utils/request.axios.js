@@ -17,8 +17,8 @@ axios.defaults.baseURL = serverName
 
 // 响应拦截器
 axios.interceptors.response.use(({ data }) => {
-    if (data.code === 0) return data.data
-    return Promise.reject(data.message)
+    return data.data
+    // return Promise.reject(data.message)
 }, error => {
     window.console.log(error)
     return Promise.reject(error)

@@ -65,8 +65,7 @@ export default {
                     name: '查询',
                     attrs: {
                         type: 'primary',
-                        size: 'mini',
-                        icon: 'el-icon-search'
+                        size: 'mini'
                     }
                 }
             },
@@ -115,8 +114,8 @@ export default {
                 tableOperationBtns: {
                     // 新增功能
                     add: {
-                        // name: '新增啊',
-                        // attrs: { type: 'danger' },,
+                        name: '新增用户',
+                        attrs: { type: 'danger' },
                         // handler: () => {
                         //     console.log('嘿嘿')
                         // },
@@ -162,6 +161,7 @@ export default {
                     },
                     // 导出excel
                     export: {
+                        attrs: { type: 'success' }
                         // name: '导出啊',
                         // attrs: { type: 'warning' }
                     }

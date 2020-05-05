@@ -38,10 +38,15 @@
                 <el-button
                     :loading="queryBtnLoading"
                     v-bind="$attrs.submitBtn && $attrs.submitBtn.attrs"
+                    icon="el-icon-position"
                     @click="submitForm"
                 >{{$attrs.submitBtn && $attrs.submitBtn.name || '提交'}}</el-button>
                 <!-- 重置按钮 -->
-                <el-button v-bind="$attrs.submitBtn && $attrs.submitBtn.attrs" @click="resetForm">重置</el-button>
+                <el-button
+                    v-bind="$attrs.submitBtn && $attrs.submitBtn.attrs"
+                    icon="el-icon-refresh"
+                    @click="resetForm"
+                >重置</el-button>
                 <!-- 自定义按钮组 -->
                 <el-button
                     v-for="btnItem in $attrs['custom-form-btns']"

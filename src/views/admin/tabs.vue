@@ -3,8 +3,8 @@
     <div class="tabs">
         <div class="tabs-box">
             <div
-                class="tabs-item"
                 v-for="(item, index) in tabsList"
+                class="tabs-item"
                 :class="{'active': curRouterName === item.name}"
                 :key="item.name"
                 @click="$router.push(item.path)"
@@ -56,12 +56,13 @@ export default {
     },
     methods: {
         closeTabItemHandle(index) {
-            this.tabsList.splice(index, 1)
-            this.$router.push(
-                this.tabsList[index]
-                    ? this.tabsList[index].path
-                    : this.tabsList[index - 1].path
-            )
+            // 如果删除的正好为高亮状态
+            if (this.tabsList.splice(index, 1)[0].name === this.curRouterName)
+                this.$router.push(
+                    this.tabsList[index]
+                        ? this.tabsList[index].path
+                        : this.tabsList[index - 1].path
+                )
         }
     }
 }

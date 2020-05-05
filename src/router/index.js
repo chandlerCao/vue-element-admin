@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './routes'
 
+import login from '@/views/login'
 import admin from '@/views/admin/admin'
 
 Vue.use(VueRouter)
@@ -17,8 +18,13 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes: [
         {
+            path: '/',
+            alias: '/login',
+            name: '登陆',
+            component: login
+        },
+        {
             path: '/admin',
-            alias: '/',
             redirect: '/admin/home',
             name: '后台',
             component: admin,

@@ -23,6 +23,11 @@ export default [{
             path: 'role',
             name: '角色管理',
             component: () => import('@/views/system/role')
+        },
+        {
+            path: 'menu',
+            name: '菜单管理',
+            component: () => import('@/views/system/menu')
         }
     ]
 }]

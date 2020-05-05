@@ -8,14 +8,14 @@
 
 <script>
 export default {
-    name: 'roleList',
+    name: 'menuList',
     data() {
         return {
             // 查询表单
             formData: {
                 formData: {
                     name: {
-                        label: '角色名称'
+                        label: '菜单名称'
                         // rule: [
                         //     {
                         //         required: true,
@@ -82,12 +82,14 @@ export default {
                         handler: () => {}
                     }
                 ],
-                // 表格自定义按钮
                 tableOperationBtns: {
                     // 新增功能
                     add: {
-                        name: '新增角色',
+                        name: '新增菜单',
                         attrs: { type: 'danger' },
+                        // handler: () => {
+                        //     console.log('嘿嘿')
+                        // },
                         formData: {
                             title: '新增用户',
                             formData: {
@@ -130,7 +132,10 @@ export default {
                     },
                     // 导出excel
                     export: {
+                        name: '导出菜单',
                         attrs: { type: 'success' }
+                        // name: '导出啊',
+                        // attrs: { type: 'warning' }
                     }
                 }
             }
