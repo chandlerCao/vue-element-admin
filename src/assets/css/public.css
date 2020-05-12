@@ -50,16 +50,27 @@ a {
     overflow: hidden;
 }
 
-.el-container {
+.el-main, .el-container {
     height: 100%;
-}
-
-.el-main {
     overflow: hidden;
 }
 
-.el-main, .el-header {
+.el-header, .el-main, .el-footer {
     padding: 0;
+}
+
+.el-select {
+    display: block;
+}
+
+.el-dialog__body {
+    box-sizing: border-box;
+    max-height: calc(100% - 125px);
+    overflow: auto;
+}
+
+.el-form-item:last-child {
+    margin-bottom: 0;
 }
 
 .slide-fade-enter-active {
@@ -85,4 +96,8 @@ a {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 18px rgba(145, 171, 213, 0.5);
+}
+
+.comp-container {
+    height: 100%;
 }

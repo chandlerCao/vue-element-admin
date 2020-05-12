@@ -1,12 +1,10 @@
 <template>
-    <el-container>
-        <router-view id="system"></router-view>
-    </el-container>
+	<router-view id="system"></router-view>
 </template>
 
 <script>
 export default {
-    name: 'system'
+	name: 'system'
 }
 </script>
 
