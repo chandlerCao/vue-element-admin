@@ -23,7 +23,7 @@
 				</component>
 			</el-form-item>
 			<!-- 按钮组 -->
-			<el-form-item v-if="!$attrs.isHideBtn">
+			<el-form-item v-if="!$attrs['is-hide-submit']">
 				<!-- 提交按钮 -->
 				<el-button
 					:loading="queryBtnLoading"
@@ -32,11 +32,7 @@
 					@click="submitForm"
 				>{{$attrs.submitBtn && $attrs.submitBtn.name || '提交'}}</el-button>
 				<!-- 重置按钮 -->
-				<el-button
-					v-bind="$attrs.submitBtn && $attrs.submitBtn.attrs"
-					icon="el-icon-refresh"
-					@click="resetForm"
-				>重置</el-button>
+				<el-button type="danger" size="mini" icon="el-icon-refresh" @click="resetForm">重置</el-button>
 				<!-- 自定义按钮组 -->
 				<el-button
 					v-for="btnItem in $attrs['custom-form-btns']"
@@ -66,7 +62,7 @@ export default {
 	},
 	data() {
 		return {
-			queryBtnLoading: false,
+			queryBtnLoading: this.submitDisabled,
 			formDataVal: {}
 		}
 	},
@@ -91,19 +87,20 @@ export default {
 	methods: {
 		// 初始化表单数据
 		initFormDataVal() {
-			Object.keys(this.formData).forEach(item => {
+			for (const formItem in this.formData) {
 				this.$set(
 					this.formDataVal,
-					item,
-					this.formData[item].defaultValue || null
+					formItem,
+					this.formData[formItem].defaultValue || ''
 				)
-			})
+			}
 		},
 		submitForm() {
-			this.$refs.compForm.validate(valid => {
+			this.$refs.compForm.validate(async valid => {
 				if (valid) {
 					this.queryBtnLoading = true
-					this.$emit('submit-form-handler', this.formDataVal)
+					await this.$emit('submit-form-handler', this.formDataVal)
+					this.queryBtnLoading = false
 				}
 			})
 		},

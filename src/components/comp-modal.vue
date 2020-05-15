@@ -15,8 +15,14 @@
 					<slot></slot>
 				</div>
 				<div class="comp-modal-footer">
-					<el-button type="primary" icon="el-icon-send">提交</el-button>
-					<el-button @click="cancel">取消</el-button>
+					<el-button
+						type="primary"
+						size="small"
+						icon="el-icon-position"
+						:loading="loading"
+						@click="$emit('ok')"
+					>提交</el-button>
+					<el-button size="small" @click="cancel">取消</el-button>
 				</div>
 			</div>
 		</div>
@@ -28,6 +34,10 @@ export default {
 	name: 'compModal',
 	props: {
 		visible: {
+			type: Boolean,
+			default: false
+		},
+		loading: {
 			type: Boolean,
 			default: false
 		}
@@ -80,7 +90,7 @@ export default {
 		font-size: 12px;
 		z-index: 1;
 		right: 10px;
-		top: 14px;
+		top: 10px;
 		overflow: hidden;
 		cursor: pointer;
 		.el-icon-close {
@@ -99,7 +109,6 @@ export default {
 		flex-shrink: 0;
 		padding: 14px 16px;
 		line-height: 1;
-		border-bottom: 1px solid #e8eaec;
 	}
 	// body
 	.comp-modal-body {
@@ -110,7 +119,6 @@ export default {
 	// footer
 	.comp-modal-footer {
 		flex-shrink: 0;
-		border-top: 1px solid #e8eaec;
 		padding: 12px 18px;
 		text-align: right;
 	}

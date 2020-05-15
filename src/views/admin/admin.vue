@@ -59,9 +59,9 @@ export default {
 	align-items: center;
 	padding-left: 0;
 }
-.el-main {
-	// background-color: #f1f6fa;
-}
+// .el-main {
+// 	background-color: #f1f6fa;
+// }
 .nav-menu-fold {
 	width: 50px;
 	height: 50px;

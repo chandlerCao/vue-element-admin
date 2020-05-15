@@ -62,7 +62,7 @@ export default {
 			default: async () => null
 		},
 		// 遮罩
-		tableDisabled: {
+		disabled: {
 			type: Boolean,
 			default: false
 		}
@@ -83,21 +83,29 @@ export default {
 				total: 50,
 				pageSizes: [10, 20, 30, 40, 50],
 				pageSize: 10
-			}
+			},
+			// 表格loading
+			tableDisabled: this.disabled
+		}
+	},
+	watch: {
+		disabled(disabled) {
+			this.tableDisabled = disabled
+		},
+		tableDisabled(tableDisabled) {
+			this.$emit('update:disabled', tableDisabled)
 		}
 	},
 	methods: {
 		// 重载表格
-		async reloadTableHandle() {
-			this.$emit('update:table-disabled', true)
-			// console.log(this.pagination.currentPage)
-			// console.log(this.pagination.pageSize)
-			// this.formDataVal = formDataVal
+		async reloadTableHandle(formDataVal) {
+			this.tableDisabled = true
 			await this.requstMethod({
 				pageIndex: this.pagination.currentPage,
-				pageSize: this.pagination.pageSize
+				pageSize: this.pagination.pageSize,
+				...formDataVal
 			})
-			this.$emit('update:table-disabled', false)
+			this.tableDisabled = false
 		}
 	}
 }

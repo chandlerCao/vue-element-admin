@@ -1,10 +1,13 @@
 <template>
 	<comp-complex-table
+		ref="userTable"
 		:form-data="queryForm"
 		:table-data="tableData"
-		:table-operation-btns="tableOperationBtns"
+		:table-head-btns="tableHeadBtns"
 		:requst-method="async (args) => $req($api.user.getUserList, args)"
-	></comp-complex-table>
+	>
+		<!-- <el-button slot="customBtns" type="primary" size="mini" icon="el-icon-house">自定义按钮</el-button> -->
+	</comp-complex-table>
 </template>
 
 <script>
@@ -18,11 +21,11 @@ export default {
 					name: {
 						label: '姓名'
 						// rule: [
-						//     {
-						//         required: true,
-						//         message: '请输入姓名',
-						//         trigger: 'blur'
-						//     }
+						// 	{
+						// 		required: true,
+						// 		message: '请输入姓名',
+						// 		trigger: 'blur'
+						// 	}
 						// ]
 					},
 					idcard: {
@@ -60,13 +63,14 @@ export default {
 				},
 				formAttrs: {
 					inline: true,
-					labelWidth: '70px'
+					labelWidth: '60px'
 				},
 				submitBtn: {
-					name: '查询',
+					name: '查询用户',
 					attrs: {
 						type: 'primary',
-						size: 'mini'
+						size: 'mini',
+						icon: 'el-icon-user'
 					}
 				}
 			},
@@ -114,38 +118,49 @@ export default {
 				]
 			},
 			// 表格头部自定义按钮
-			tableOperationBtns: {
+			tableHeadBtns: {
 				// 新增功能
 				add: {
-					name: '新增用户',
-					// attrs: { type: 'danger' },
-					// handler: () => {
-					//     console.log('嘿嘿')
-					// },
-					addForm: {
+					btn: {
+						name: '新增用户'
+					},
+					modal: {
 						title: '新增用户',
+						width: '700px'
+					},
+					form: {
 						formData: {
 							name: {
 								label: '姓名'
 							},
 							age: {
 								label: '年龄'
+							},
+							sex: {
+								label: '性别'
+							},
+							job: {
+								label: '职业'
+							},
+							xl: {
+								label: '学历'
+							},
+							sg: {
+								label: '身高'
+							},
+							tz: {
+								label: '体重'
+							},
+							ah: {
+								label: '爱好'
 							}
 						},
 						formAttrs: {
 							labelWidth: '60px'
 						},
-						isHideBtn: true,
-						submitBtn: {
-							attrs: {
-								type: 'primary'
-							}
-						},
-						requstMethod: async args => {
-							return await this.$req(
-								this.$api.user.getUserList,
-								args
-							)
+						addFormReq: async args => {
+							// 新增表格接口
+							return this.$req(this.$api.user.getUserList, args)
 						}
 					}
 				},
