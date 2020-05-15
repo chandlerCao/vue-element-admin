@@ -70,6 +70,7 @@ export default {
 						}
 					},
 					modal: {
+						title: '新增',
 						visible: false
 					},
 					handler() {

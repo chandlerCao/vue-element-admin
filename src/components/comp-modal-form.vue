@@ -1,6 +1,6 @@
 <template>
 	<comp-modal :visible.sync="modalVisible" :loading="loading" @ok="modalOk">
-		<span slot="title">{{$attrs.form.title}}</span>
+		<span slot="title">{{$attrs.title}}</span>
 		<comp-form
 			ref="compForm"
 			:style="{width: $attrs.width}"
