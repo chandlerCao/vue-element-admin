@@ -15,14 +15,8 @@
 					<slot></slot>
 				</div>
 				<div class="comp-modal-footer">
-					<el-button
-						type="primary"
-						size="small"
-						icon="el-icon-position"
-						:loading="loading"
-						@click="$emit('ok')"
-					>提交</el-button>
-					<el-button size="small" @click="cancel">取消</el-button>
+					<el-button type="primary" icon="el-icon-position" :loading="loading" @click="$emit('ok')">提交</el-button>
+					<el-button @click="cancel">取消</el-button>
 				</div>
 			</div>
 		</div>
