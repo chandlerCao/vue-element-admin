@@ -66,7 +66,7 @@ export default {
 
 <style lang="less">
 .tabs {
-    padding-bottom: 5px;
+	padding-bottom: 5px;
 	border-bottom: 1px solid #e4e7ed;
 }
 .tabs-box {
