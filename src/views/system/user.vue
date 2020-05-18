@@ -176,9 +176,11 @@ export default {
 				},
 				// 导出excel
 				export: {
-					// attrs: { type: 'success' }
 					// name: '导出啊'
-					// attrs: { type: 'warning' }
+					// attrs: { type: 'success' }
+					handler() {
+						console.log('导出')
+					}
 				}
 			}
 		}

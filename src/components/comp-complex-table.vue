@@ -11,13 +11,15 @@
 					@submit-form-handler="reloadTableHandle"
 				></comp-form>
 				<!-- 表格自定义按钮 -->
-				<el-button
-					v-for="(value, key) in newTableHeadBtns"
-					:key="key"
-					v-bind="value.btn.attrs"
-					@click="value.handler.bind(newTableHeadBtns[key])()"
-				>{{value.btn.name}}</el-button>
-				<slot name="customBtns"></slot>
+				<div v-if="Object.keys(tableHeadBtns).length">
+					<el-button
+						v-for="(value, key) in newTableHeadBtns"
+						:key="key"
+						v-bind="value.btn.attrs"
+						@click="value.handler.bind(newTableHeadBtns[key])()"
+					>{{value.btn.name}}</el-button>
+					<slot name="customBtns"></slot>
+				</div>
 			</el-header>
 			<!-- 表格 -->
 			<el-main>
@@ -99,13 +101,24 @@ export default {
 		}
 	},
 	created() {
-		this.newTableHeadBtns = objUtils.assign(
-			this.enumTableHeadBtns,
-			this.tableHeadBtns
-		)
-		console.log(this.$slots)
+		// 合并自定义按钮
+		this.mergeTableHeadBtns()
 	},
 	methods: {
+		// 合并自定义按钮
+		mergeTableHeadBtns() {
+			if (Object.keys(this.tableHeadBtns)) {
+				const localTableHeadBtns = {}
+				for (const key in this.tableHeadBtns) {
+					if (this.enumTableHeadBtns[key])
+						localTableHeadBtns[key] = this.enumTableHeadBtns[key]
+				}
+				this.newTableHeadBtns = objUtils.assign(
+					localTableHeadBtns,
+					this.tableHeadBtns
+				)
+			}
+		},
 		// 重载表格
 		async reloadTableHandle(formDataVal = {}) {
 			// 重载表格
