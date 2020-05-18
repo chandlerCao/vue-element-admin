@@ -29,7 +29,7 @@
 					:disabled.sync="tableDisabled"
 					:requst-method="$attrs['requst-method']"
 				>
-					<slot v-for="(slot, slotName) in $slots" :name="slotName" :slot="slotName"></slot>
+					<!-- <slot v-for="(slot, slotName) in $slots" :name="slotName" #[slotName] :value="123"></slot> -->
 				</comp-table>
 			</el-main>
 		</el-container>
@@ -103,6 +103,9 @@ export default {
 	created() {
 		// 合并自定义按钮
 		this.mergeTableHeadBtns()
+	},
+	mounted() {
+		console.log(this.$slots)
 	},
 	methods: {
 		// 合并自定义按钮

@@ -6,8 +6,12 @@
 		:table-head-btns="tableHeadBtns"
 		:requst-method="async (args) => $req($api.user.getUserList, args)"
 	>
-		<!-- <el-button slot="customBtns" type="primary" size="mini" icon="el-icon-house">自定义按钮</el-button> -->
-		<el-tag v-slot:date="slotProps">{{slotProps.value}}</el-tag>
+		<template #customBtns>
+			<el-button type="primary" size="mini" icon="el-icon-house">自定义按钮</el-button>
+		</template>
+		<template #table-name>
+			<el-tag>1</el-tag>
+		</template>
 	</comp-complex-table>
 </template>
 
@@ -184,6 +188,9 @@ export default {
 				}
 			}
 		}
+	},
+	created() {
+		// console.log(this.$scopedSlots)
 	}
 }
 </script>

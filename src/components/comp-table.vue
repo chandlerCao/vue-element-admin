@@ -13,7 +13,8 @@
 						:width="item.width"
 					>
 						<slot
-							slot-scope="{ row }"
+							v-if="$slots[`table-${item.prop}`]"
+							#defalut="{row}"
 							:name="`table-${item.prop}`"
 							:value="row[item.prop]"
 						>{{row[item.prop]}}</slot>
@@ -95,14 +96,6 @@ export default {
 			tableDisabled: this.disabled
 		}
 	},
-	computed: {
-		slots() {
-			return this.$slots.default.reduce((slots, item) => {
-				slots[item.data.attrs['slot-name']] = item
-				return slots
-			}, {})
-		}
-	},
 	watch: {
 		disabled(disabled) {
 			this.tableDisabled = disabled
@@ -111,6 +104,9 @@ export default {
 			this.$emit('update:disabled', tableDisabled)
 		}
 	},
+	/* created() {
+		console.log(this.$slots)
+	}, */
 	methods: {
 		// 重载表格
 		async reloadTableHandle(formDataVal) {
