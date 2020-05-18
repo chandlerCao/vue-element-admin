@@ -6,8 +6,8 @@
 		<el-container>
 			<el-header id="comp-header" class="comp-shadow" style="height: 50px;">
 				<div class="nav-menu-fold" @click="collapseHandle">
-					<i v-if="isCollapse" class="el-icon-s-unfold"></i>
-					<i v-else class="el-icon-s-fold"></i>
+					<i v-show="isCollapse" class="el-icon-s-unfold"></i>
+					<i v-show="!isCollapse" class="el-icon-s-fold"></i>
 				</div>
 				<breadcrumb style="margin-left: 10px;"></breadcrumb>
 			</el-header>
@@ -29,9 +29,9 @@
 
 <script>
 import eventBus from '@/utils/event-bus'
-import navMenu from './menu'
-import breadcrumb from './breadcrumb'
-import tabs from './tabs'
+import navMenu from '@/views/admin/menu'
+import breadcrumb from '@/views/admin/breadcrumb'
+import tabs from '@/views/admin/tabs'
 export default {
 	name: 'app',
 	components: {

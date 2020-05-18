@@ -12,8 +12,6 @@ export default {
 
 <style lang="less" scoped>
 #app {
-	display: flex;
 	height: 100%;
-	overflow: hidden;
 }
 </style>
