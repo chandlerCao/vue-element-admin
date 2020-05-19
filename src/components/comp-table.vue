@@ -3,7 +3,7 @@
 		<el-container>
 			<!-- 表格 -->
 			<el-main>
-				<el-table :data="tableData" height="100%" v-loading="tableDisabled">
+				<el-table :id="primaryKey" :data="tableData" height="100%" v-loading="tableDisabled">
 					<el-table-column
 						v-for="item in tableColumn"
 						:key="item.prop"
@@ -63,7 +63,7 @@
 			:width="newTableHandleBtns.edit.modal.width"
 			:visible.sync="newTableHandleBtns.edit.modal.visible"
 			:form="newTableHandleBtns.edit.form"
-			@submit-form-handler="reloadTableHandle"
+			@submit-form-handler="pagination.currentPage = 1; reloadTableHandle()"
 		></comp-modal-form>
 	</div>
 </template>
@@ -159,6 +159,7 @@ export default {
 					}
 				}
 			},
+			// 表格操作按钮
 			newTableHandleBtns: {}
 		}
 	},

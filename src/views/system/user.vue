@@ -6,9 +6,9 @@
 		:table-head-btns="tableHeadBtns"
 		:requst-method="async (args) => $req($api.user.getUserList, args)"
 	>
-		<template #table-head-btns>
+		<!-- <template #table-head-btns>
 			<el-button type="primary" size="mini" icon="el-icon-house">自定义按钮</el-button>
-		</template>
+		</template>-->
 		<template #table-id="{value}">
 			<el-tag>{{value}}</el-tag>
 		</template>
@@ -96,6 +96,7 @@ export default {
 			// 表格数据
 			tableData: {
 				primaryKey: 'id',
+				name: '用户表',
 				// 表头
 				tableColumn: [
 					{
