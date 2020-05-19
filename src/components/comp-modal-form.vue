@@ -44,7 +44,7 @@ export default {
 			// loading
 			this.loading = true
 			// 请求新增接口
-			await this.$attrs.form.addFormReq({
+			await this.$attrs.form.formReq({
 				id: '5bf57a8f85e0f13af26e579b',
 				type: 1,
 				...formDataVal

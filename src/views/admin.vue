@@ -29,15 +29,15 @@
 
 <script>
 import eventBus from '@/utils/event-bus'
-import navMenu from '@/views/admin/menu'
-import breadcrumb from '@/views/admin/breadcrumb'
-import tabs from '@/views/admin/tabs'
+// import navMenu from '@/views/admin/menu'
+// import breadcrumb from '@/views/admin/breadcrumb'
+// import tabs from '@/views/admin/tabs'
 export default {
 	name: 'app',
 	components: {
-		navMenu,
-		breadcrumb,
-		tabs
+		navMenu: () => import('@/views/admin/menu'),
+		breadcrumb: () => import('@/views/admin/breadcrumb'),
+		tabs: () => import('@/views/admin/tabs')
 	},
 	data() {
 		return {
@@ -60,7 +60,7 @@ export default {
 	padding-left: 0;
 }
 // .el-main {
-// 	background-color: #f1f6fa;
+// 	background-color: #eee;
 // }
 .nav-menu-fold {
 	width: 50px;
