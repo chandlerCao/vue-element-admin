@@ -63,7 +63,7 @@
 			:width="newTableHandleBtns.edit.modal.width"
 			:visible.sync="newTableHandleBtns.edit.modal.visible"
 			:form="newTableHandleBtns.edit.form"
-			@submit-form-handler="pagination.currentPage = 1; reloadTableHandle()"
+			@submit-form-handler="reloadTableHandle()"
 		></comp-modal-form>
 	</div>
 </template>

@@ -1,5 +1,7 @@
 <template>
-	<div>登陆</div>
+	<div>
+		<comp-upload-file></comp-upload-file>
+	</div>
 </template>
 
 <script>
