@@ -7,8 +7,8 @@
 					v-if="$attrs['form-data']"
 					ref="queryForm"
 					v-bind="$attrs['form-data']"
-					:submit-disabled.sync="tableDisabled"
-					@submit-form-handler="reloadTableHandle"
+					:submitDisabled.sync="tableDisabled"
+					@submit-form-handler="reloadTableHandler"
 				></comp-form>
 				<!-- 表格自定义按钮 -->
 				<div v-if="Object.keys(tableHeadBtns).length">
@@ -18,7 +18,7 @@
 						v-bind="value.btn.attrs"
 						@click="value.handler.bind(value)()"
 					>{{value.btn.name}}</el-button>
-					<slot name="table-head-btns"></slot>
+					<slot name="head-btns"></slot>
 				</div>
 			</el-header>
 			<!-- 表格 -->
@@ -29,19 +29,23 @@
 					:disabled.sync="tableDisabled"
 					:requst-method="$attrs['requst-method']"
 				>
-					<template v-for="(slot, slotName) in tableSltos" #[slotName]="{value}">
-						<slot :name="slotName" :value="value"></slot>
+					<template #handle-btns="{row}">
+						<slot name="handle-btns" :row="row"></slot>
+					</template>
+					<template v-for="(slot, slotName) in tableSltos" #[slotName]="{row}">
+						<slot :name="slotName" :row="row || {}"></slot>
 					</template>
 				</comp-table>
 			</el-main>
 		</el-container>
 		<!-- 表格新增弹窗 -->
 		<comp-modal-form
+			v-if="newTableHeadBtns.add"
 			:title="newTableHeadBtns.add.modal.title"
 			:width="newTableHeadBtns.add.modal.width"
 			:visible.sync="newTableHeadBtns.add.modal.visible"
 			:form="newTableHeadBtns.add.form"
-			@submit-form-handler="reloadTableHandle"
+			@submit-form-handler="reloadTableHandler"
 		></comp-modal-form>
 	</div>
 </template>
@@ -132,11 +136,12 @@ export default {
 	},
 	computed: {
 		tableSltos() {
-			const tableSltos = {}
-			for (const key in this.$scopedSlots) {
-				tableSltos[key] = this.$scopedSlots[key]()
-			}
-			return tableSltos
+			return Object.keys(this.$scopedSlots)
+				.filter(slotItem => slotItem.includes('table-'))
+				.reduce((prev, slotName) => {
+					prev[slotName] = this.$scopedSlots[slotName]()
+					return prev
+				}, {})
 		}
 	},
 	created() {
@@ -159,12 +164,11 @@ export default {
 			}
 		},
 		// 重载表格
-		async reloadTableHandle(formDataVal = {}) {
+		async reloadTableHandler(formDataVal = {}) {
 			// 重载表格
 			this.$refs.compTable.pagination.currentPage = 1
-			await this.$refs.compTable.reloadTableHandle(
-				Object.create(formDataVal)
-			)
+			this.$refs.compTable.queryFormVal = Object.assign({}, formDataVal)
+			await this.$refs.compTable.reloadTableHandler()
 		}
 	}
 }

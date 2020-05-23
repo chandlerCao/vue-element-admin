@@ -25,6 +25,7 @@ export default [{
             component: () => import('@/views/system/role')
         },
         {
+            hide: true,
             path: 'menu',
             name: '菜单管理',
             component: () => import('@/views/system/menu')

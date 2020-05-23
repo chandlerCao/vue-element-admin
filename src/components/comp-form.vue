@@ -27,23 +27,25 @@
 					</template>
 				</component>
 			</el-form-item>
-			<!-- 按钮组 -->
-			<el-form-item v-if="!$attrs['is-hide-submit']">
+			<!-- 表单提交按钮组 -->
+			<el-form-item>
 				<!-- 提交按钮 -->
 				<el-button
-					:loading="queryBtnLoading"
+					v-if="$attrs.submitBtn"
+					:loading="submitLoading"
 					v-bind="$attrs.submitBtn && $attrs.submitBtn.attrs"
+					type="primary"
 					icon="el-icon-position"
 					@click="submitForm"
 				>{{$attrs.submitBtn && $attrs.submitBtn.name || '提交'}}</el-button>
 				<!-- 重置按钮 -->
 				<el-button
-					v-if="!$attrs.hideReset"
+					v-if="$attrs.resetBtn"
 					type="danger"
-					size="mini"
 					icon="el-icon-refresh"
+					v-bind="$attrs.resetBtn.attrs"
 					@click="resetForm"
-				>重置</el-button>
+				>{{$attrs.submitBtn && $attrs.resetBtn.name || '重置'}}</el-button>
 				<!-- 自定义按钮组 -->
 				<el-button
 					v-for="btnItem in $attrs.customFormBtns"
@@ -64,22 +66,17 @@ export default {
 		formData: {
 			type: Object,
 			default: () => {}
-		},
-		// 查询按钮loading
-		submitDisabled: {
-			type: Boolean,
-			default: false
 		}
 	},
 	data() {
 		return {
-			queryBtnLoading: this.submitDisabled,
+			submitLoading: this.$attrs.submitDisabled || false,
 			formDataVal: {}
 		}
 	},
 	watch: {
-		submitDisabled(submitDisabled) {
-			this.queryBtnLoading = submitDisabled
+		'$attrs.submitDisabled'(submitDisabled) {
+			this.submitLoading = submitDisabled
 		}
 	},
 	computed: {
@@ -109,7 +106,7 @@ export default {
 		submitForm() {
 			this.$refs.compForm.validate(async valid => {
 				if (valid) {
-					this.queryBtnLoading = true
+					this.submitLoading = true
 					await this.$emit('submit-form-handler', this.formDataVal)
 				}
 			})

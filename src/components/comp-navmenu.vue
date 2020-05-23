@@ -1,5 +1,6 @@
 <template>
 	<component
+		v-if="!navData.hide"
 		:is="navData.children && navData.children.length ? 'el-submenu' : 'el-menu-item'"
 		:index="`${prevPath}/${navData.path}`"
 	>

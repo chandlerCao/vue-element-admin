@@ -6,11 +6,28 @@
 		:table-head-btns="tableHeadBtns"
 		:requst-method="async (args) => $req($api.user.getUserList, args)"
 	>
-		<!-- <template #table-head-btns>
+		<template #head-btns>
 			<el-button type="primary" size="mini" icon="el-icon-house">自定义按钮</el-button>
+		</template>
+
+		<!-- <template #handle-btns="{row}">
+			<el-button v-if="row" type="primary" size="mini" icon="el-icon-house" @click="aaa(row.id)">分配角色</el-button>
 		</template>-->
-		<template #table-id="{value}">
-			<el-tag>{{value}}</el-tag>
+
+		<template #table-name="{ row }">
+			<el-tag v-if="row">{{row.name}}</el-tag>
+		</template>
+
+		<template #table-date>
+			<el-rate :value="3.7" disabled show-score text-color="#ff9900"></el-rate>
+		</template>
+
+		<template #table-age="{ row }">
+			<el-progress v-if="row" :percentage="row.age" :show-text="false"></el-progress>
+		</template>
+
+		<template #table-sex="{ row }">
+			<el-tag v-if="row" :type="row.sex === '男' ? '' : 'danger'">{{row.sex}}</el-tag>
 		</template>
 	</comp-complex-table>
 </template>
@@ -25,42 +42,12 @@ export default {
 				formData: {
 					name: {
 						label: '姓名'
-						// rule: [
-						// 	{
-						// 		required: true,
-						// 		message: '请输入姓名',
-						// 		trigger: 'blur'
-						// 	}
-						// ]
 					},
 					idcard: {
 						label: '身份证'
 					},
-					age: {
-						label: '年龄',
-						el: 'el-select',
-						options: [
-							{
-								value: '选项1',
-								label: '黄金糕'
-							},
-							{
-								value: '选项2',
-								label: '双皮奶'
-							},
-							{
-								value: '选项3',
-								label: '蚵仔煎'
-							},
-							{
-								value: '选项4',
-								label: '龙须面'
-							},
-							{
-								value: '选项5',
-								label: '北京烤鸭'
-							}
-						]
+					sex: {
+						label: '年龄'
 					}
 				},
 				elAttrs: {
@@ -70,7 +57,6 @@ export default {
 					inline: true,
 					labelWidth: '60px'
 				},
-				// hideReset: true,
 				submitBtn: {
 					name: '查询用户',
 					attrs: {
@@ -78,31 +64,19 @@ export default {
 						size: 'mini',
 						icon: 'el-icon-user'
 					}
+				},
+				resetBtn: {
+					name: '重置',
+					attrs: {
+						size: 'mini'
+					}
 				}
-				/* customFormBtns: [
-                    {
-                        name: '嘿嘿',
-                        attrs: {
-                            type: 'warning',
-                            size: 'mini',
-                            icon: 'el-icon-home'
-                        },
-                        handler(formDataVal) {
-                            console.log(formDataVal)
-                        }
-                    }
-                ] */
 			},
 			// 表格数据
 			tableData: {
-				primaryKey: 'id',
-				name: '用户表',
+				primaryKey: 'userId',
 				// 表头
 				tableColumn: [
-					{
-						prop: 'id',
-						label: '主键'
-					},
 					{
 						prop: 'date',
 						label: '日期'
@@ -186,12 +160,7 @@ export default {
 					// 删除功能
 					delete: {
 						btn: {
-							name: '删除',
-							attrs: {
-								type: 'danger',
-								size: 'mini',
-								icon: 'el-icon-delete-solid'
-							}
+							message: '确认删除当前用户吗？'
 						},
 						deleteReq: async args => {
 							// 表格删除接口
@@ -265,6 +234,11 @@ export default {
 					// }
 				}
 			}
+		}
+	},
+	methods: {
+		aaa(id) {
+			console.log(id)
 		}
 	}
 }

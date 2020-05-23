@@ -7,13 +7,12 @@
 					<el-table-column
 						v-for="item in tableColumn"
 						:key="item.prop"
-						:fixed="item.fixed"
 						:prop="item.prop"
 						:label="item.label"
 						:width="item.width"
 					>
 						<template #default="{ row }">
-							<slot :name="`table-${item.prop}`" :value="row[item.prop]">{{row[item.prop]}}</slot>
+							<slot :name="`table-${item.prop}`" :row="row">{{row[item.prop]}}</slot>
 						</template>
 					</el-table-column>
 					<!-- 表格操作 -->
@@ -22,19 +21,20 @@
 							<el-button
 								v-if="newTableHandleBtns.edit"
 								v-bind="newTableHandleBtns.edit.btn.attrs"
-								@click="newTableHandleBtns.edit.handler.call(newTableHandleBtns.edit, {index: $index, primaryKey: row[primaryKey], row})"
+								@click="newTableHandleBtns.edit.handler({self: newTableHandleBtns.edit, row})"
 							>{{newTableHandleBtns.edit.btn.name}}</el-button>
 							<el-popconfirm
 								v-if="newTableHandleBtns.delete"
-								style="margin-left: 10px; margin-left: 10px;"
-								title="确认删除？"
-								@onConfirm="newTableHandleBtns.delete.handler.call(newTableHandleBtns.delete, {index: $index, primaryKey: row[primaryKey], row})"
+								style="margin-left: 10px; margin-right: 10px;"
+								:title="newTableHandleBtns.delete.btn.message || '确认删除？'"
+								@onConfirm="newTableHandleBtns.delete.handler({self: newTableHandleBtns.delete, row})"
 							>
 								<el-button
 									slot="reference"
 									v-bind="newTableHandleBtns.delete.btn.attrs"
 								>{{newTableHandleBtns.delete.btn.name}}</el-button>
 							</el-popconfirm>
+							<slot name="handle-btns" :row="row"></slot>
 						</template>
 					</el-table-column>
 				</el-table>
@@ -49,8 +49,8 @@
 						:page-size.sync="pagination.pageSize"
 						layout="total, sizes, prev, pager, next, jumper"
 						background
-						@size-change="reloadTableHandle({})"
-						@current-change="reloadTableHandle({})"
+						@size-change="reloadTableHandler"
+						@current-change="reloadTableHandler"
 						:disabled="tableDisabled"
 					></el-pagination>
 				</div>
@@ -63,7 +63,7 @@
 			:width="newTableHandleBtns.edit.modal.width"
 			:visible.sync="newTableHandleBtns.edit.modal.visible"
 			:form="newTableHandleBtns.edit.form"
-			@submit-form-handler="reloadTableHandle()"
+			@submit-form-handler="reloadTableHandler"
 		></comp-modal-form>
 	</div>
 </template>
@@ -79,43 +79,44 @@ export default {
 		},
 		tableColumn: {
 			type: Array,
-			default: () => []
+			default() {
+				return []
+			}
 		},
 		tableHandleBtns: {
 			type: Object,
-			default: () => {}
+			default() {
+				return {}
+			}
 		},
 		// 请求方法
 		requstMethod: {
 			type: Function,
-			default: async () => null
-		},
-		// 遮罩
-		disabled: {
-			type: Boolean,
-			default: false
+			default() {
+				return async () => null
+			}
 		}
 	},
 	data() {
 		return {
-			formDataVal: {}, // 缓存查询表格的表单值
+			queryFormVal: {}, // 缓存查询表格的表单值
 			// 表格的数据
-			tableData: new Array(20).fill('_').map(() => ({
+			tableData: new Array(6).fill('_').map(() => ({
 				id: Math.random(),
-				date: '2020-04-29 17:53:00',
+				date: '1997-05-15 03:35:00',
 				name: '曹德健',
 				age: 23,
-				sex: '男'
+				sex: Math.random() > 0.5 ? '男' : '女'
 			})),
 			// 表格的分页信息
 			pagination: {
 				currentPage: 1,
-				total: 50,
+				total: 100,
 				pageSizes: [10, 20, 30, 40, 50],
 				pageSize: 10
 			},
 			// 表格loading
-			tableDisabled: this.disabled,
+			tableDisabled: this.$attrs.disabled || false,
 			// 枚举表格操作按钮
 			enumTableHandleBtns: {
 				// 编辑功能
@@ -133,14 +134,15 @@ export default {
 						title: '编辑',
 						visible: false
 					},
-					async handler({ row }) {
-						this.btn.attrs.loading = true
-						await this.getRowInfoReq({ pageIndex: 2, pageSize: 10 })
-						for (const key in this.form.formData) {
-							this.form.formData[key].defaultValue = row[key]
+					async handler({ self, row }) {
+						self.btn.attrs.loading = true
+						await self.getRowInfoReq({ pageIndex: 2, pageSize: 10 })
+						for (const formKey in self.form.formData) {
+							self.form.formData[formKey].defaultValue =
+								row[formKey]
 						}
-						this.modal.visible = true
-						this.btn.attrs.loading = false
+						self.modal.visible = true
+						self.btn.attrs.loading = false
 					}
 				},
 				// 删除功能
@@ -153,9 +155,10 @@ export default {
 							icon: 'el-icon-delete-solid'
 						}
 					},
-					async handler({ primaryKey }) {
-						// await this.deleteReq()
-						console.log(primaryKey)
+					handler: async ({ self, row }) => {
+						self, row
+						// console.log(this.primaryKey)
+						// await self.deleteReq()
 					}
 				}
 			},
@@ -164,7 +167,7 @@ export default {
 		}
 	},
 	watch: {
-		disabled(disabled) {
+		'$attrs.disabled'(disabled) {
 			this.tableDisabled = disabled
 		},
 		tableDisabled(tableDisabled) {
@@ -177,12 +180,12 @@ export default {
 	},
 	methods: {
 		// 重载表格
-		async reloadTableHandle(formDataVal) {
+		async reloadTableHandler() {
 			this.tableDisabled = true
 			await this.requstMethod({
 				pageIndex: this.pagination.currentPage,
 				pageSize: this.pagination.pageSize,
-				...formDataVal
+				...this.queryFormVal
 			})
 			this.tableDisabled = false
 		},

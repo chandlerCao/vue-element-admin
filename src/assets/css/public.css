@@ -45,13 +45,8 @@ a {
     text-decoration: none;
 }
 
-.el-aside {
-    overflow: hidden;
-}
-
 .el-main, .el-container {
     height: 100%;
-    overflow: hidden;
 }
 
 .el-header, .el-main, .el-footer {
