@@ -3,16 +3,15 @@
 		ref="userTable"
 		:form-data="queryForm"
 		:table-data="tableData"
-		:table-head-btns="tableHeadBtns"
 		:requst-method="async (args) => $req($api.user.getUserList, args)"
 	>
 		<template #head-btns>
 			<el-button type="primary" size="mini" icon="el-icon-house">自定义按钮</el-button>
 		</template>
 
-		<!-- <template #handle-btns="{row}">
+		<template #handle-btns="{row}">
 			<el-button v-if="row" type="primary" size="mini" icon="el-icon-house" @click="aaa(row.id)">分配角色</el-button>
-		</template>-->
+		</template>
 
 		<template #table-name="{ row }">
 			<el-tag v-if="row">{{row.name}}</el-tag>
@@ -96,6 +95,7 @@ export default {
 				],
 				// 操作按钮
 				tableHandleBtns: {
+					width: 300,
 					// 编辑功能
 					edit: {
 						// btn: {

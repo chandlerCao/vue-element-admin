@@ -6,6 +6,7 @@ import store from './store'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/assets/css/public.css'
+import '@/assets/css/reset-el.css'
 
 import request from './utils/request.axios'
 import api from './api'

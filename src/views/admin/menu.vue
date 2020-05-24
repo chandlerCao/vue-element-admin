@@ -2,11 +2,11 @@
 <template>
 	<div id="nav-menu">
 		<el-menu
+			class="el-menu-vertical-demo"
 			:default-active="$route.fullPath"
 			router
-			class="el-menu-vertical-demo"
-			background-color="#304156"
-			text-color="#fff"
+			unique-opened
+			background-color="#ebf1f6"
 			active-text-color="#409eff"
 			style="height: 100%"
 			:collapse="isCollapse"

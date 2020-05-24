@@ -45,28 +45,6 @@ a {
     text-decoration: none;
 }
 
-.el-main, .el-container {
-    height: 100%;
-}
-
-.el-header, .el-main, .el-footer {
-    padding: 0;
-}
-
-.el-select {
-    display: block;
-}
-
-.el-dialog__body {
-    box-sizing: border-box;
-    max-height: calc(100% - 125px);
-    overflow: auto;
-}
-
-.el-form-item:last-child {
-    margin-bottom: 0;
-}
-
 .slide-fade-enter-active {
     transition: all 0.15s;
 }

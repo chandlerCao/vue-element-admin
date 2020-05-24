@@ -11,7 +11,7 @@
 					@submit-form-handler="reloadTableHandler"
 				></comp-form>
 				<!-- 表格自定义按钮 -->
-				<div v-if="Object.keys(tableHeadBtns).length">
+				<div class="table-head-btns">
 					<el-button
 						v-for="(value, key) in newTableHeadBtns"
 						:key="key"

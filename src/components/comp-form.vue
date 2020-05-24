@@ -13,6 +13,7 @@
 			<el-form-item v-for="(elm, key) in formData" :key="key" :prop="key" :label="elm.label">
 				<component
 					:is="`${elm.el || 'el-input'}`"
+					clearable
 					v-model="formDataVal[key]"
 					v-bind="Object.assign(Object.assign({}, $attrs.elAttrs), elm.attrs)"
 					@file-change-handler="fileChangeHandler($event, key)"

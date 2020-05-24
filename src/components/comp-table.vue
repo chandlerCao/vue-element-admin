@@ -3,20 +3,24 @@
 		<el-container>
 			<!-- 表格 -->
 			<el-main>
-				<el-table :id="primaryKey" :data="tableData" height="100%" v-loading="tableDisabled">
+				<el-table :id="primaryKey" :data="tableData" height="100%" v-loading="tableDisabled" stripe>
 					<el-table-column
 						v-for="item in tableColumn"
 						:key="item.prop"
 						:prop="item.prop"
 						:label="item.label"
-						:width="item.width"
+						v-bind="item.attrs"
 					>
 						<template #default="{ row }">
 							<slot :name="`table-${item.prop}`" :row="row">{{row[item.prop]}}</slot>
 						</template>
 					</el-table-column>
 					<!-- 表格操作 -->
-					<el-table-column v-if="Object.keys(tableHandleBtns).length" label="操作">
+					<el-table-column
+						v-if="Object.keys(tableHandleBtns).length"
+						label="操作"
+						:width="newTableHandleBtns.width"
+					>
 						<template #default="{$index, row}">
 							<el-button
 								v-if="newTableHandleBtns.edit"
