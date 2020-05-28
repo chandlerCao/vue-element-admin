@@ -10,7 +10,7 @@
 		</template>
 
 		<template #handle-btns="{row}">
-			<el-button v-if="row" type="primary" size="mini" icon="el-icon-house" @click="aaa(row.id)">分配角色</el-button>
+			<el-button v-if="row" type="primary" size="mini" icon="el-icon-house" @click="aaa(row)">分配角色</el-button>
 		</template>
 
 		<template #table-name="{ row }">
@@ -237,8 +237,8 @@ export default {
 		}
 	},
 	methods: {
-		aaa(id) {
-			console.log(id)
+		aaa(row) {
+			console.log(row)
 		}
 	}
 }

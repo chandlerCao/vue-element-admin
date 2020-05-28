@@ -17,7 +17,7 @@ export default [{
         {
             path: 'user',
             name: '用户管理',
-            component: () => import('@/views/system/user')
+            component: () => import('@/views/system/user'),
         },
         {
             path: 'role',

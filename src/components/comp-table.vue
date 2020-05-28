@@ -4,6 +4,7 @@
 			<!-- 表格 -->
 			<el-main>
 				<el-table :id="primaryKey" :data="tableData" height="100%" v-loading="tableDisabled" stripe>
+					<!-- 表格每一列 -->
 					<el-table-column
 						v-for="item in tableColumn"
 						:key="item.prop"
@@ -15,7 +16,7 @@
 							<slot :name="`table-${item.prop}`" :row="row">{{row[item.prop]}}</slot>
 						</template>
 					</el-table-column>
-					<!-- 表格操作 -->
+					<!-- 表格操作列 -->
 					<el-table-column
 						v-if="Object.keys(tableHandleBtns).length"
 						label="操作"
@@ -105,7 +106,7 @@ export default {
 		return {
 			queryFormVal: {}, // 缓存查询表格的表单值
 			// 表格的数据
-			tableData: new Array(6).fill('_').map(() => ({
+			tableData: new Array(10).fill('_').map(() => ({
 				id: Math.random(),
 				date: '1997-05-15 03:35:00',
 				name: '曹德健',
@@ -141,11 +142,11 @@ export default {
 					async handler({ self, row }) {
 						self.btn.attrs.loading = true
 						await self.getRowInfoReq({ pageIndex: 2, pageSize: 10 })
+						self.modal.visible = true
 						for (const formKey in self.form.formData) {
 							self.form.formData[formKey].defaultValue =
 								row[formKey]
 						}
-						self.modal.visible = true
 						self.btn.attrs.loading = false
 					}
 				},

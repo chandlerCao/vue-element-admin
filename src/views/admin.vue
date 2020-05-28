@@ -16,7 +16,7 @@
 					<el-header style="height: auto;">
 						<tabs></tabs>
 					</el-header>
-					<el-main>
+					<el-main style="margin-top: 10px">
 						<transition name="slide-fade">
 							<router-view></router-view>
 						</transition>

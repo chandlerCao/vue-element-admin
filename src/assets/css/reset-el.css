@@ -20,6 +20,11 @@
     overflow: auto;
 }
 
+.el-popconfirm__main {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
 .el-form-item:last-child {
     margin-bottom: 0;
 }
