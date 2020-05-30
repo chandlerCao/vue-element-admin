@@ -18,7 +18,9 @@
 					</el-header>
 					<el-main style="margin-top: 10px">
 						<transition name="slide-fade">
-							<router-view></router-view>
+							<keep-alive>
+								<router-view></router-view>
+							</keep-alive>
 						</transition>
 					</el-main>
 				</el-container>
@@ -29,15 +31,15 @@
 
 <script>
 import eventBus from '@/utils/event-bus'
-// import navMenu from '@/views/admin/menu'
-// import breadcrumb from '@/views/admin/breadcrumb'
-// import tabs from '@/views/admin/tabs'
+import navMenu from '@/views/admin/menu'
+import breadcrumb from '@/views/admin/breadcrumb'
+import tabs from '@/views/admin/tabs'
 export default {
 	name: 'app',
 	components: {
-		navMenu: () => import('@/views/admin/menu'),
-		breadcrumb: () => import('@/views/admin/breadcrumb'),
-		tabs: () => import('@/views/admin/tabs')
+		navMenu,
+		breadcrumb,
+		tabs
 	},
 	data() {
 		return {

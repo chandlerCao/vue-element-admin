@@ -15,8 +15,7 @@
 					:is="`${elm.el || 'el-input'}`"
 					clearable
 					v-model="formDataVal[key]"
-					v-bind="Object.assign(Object.assign({}, $attrs.elAttrs), elm.attrs)"
-					@file-change-handler="fileChangeHandler($event, key)"
+					v-bind="elm.attrs"
 				>
 					<!-- 如果为下拉框 -->
 					<template v-if="elm.el === 'el-select'">
@@ -93,6 +92,9 @@ export default {
 		// 初始化表单数据
 		this.initFormDataVal()
 	},
+	mounted() {
+		if (this.$attrs['active-submission']) this.submitForm()
+	},
 	methods: {
 		// 初始化表单数据
 		initFormDataVal() {
@@ -108,18 +110,13 @@ export default {
 			this.$refs.compForm.validate(async valid => {
 				if (valid) {
 					this.submitLoading = true
-					await this.$emit('submit-form-handler', this.formDataVal)
+					this.$emit('submit-form-handler', this.formDataVal)
 				}
 			})
 		},
 		// 重置表单
 		resetForm() {
 			this.$refs.compForm.resetFields()
-		},
-		// 文件上传回调
-		fileChangeHandler(fileList, key) {
-			this.formDataVal[key] = fileList
-			console.log(this.formDataVal)
 		}
 	}
 }

@@ -7,8 +7,9 @@
 					v-if="$attrs['form-data']"
 					ref="queryForm"
 					v-bind="$attrs['form-data']"
+					:active-submission="true"
 					:submitDisabled.sync="tableDisabled"
-					@submit-form-handler="reloadTableHandler"
+					@submit-form-handler="formDataVal => { this.formDataVal = formDataVal;this.reloadTableHandler() }"
 				></comp-form>
 				<!-- 表格自定义按钮 -->
 				<div class="table-head-btns">
@@ -33,7 +34,7 @@
 						<slot name="handle-btns" :row="row"></slot>
 					</template>
 					<template v-for="(slot, slotName) in tableSltos" #[slotName]="{row}">
-						<slot :name="slotName" :row="row || {}"></slot>
+						<slot :name="slotName" :row="row"></slot>
 					</template>
 				</comp-table>
 			</el-main>
@@ -68,6 +69,7 @@ export default {
 	},
 	data() {
 		return {
+			formDataVal: {},
 			tableDisabled: false,
 			// 枚举表格操作按钮
 			enumTableHeadBtns: {
@@ -164,10 +166,13 @@ export default {
 			}
 		},
 		// 重载表格
-		async reloadTableHandler(formDataVal = {}) {
+		async reloadTableHandler() {
 			// 重载表格
 			this.$refs.compTable.pagination.currentPage = 1
-			this.$refs.compTable.queryFormVal = Object.assign({}, formDataVal)
+			this.$refs.compTable.queryFormVal = Object.assign(
+				{},
+				this.formDataVal
+			)
 			await this.$refs.compTable.reloadTableHandler()
 		}
 	}

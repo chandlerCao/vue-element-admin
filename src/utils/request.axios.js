@@ -15,9 +15,20 @@ axios.defaults.baseURL = serverName
 //     return config;
 // });
 
+import { Message } from 'element-ui';
 // 响应拦截器
 axios.interceptors.response.use(({ data }) => {
-    return data.data
+    if (data.c === 0) {
+        if (data.m) Message({
+            type: 'success',
+            message: data.m
+        })
+        return data.d
+    }
+    else Message({
+        type: 'error',
+        message: data.m
+    })
     // return Promise.reject(data.message)
 }, error => {
     window.console.log(error)

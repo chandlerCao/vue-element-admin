@@ -4,12 +4,15 @@
 			<!-- 表格 -->
 			<el-main>
 				<el-table :id="primaryKey" :data="tableData" height="100%" v-loading="tableDisabled" stripe>
+					<!-- 表格序号 -->
+					<el-table-column type="index" label="序号"></el-table-column>
 					<!-- 表格每一列 -->
 					<el-table-column
 						v-for="item in tableColumn"
 						:key="item.prop"
 						:prop="item.prop"
 						:label="item.label"
+						show-overflow-tooltip
 						v-bind="item.attrs"
 					>
 						<template #default="{ row }">
@@ -21,8 +24,10 @@
 						v-if="Object.keys(tableHandleBtns).length"
 						label="操作"
 						:width="newTableHandleBtns.width"
+						fixed="right"
 					>
 						<template #default="{$index, row}">
+							<slot name="handle-btns" :row="row"></slot>
 							<el-button
 								v-if="newTableHandleBtns.edit"
 								v-bind="newTableHandleBtns.edit.btn.attrs"
@@ -39,7 +44,6 @@
 									v-bind="newTableHandleBtns.delete.btn.attrs"
 								>{{newTableHandleBtns.delete.btn.name}}</el-button>
 							</el-popconfirm>
-							<slot name="handle-btns" :row="row"></slot>
 						</template>
 					</el-table-column>
 				</el-table>
@@ -106,17 +110,11 @@ export default {
 		return {
 			queryFormVal: {}, // 缓存查询表格的表单值
 			// 表格的数据
-			tableData: new Array(10).fill('_').map(() => ({
-				id: Math.random(),
-				date: '1997-05-15 03:35:00',
-				name: '曹德健',
-				age: 23,
-				sex: Math.random() > 0.5 ? '男' : '女'
-			})),
+			tableData: [],
 			// 表格的分页信息
 			pagination: {
 				currentPage: 1,
-				total: 100,
+				total: 0,
 				pageSizes: [10, 20, 30, 40, 50],
 				pageSize: 10
 			},
@@ -141,7 +139,10 @@ export default {
 					},
 					async handler({ self, row }) {
 						self.btn.attrs.loading = true
-						await self.getRowInfoReq({ pageIndex: 2, pageSize: 10 })
+						await self.getRowInfoReq({
+							currentPage: 2,
+							pageSize: 10
+						})
 						self.modal.visible = true
 						for (const formKey in self.form.formData) {
 							self.form.formData[formKey].defaultValue =
@@ -157,13 +158,17 @@ export default {
 						attrs: {
 							type: 'danger',
 							size: 'mini',
-							icon: 'el-icon-delete-solid'
+							icon: 'el-icon-delete-solid',
+							loading: false
 						}
 					},
 					handler: async ({ self, row }) => {
-						self, row
-						// console.log(this.primaryKey)
-						// await self.deleteReq()
+						self.btn.attrs.loading = true
+						await self.deleteReq({
+							[this.primaryKey]: [row[this.primaryKey]]
+						})
+						this.reloadTableHandler()
+						self.btn.attrs.loading = false
 					}
 				}
 			},
@@ -187,11 +192,20 @@ export default {
 		// 重载表格
 		async reloadTableHandler() {
 			this.tableDisabled = true
-			await this.requstMethod({
-				pageIndex: this.pagination.currentPage,
-				pageSize: this.pagination.pageSize,
-				...this.queryFormVal
+
+			const { pagination, tableData } = await this.requstMethod({
+				pagination: {
+					currentPage: this.pagination.currentPage,
+					pageSize: this.pagination.pageSize
+				},
+				params: this.queryFormVal
 			})
+
+			this.pagination.currentPage = pagination.currentPage
+			this.pagination.total = pagination.total
+			this.pagination.pageSize = pagination.pageSize
+			this.tableData = tableData
+
 			this.tableDisabled = false
 		},
 		// 合并表格操作按钮
