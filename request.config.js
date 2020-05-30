@@ -1,4 +1,4 @@
 module.exports = {
-    serverName: '/api/',
-    serverUrl: 'http://biaochenxuying.cn'
+    serverUrl: 'http://localhost:7070',
+    serverName: '/backend/'
 }

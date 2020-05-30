@@ -6,6 +6,37 @@ export default [{
     },
     component: () => import('@/views/admin/home')
 }, {
+    path: 'article',
+    redirect: 'article/list',
+    name: '文章管理',
+    meta: {
+        icon: 'el-icon-notebook-2'
+    },
+    component: () => import('@/views/article/article'),
+    children: [
+        {
+            path: 'add',
+            name: '新建文章',
+            component: () => import('@/views/article/article-add')
+        },
+        {
+            path: 'edit/:aid',
+            name: '编辑文章',
+            hide: true,
+            component: () => import('@/views/article/article-edit')
+        },
+        {
+            path: 'list',
+            name: '文章列表',
+            component: () => import('@/views/article/article-list')
+        },
+        {
+            path: 'dustbin',
+            name: '回收站',
+            component: () => import('@/views/article/article-dustbin')
+        }
+    ]
+}, {
     path: 'system',
     redirect: 'system/user',
     name: '系统管理',
