@@ -108,13 +108,13 @@ export default {
 						label: '前言'
 					},
 					{
+						prop: 'cover',
+						label: '封面图'
+					},
+					{
 						prop: 'tag_name',
 						label: '标签',
 						attrs: { width: 116 }
-					},
-					{
-						prop: 'cover',
-						label: '封面图'
 					},
 					{
 						prop: 'read_count',

@@ -17,13 +17,13 @@ export default [{
         {
             path: 'add',
             name: '新建文章',
-            component: () => import('@/views/article/article-add')
+            component: () => import('@/views/article/article-form/article-add')
         },
         {
             path: 'edit/:aid',
             name: '编辑文章',
             hide: true,
-            component: () => import('@/views/article/article-edit')
+            component: () => import('@/views/article/article-form/article-edit')
         },
         {
             path: 'list',

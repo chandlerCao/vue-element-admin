@@ -11,8 +11,6 @@ import '@/assets/css/reset-el.css'
 import request from './utils/request.axios'
 import api from './api'
 
-import 'default-passive-events'
-
 Vue.use(ElementUI);
 
 // mavonEditor

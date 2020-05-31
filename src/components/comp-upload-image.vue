@@ -31,7 +31,10 @@ export default {
 		event: 'upload'
 	},
 	props: {
-		url: String,
+		url: {
+			type: String,
+			default: ''
+		},
 		uploadImgReq: {
 			type: Function,
 			default: async () => () => {}
@@ -41,7 +44,7 @@ export default {
 		return {
 			uploadComplete: true,
 			inputFile: true,
-			imgUrl: ''
+			imgUrl: this.url
 		}
 	},
 	watch: {

@@ -1,9 +1,6 @@
 <template>
-	<div id="article-add" class="comp-container">
-		<comp-form v-bind="articleFormData" @submit-form-handler="articleAdd">
-			<!-- <template #form-custom-btns="{formDataVal}">
-				<el-button v-if="formDataVal" type="info" icon="el-icon-tickets" @click="aaa(formDataVal)">线下发布</el-button>
-			</template>-->
+	<div id="article-form" class="comp-container">
+		<comp-form v-bind="articleFormData" @submit-form-handler="articleSubmit">
 			<template #form-items>
 				<el-form-item label="内容">
 					<mavon-editor
@@ -14,7 +11,6 @@
 						ishljs
 						:autofocus="false"
 					></mavon-editor>
-					<!-- :navigation="true" -->
 				</el-form-item>
 			</template>
 		</comp-form>
@@ -24,6 +20,14 @@
 <script>
 export default {
 	name: 'article-add',
+	props: {
+		articleData: {
+			type: Object,
+			default() {
+				return {}
+			}
+		}
+	},
 	data() {
 		return {
 			articleFormData: {
@@ -106,6 +110,12 @@ export default {
 			}
 		}
 	},
+	watch: {
+		articleData(articleData) {
+			// 初始化文章字段值
+			this.setArticleDefaultVal(articleData)
+		}
+	},
 	created() {
 		// 获取标签下拉框数据
 		this.getTagList()
@@ -132,28 +142,40 @@ export default {
 			)
 			this.$refs.mavonEditor.$img2Url(pos, url)
 		},
+		// 初始化文章表单
+		setArticleDefaultVal(articleData) {
+			for (const formName in this.articleFormData.formData) {
+				this.$set(
+					this.articleFormData.formData[formName],
+					'defaultValue',
+					articleData[formName]
+				)
+			}
+			console.log(articleData)
+			this.mavon.markdownTxt = articleData.markdownTxt
+			this.mavon.articleCnt = articleData.content
+		},
 		// 文章内容保存
 		articleCntSave(markdownTxt, articleCnt) {
 			this.mavon.markdownTxt = markdownTxt
 			this.mavon.articleCnt = articleCnt
 		},
-		// 添加文章
-		async articleAdd(articleData) {
+		// 发布文章
+		articleSubmit(articleData) {
 			if (this.mavon.markdownTxt.trim() === '') {
 				this.$message({ type: 'warning', message: '请填写文章内容！' })
 				return
 			}
 			articleData.markdownTxt = this.mavon.markdownTxt
 			articleData.content = this.mavon.articleCnt
-			await this.$req(this.$api.article.articleAdd, { ...articleData })
-			this.$router.push({ name: '文章列表' })
+			this.$emit('article-submit', articleData)
 		}
 	}
 }
 </script>
 
-<style lang="less" scoped>
-#article-add {
+<style lang="less">
+#article-form {
 	box-sizing: border-box;
 	padding: 10px 0 0 15px;
 }

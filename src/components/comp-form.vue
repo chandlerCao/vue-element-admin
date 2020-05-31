@@ -70,8 +70,11 @@ export default {
 		},
 		// 表单数据
 		formData: {
+			required: true,
 			type: Object,
-			default: () => {}
+			default() {
+				return {}
+			}
 		}
 	},
 	data() {
@@ -81,6 +84,12 @@ export default {
 		}
 	},
 	watch: {
+		formData: {
+			handler(formData) {
+				this.initFormDataVal(formData)
+			},
+			deep: true
+		},
 		'$attrs.submitDisabled'(submitDisabled) {
 			this.submitLoading = submitDisabled
 		}
@@ -94,26 +103,22 @@ export default {
 			}, {})
 		}
 	},
-	created() {
-		// 初始化表单数据
-		this.initFormDataVal()
-	},
 	mounted() {
 		if (this.$attrs['active-submission']) this.submitForm()
 	},
 	methods: {
 		// 初始化表单数据
-		initFormDataVal() {
-			for (const formItem in this.formData) {
+		initFormDataVal(formData) {
+			for (const formItem in formData) {
 				this.$set(
 					this.formDataVal,
 					formItem,
-					this.formData[formItem].defaultValue || ''
+					formData[formItem].defaultValue
 				)
 			}
 		},
 		submitForm() {
-			this.$refs.compForm.validate(async valid => {
+			this.$refs.compForm.validate(valid => {
 				if (valid) {
 					this.submitLoading = true
 					this.$emit('submit-form-handler', this.formDataVal)

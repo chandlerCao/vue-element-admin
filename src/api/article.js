@@ -4,6 +4,16 @@ export default {
         method: 'post',
         url: 'article/articleAdd'
     },
+    // 获取单个文章内容
+    articleContentByAid: {
+        method: 'get',
+        url: 'article/articleContentByAid'
+    },
+    // 更新文章
+    articleUpdate: {
+        method: 'post',
+        url: 'article/articleUpdate'
+    },
     // 上传图片
     uploadImg: {
         method: 'post',

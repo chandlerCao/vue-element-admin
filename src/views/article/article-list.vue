@@ -126,17 +126,13 @@ export default {
 						label: '前言'
 					},
 					{
-						prop: 'tag_name',
-						label: '标签',
-						attrs: { width: 116 }
-					},
-					{
 						prop: 'cover',
 						label: '封面图'
 					},
 					{
-						prop: 'state',
-						label: '状态'
+						prop: 'tag_name',
+						label: '标签',
+						attrs: { width: 116 }
 					},
 					{
 						prop: 'read_count',
@@ -149,6 +145,10 @@ export default {
 					{
 						prop: 'comment_count',
 						label: '评论数'
+					},
+					{
+						prop: 'state',
+						label: '状态'
 					},
 					{
 						prop: 'date',

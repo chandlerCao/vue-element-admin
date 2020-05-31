@@ -25,16 +25,20 @@ axios.interceptors.response.use(({ data }) => {
         })
         return data.d
     }
-    else Message({
-        type: 'error',
-        message: data.m
-    })
-    // return Promise.reject(data.message)
+    else {
+        Message({
+            type: 'error',
+            message: data.m
+        })
+        return Promise.reject(data.m)
+    }
 }, error => {
     window.console.log(error)
     return Promise.reject(error)
 })
 
 export default async (requestObj, args) => {
+    if (requestObj.method === 'get')
+        args = { params: { ...args } }
     return await axios[requestObj.method](requestObj.url, args)
 }
