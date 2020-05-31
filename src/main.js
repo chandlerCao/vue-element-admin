@@ -15,6 +15,12 @@ import 'default-passive-events'
 
 Vue.use(ElementUI);
 
+// mavonEditor
+import mavonEditor from 'mavon-editor';
+import 'mavon-editor/dist/css/index.css';
+
+Vue.use(mavonEditor);
+
 
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'

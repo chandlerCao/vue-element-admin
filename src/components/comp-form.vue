@@ -2,58 +2,59 @@
 	<div class="comp-form">
 		<!-- 表单 -->
 		<el-form
-			:model="formDataVal"
 			ref="compForm"
-			v-bind="$attrs.formAttrs"
-			class="demo-ruleForm"
+			:class="[!$attrs.formAttrs.inline ? 'comp-el-form__flex' : '']"
+			:model="formDataVal"
 			:rules="rules"
+			v-bind="$attrs.formAttrs"
 			@keyup.enter.native="submitForm"
 		>
 			<!-- 表单元素 -->
-			<el-form-item v-for="(elm, key) in formData" :key="key" :prop="key" :label="elm.label">
-				<component
-					:is="`${elm.el || 'el-input'}`"
-					clearable
-					v-model="formDataVal[key]"
-					v-bind="elm.attrs"
-				>
-					<!-- 如果为下拉框 -->
-					<template v-if="elm.el === 'el-select'">
-						<el-option v-for="opt in elm.options" :key="opt.value" :label="opt.label" :value="opt.value"></el-option>
-					</template>
-					<!-- 如果为上传 -->
-					<template v-if="elm.el === 'el-upload'">
-						<el-button type="primary">点击上传</el-button>
-					</template>
-				</component>
-			</el-form-item>
+			<div class="comp-el-form-items">
+				<el-form-item v-for="(elm, key) in formData" :key="key" :prop="key" :label="elm.label">
+					<component
+						:is="`${elm.el || 'el-input'}`"
+						clearable
+						filterable
+						v-model="formDataVal[key]"
+						v-bind="elm.attrs"
+					>
+						<!-- 如果为下拉框 -->
+						<template v-if="elm.el === 'el-select'">
+							<el-option v-for="opt in elm.options" :key="opt.value" :label="opt.label" :value="opt.value"></el-option>
+						</template>
+						<!-- 如果为上传 -->
+						<template v-if="elm.el === 'el-upload'">
+							<el-button type="primary">点击上传</el-button>
+						</template>
+					</component>
+				</el-form-item>
+				<slot name="form-items"></slot>
+			</div>
 			<!-- 表单提交按钮组 -->
-			<el-form-item>
-				<!-- 提交按钮 -->
-				<el-button
-					v-if="$attrs.submitBtn"
-					:loading="submitLoading"
-					v-bind="$attrs.submitBtn && $attrs.submitBtn.attrs"
-					type="primary"
-					icon="el-icon-position"
-					@click="submitForm"
-				>{{$attrs.submitBtn && $attrs.submitBtn.name || '提交'}}</el-button>
-				<!-- 重置按钮 -->
-				<el-button
-					v-if="$attrs.resetBtn"
-					type="danger"
-					icon="el-icon-refresh"
-					v-bind="$attrs.resetBtn.attrs"
-					@click="resetForm"
-				>{{$attrs.submitBtn && $attrs.resetBtn.name || '重置'}}</el-button>
-				<!-- 自定义按钮组 -->
-				<el-button
-					v-for="btnItem in $attrs.customFormBtns"
-					:key="btnItem.name"
-					v-bind="btnItem.attrs"
-					@click="btnItem.handler(formDataVal) || function() {}"
-				>{{btnItem.name}}</el-button>
-			</el-form-item>
+			<div class="comp-el-form-btns">
+				<el-form-item>
+					<!-- 提交按钮 -->
+					<el-button
+						v-if="$attrs.submitBtn"
+						:loading="submitLoading"
+						v-bind="$attrs.submitBtn && $attrs.submitBtn.attrs"
+						type="primary"
+						icon="el-icon-position"
+						@click="submitForm"
+					>{{$attrs.submitBtn && $attrs.submitBtn.name || '提交'}}</el-button>
+					<!-- 自定义按钮组 -->
+					<slot name="form-custom-btns" :formDataVal="formDataVal"></slot>
+					<!-- 重置按钮 -->
+					<el-button
+						v-if="$attrs.resetBtn"
+						type="danger"
+						icon="el-icon-refresh"
+						v-bind="$attrs.resetBtn.attrs"
+						@click="resetForm"
+					>{{$attrs.submitBtn && $attrs.resetBtn.name || '重置'}}</el-button>
+				</el-form-item>
+			</div>
 		</el-form>
 	</div>
 </template>
@@ -62,6 +63,11 @@ export default {
 	name: 'compForm',
 	inheritAttrs: false,
 	props: {
+		// 流体布局
+		flex: {
+			type: Boolean,
+			default: true
+		},
 		// 表单数据
 		formData: {
 			type: Object,
@@ -123,4 +129,29 @@ export default {
 </script>
 
 <style lang="less">
+.comp-form {
+	height: 100%;
+}
+.comp-el-form__flex {
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	.comp-el-form-items {
+		flex: 1;
+		overflow: auto;
+	}
+	.comp-el-form-btns {
+		flex-shrink: 0;
+		padding: 10px 0;
+		background-color: #fff;
+		border-top: 1px solid #e4e7ed;
+	}
+}
+
+.comp-el-form-items {
+	display: inline-block;
+}
+.comp-el-form-btns {
+	display: inline-block;
+}
 </style>

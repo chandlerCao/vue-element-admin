@@ -4,6 +4,7 @@
 
 .el-main, .el-container {
     height: 100%;
+    overflow: hidden;
 }
 
 .el-header, .el-main, .el-footer {

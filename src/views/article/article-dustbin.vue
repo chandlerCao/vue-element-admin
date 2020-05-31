@@ -1,5 +1,6 @@
 <template>
 	<comp-complex-table
+		style="box-sizing: border-box; padding: 10px 0 15px 15px;"
 		ref="articleDustbin"
 		:form-data="queryForm"
 		:table-data="tableData"
@@ -66,10 +67,8 @@ export default {
 						}
 					}
 				},
-				elAttrs: {
-					size: 'mini'
-				},
 				formAttrs: {
+					size: 'mini',
 					inline: true,
 					labelWidth: '60px'
 				},

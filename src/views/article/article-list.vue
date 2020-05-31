@@ -1,5 +1,6 @@
 <template>
 	<comp-complex-table
+		style="box-sizing: border-box; padding: 10px 0 15px 15px;"
 		:form-data="queryForm"
 		:table-data="tableData"
 		:requst-method="async (args) => $req($api.article.getArticleList, args)"

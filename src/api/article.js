@@ -1,4 +1,14 @@
 export default {
+    // 文章发布
+    articleAdd: {
+        method: 'post',
+        url: 'article/articleAdd'
+    },
+    // 上传图片
+    uploadImg: {
+        method: 'post',
+        url: 'article/uploadImg'
+    },
     // 获取文章列表
     getArticleList: {
         method: 'post',

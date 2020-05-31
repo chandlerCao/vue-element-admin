@@ -12,11 +12,11 @@
 				<breadcrumb style="margin-left: 10px;"></breadcrumb>
 			</el-header>
 			<el-main>
-				<el-container style="padding: 10px 15px;">
-					<el-header style="height: auto;">
+				<el-container>
+					<el-header style="height: auto; padding: 10px 15px 0;">
 						<tabs></tabs>
 					</el-header>
-					<el-main style="margin-top: 10px">
+					<el-main>
 						<transition name="slide-fade">
 							<keep-alive>
 								<router-view></router-view>

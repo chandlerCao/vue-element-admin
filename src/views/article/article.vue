@@ -1,5 +1,5 @@
 <template>
-	<router-view id="article-management"></router-view>
+	<router-view></router-view>
 </template>
 
 <script>

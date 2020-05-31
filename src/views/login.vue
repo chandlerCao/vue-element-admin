@@ -32,6 +32,7 @@ export default {
 			if (this.loginLoading) return
 			this.loginLoading = true
 			setTimeout(() => {
+				this.$router.push({ name: '文章列表' })
 				this.loginLoading = false
 			}, 300)
 		}
