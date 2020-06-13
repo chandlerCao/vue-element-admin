@@ -34,3 +34,7 @@
     background-color: #f5f8fb !important;
     color: #409eff;
 }
+
+.el-date-editor--daterange.el-input__inner {
+    width: 200px;
+}

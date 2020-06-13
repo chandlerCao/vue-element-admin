@@ -1,5 +1,9 @@
 <template>
-	<article-basic-form @article-submit="articleUpdate" :article-data="articleData"></article-basic-form>
+	<article-basic-form
+		@submit="articleUpdate"
+		:article-data="articleData"
+		submit-btn="更新文章"
+	></article-basic-form>
 </template>
 
 <script>

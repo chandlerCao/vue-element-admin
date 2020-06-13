@@ -97,7 +97,7 @@ export default {
 					}
 				},
 				submitBtn: {
-					name: '发布文章'
+					name: this.$attrs['submit-btn'] || '发布文章'
 				},
 				resetBtn: {},
 				formAttrs: {
@@ -118,13 +118,13 @@ export default {
 	},
 	created() {
 		// 获取标签下拉框数据
-		this.getTagList()
+		this.getAllTag()
 	},
 	methods: {
 		// 获取标签下拉框数据
-		async getTagList() {
+		async getAllTag() {
 			this.articleFormData.formData.tag_id.options = (
-				await this.$req(this.$api.tag.getTagList)
+				await this.$req(this.$api.tag.getAllTag)
 			).map(tag => {
 				return {
 					label: tag.tag_name,
@@ -168,7 +168,7 @@ export default {
 			}
 			articleData.markdownTxt = this.mavon.markdownTxt
 			articleData.content = this.mavon.articleCnt
-			this.$emit('article-submit', articleData)
+			this.$emit('submit', articleData)
 		}
 	}
 }
@@ -177,6 +177,6 @@ export default {
 <style lang="less">
 #article-form {
 	box-sizing: border-box;
-	padding: 10px 0 0 15px;
+	padding-left: 15px;
 }
 </style>

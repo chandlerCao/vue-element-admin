@@ -95,11 +95,7 @@ export default {
 					labelWidth: '60px'
 				},
 				submitBtn: {
-					name: '查询文章',
-					attrs: {
-						type: 'primary',
-						icon: 'el-icon-user'
-					}
+					name: '查询文章'
 				},
 				resetBtn: {
 					name: '重置'
@@ -192,13 +188,13 @@ export default {
 	},
 	created() {
 		// 获取标签下拉框数据
-		this.getTagList()
+		this.getAllTag()
 	},
 	methods: {
 		// 获取标签下拉框数据
-		async getTagList() {
+		async getAllTag() {
 			this.queryForm.formData.tag.options = this.queryForm.formData.tag.options.concat(
-				(await this.$req(this.$api.tag.getTagList)).map(tag => {
+				(await this.$req(this.$api.tag.getAllTag)).map(tag => {
 					return {
 						label: tag.tag_name,
 						value: tag.tid

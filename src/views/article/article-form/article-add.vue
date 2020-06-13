@@ -1,5 +1,5 @@
 <template>
-	<article-basic-form @article-submit="articleAdd"></article-basic-form>
+	<article-basic-form @submit="articleAdd"></article-basic-form>
 </template>
 
 <script>

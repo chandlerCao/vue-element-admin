@@ -8,6 +8,7 @@
 			:rules="rules"
 			v-bind="$attrs.formAttrs"
 			@keyup.enter.native="submitForm"
+			@submit.native.prevent
 		>
 			<!-- 表单元素 -->
 			<div class="comp-el-form-items">
@@ -143,7 +144,8 @@ export default {
 	flex-direction: column;
 	.comp-el-form-items {
 		flex: 1;
-		overflow: auto;
+		overflow-x: hidden;
+		overflow-y: auto;
 	}
 	.comp-el-form-btns {
 		flex-shrink: 0;
