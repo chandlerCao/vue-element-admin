@@ -17,5 +17,20 @@ export default {
     tagAdd: {
         method: 'post',
         url: 'tag/tagAdd'
+    },
+    // 获取单个标签详情
+    getTagByTid: {
+        method: 'get',
+        url: 'tag/getTagByTid'
+    },
+    // 更新标签
+    tagUpdate: {
+        method: 'post',
+        url: 'tag/tagUpdate'
+    },
+    // 删除标签
+    tagDelete: {
+        method: 'post',
+        url: 'tag/tagDelete'
     }
 }

@@ -1,15 +1,11 @@
 <template>
-	<article-basic-form
-		@submit="articleUpdate"
-		:article-data="articleData"
-		submit-btn="更新文章"
-	></article-basic-form>
+	<article-basic-form @submit="articleUpdate" :article-data="articleData" submit-btn="更新文章"></article-basic-form>
 </template>
 
 <script>
 import articleBasicForm from './article-basic-form'
 export default {
-	name: 'article-add',
+	name: 'article-edit',
 	components: { articleBasicForm },
 	data() {
 		return {
@@ -32,6 +28,7 @@ export default {
 		async articleUpdate(articleData) {
 			articleData.aid = this.$route.params.aid
 			await this.$req(this.$api.article.articleUpdate, { ...articleData })
+			this.$children[0].$children[0].submitLoading = false
 			this.$router.push({ name: '文章列表' })
 		}
 	}

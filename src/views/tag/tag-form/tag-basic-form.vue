@@ -19,7 +19,7 @@ export default {
 		return {
 			tagFormData: {
 				formData: {
-					tagName: {
+					tag_name: {
 						label: '标签名称',
 						rule: [
 							{
@@ -29,7 +29,7 @@ export default {
 							}
 						]
 					},
-					tagIcon: {
+					tag_icon: {
 						label: '标签图标',
 						el: 'comp-upload-image',
 						rule: [
@@ -62,7 +62,7 @@ export default {
 	watch: {
 		tagData(tagData) {
 			// 初始化标签字段值
-			this.setArticleDefaultVal(tagData)
+			this.setTagDefaultVal(tagData)
 		}
 	},
 	methods: {
@@ -75,8 +75,6 @@ export default {
 					tagData[formName]
 				)
 			}
-			this.mavon.markdownTxt = tagData.markdownTxt
-			this.mavon.tagCnt = tagData.content
 		},
 		// 发布标签
 		tagSubmit(tagData) {

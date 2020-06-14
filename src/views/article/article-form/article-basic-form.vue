@@ -151,7 +151,6 @@ export default {
 					articleData[formName]
 				)
 			}
-			console.log(articleData)
 			this.mavon.markdownTxt = articleData.markdownTxt
 			this.mavon.articleCnt = articleData.content
 		},
@@ -162,10 +161,10 @@ export default {
 		},
 		// 发布文章
 		articleSubmit(articleData) {
-			if (this.mavon.markdownTxt.trim() === '') {
-				this.$message({ type: 'warning', message: '请填写文章内容！' })
-				return
-			}
+			// if (this.mavon.markdownTxt.trim() === '') {
+			// 	this.$message({ type: 'warning', message: '请填写文章内容！' })
+			// 	return
+			// }
 			articleData.markdownTxt = this.mavon.markdownTxt
 			articleData.content = this.mavon.articleCnt
 			this.$emit('submit', articleData)

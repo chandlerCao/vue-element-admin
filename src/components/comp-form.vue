@@ -3,7 +3,7 @@
 		<!-- 表单 -->
 		<el-form
 			ref="compForm"
-			:class="[!$attrs.formAttrs.inline ? 'comp-el-form__flex' : '']"
+			:class="[$attrs.formAttrs.inline ? '' : 'comp-el-form__flex']"
 			:model="formDataVal"
 			:rules="rules"
 			v-bind="$attrs.formAttrs"
@@ -119,11 +119,11 @@ export default {
 			}
 		},
 		submitForm() {
+			if (this.submitLoading) return
 			this.$refs.compForm.validate(valid => {
-				if (valid) {
-					this.submitLoading = true
-					this.$emit('submit-form-handler', this.formDataVal)
-				}
+				if (!valid) return
+				this.submitLoading = true
+				this.$emit('submit-form-handler', this.formDataVal)
 			})
 		},
 		// 重置表单

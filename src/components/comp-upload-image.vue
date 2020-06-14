@@ -7,7 +7,7 @@
 				title="删除图片"
 				@click.stop="clearImage"
 			></i>
-			<el-image :src="imgUrl" fit="cover" style="width: 300px; height: 200px;">
+			<el-image :src="imgUrl">
 				<div slot="error" class="image-slot">
 					<i :class="[uploadComplete ? 'el-icon-picture-outline' : 'el-icon-loading']"></i>
 				</div>
@@ -103,10 +103,10 @@ export default {
 }
 .image-slot {
 	display: flex;
+	width: 300px;
+	height: 200px;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
-	height: 100%;
 	background: #f5f7fa;
 	color: #909399;
 	font-size: 30px;

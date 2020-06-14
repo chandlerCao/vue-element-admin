@@ -11,7 +11,8 @@ export default {
 		// 添加标签
 		async tagAdd(tagData = {}) {
 			await this.$req(this.$api.tag.tagAdd, { ...tagData })
-			// this.$router.push({ name: '标签列表' })
+			this.$children[0].$children[0].submitLoading = false
+			this.$router.push({ name: '标签列表' })
 		}
 	}
 }

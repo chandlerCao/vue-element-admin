@@ -175,7 +175,7 @@ export default {
 		// 获取标签下拉框数据
 		async getTagList() {
 			this.queryForm.formData.tag.options = this.queryForm.formData.tag.options.concat(
-				(await this.$req(this.$api.tag.getTagList)).map(tag => {
+				(await this.$req(this.$api.tag.getAllTag)).map(tag => {
 					return {
 						label: tag.tag_name,
 						value: tag.tid

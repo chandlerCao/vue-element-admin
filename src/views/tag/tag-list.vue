@@ -7,18 +7,14 @@
 	>
 		<!-- 标签编辑按钮 -->
 		<template #handle-btns="{ row }">
-			<el-button
-				v-if="row"
-				type="primary"
-				size="mini"
-				icon="el-icon-edit"
-				@click="$router.push({name: '编辑标签', params: { tid: row.tid }})"
-			>编辑</el-button>
+			<router-link v-if="row" tag="span" :to="{name: '编辑标签', params: {tid: row.tid}}">
+				<el-button type="primary" size="mini" icon="el-icon-edit">编辑</el-button>
+			</router-link>
 		</template>
 		<template #table-tag_icon="{ row }">
 			<el-image
 				v-if="row"
-				style="width: 50px; height: 50px;"
+				style="height: 50px;"
 				:src="row.tag_icon"
 				:preview-src-list="[row.tag_icon]"
 			></el-image>
@@ -85,7 +81,7 @@ export default {
 						},
 						deleteReq: async args => {
 							// 表格删除接口
-							return this.$req(this.$api.tag.tagDustbin, args)
+							return this.$req(this.$api.tag.tagDelete, args)
 						}
 					}
 				}

@@ -7,23 +7,21 @@
 	>
 		<!-- 文章编辑按钮 -->
 		<template #handle-btns="{ row }">
-			<el-button
-				v-if="row"
-				type="primary"
-				size="mini"
-				icon="el-icon-edit"
-				@click="$router.push({name: '编辑文章', params: { aid: row.aid }})"
-			>编辑</el-button>
+			<router-link v-if="row" tag="span" :to="{name: '编辑文章', params: { aid: row.aid }}">
+				<el-button type="primary" size="mini" icon="el-icon-edit">编辑</el-button>
+			</router-link>
 		</template>
 
-		<template #table-aid="{ row }">
-			<span v-if="row">{{row.aid}}</span>
-		</template>
 		<template #table-tag_name="{ row }">
-			<div v-if="row" style="display: flex; align-items: center;">
+			<router-link
+				v-if="row"
+				tag="div"
+				:to="{name: '编辑标签', params: {tid: row.tag_id}}"
+				style="display: flex; align-items: center; cursor: pointer;"
+			>
 				<el-image style="width: 16px; height: 16px;" :src="row.tag.url" fit="cover"></el-image>
 				<span style="margin-left: 5px;">{{row.tag.name}}</span>
-			</div>
+			</router-link>
 		</template>
 		<template #table-cover="{ row }">
 			<el-image

@@ -38,3 +38,8 @@
 .el-date-editor--daterange.el-input__inner {
     width: 200px;
 }
+
+.el-image__inner {
+    width: auto;
+    max-height: 200px;
+}

@@ -33,7 +33,10 @@ axios.interceptors.response.use(({ data }) => {
         return Promise.reject(data.m)
     }
 }, error => {
-    window.console.log(error)
+    Message({
+        type: 'error',
+        message: error
+    })
     return Promise.reject(error)
 })
 

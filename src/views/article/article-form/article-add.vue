@@ -11,6 +11,7 @@ export default {
 		// 添加文章
 		async articleAdd(articleData) {
 			await this.$req(this.$api.article.articleAdd, { ...articleData })
+			this.$children[0].$children[0].submitLoading = false
 			this.$router.push({ name: '文章列表' })
 		}
 	}
