@@ -12,6 +12,17 @@
 			</router-link>
 		</template>
 
+		<!-- 封面 -->
+		<template #table-cover="{ row }">
+			<el-image
+				v-if="row"
+				style="height: 50px;"
+				:src="row.cover"
+				:preview-src-list="[row.cover]"
+				fit="cover"
+			></el-image>
+		</template>
+		<!-- 标签 -->
 		<template #table-tag_name="{ row }">
 			<router-link
 				v-if="row"
@@ -23,15 +34,15 @@
 				<span style="margin-left: 5px;">{{row.tag.name}}</span>
 			</router-link>
 		</template>
-		<template #table-cover="{ row }">
-			<el-image
-				v-if="row"
-				style="height: 50px;"
-				:src="row.cover"
-				:preview-src-list="[row.cover]"
-				fit="cover"
-			></el-image>
+		<!-- 点赞数 -->
+		<template #table-like_count="{ row }">
+			<el-button v-if="row" type="text">{{row.like_count}}</el-button>
 		</template>
+		<!-- 评论数 -->
+		<template #table-comment_count="{ row }">
+			<el-button v-if="row" type="text">{{row.comment_count}}</el-button>
+		</template>
+		<!-- 状态 -->
 		<template #table-state="{ row }">
 			<el-tag
 				v-if="row"

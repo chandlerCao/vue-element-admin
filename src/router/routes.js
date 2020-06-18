@@ -68,6 +68,16 @@ export default [
             }
         ]
     },
+    // 评论管理
+    {
+        path: 'commentlist',
+        name: '评论列表',
+        meta: {
+            icon: 'el-icon-chat-dot-square'
+        },
+        component: () => import('@/views/comment/comment')
+    },
+    // 系统管理
     {
         path: 'system',
         redirect: 'system/user',
@@ -94,4 +104,5 @@ export default [
                 component: () => import('@/views/system/menu')
             }
         ]
-    }]
+    }
+]

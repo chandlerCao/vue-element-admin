@@ -18,9 +18,6 @@
 			>恢复</el-button>
 		</template>
 
-		<template #table-aid="{ row }">
-			<span v-if="row">{{row.aid}}</span>
-		</template>
 		<template #table-tag_name="{ row }">
 			<div v-if="row" style="display: flex; align-items: center;">
 				<el-image style="width: 16px; height: 16px;" :src="row.tag.url" fit="cover"></el-image>
