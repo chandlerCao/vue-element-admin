@@ -126,10 +126,6 @@ export default {
 						label: '标题'
 					},
 					{
-						prop: 'preface',
-						label: '前言'
-					},
-					{
 						prop: 'cover',
 						label: '封面图'
 					},

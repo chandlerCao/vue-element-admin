@@ -43,3 +43,7 @@
     width: auto;
     max-height: 200px;
 }
+
+.el-table th.is-leaf {
+    background-color: #f5f7fa;
+}
