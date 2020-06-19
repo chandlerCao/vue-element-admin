@@ -70,12 +70,12 @@ export default [
     },
     // 评论管理
     {
-        path: 'commentlist',
+        path: 'comment/list',
         name: '评论列表',
         meta: {
             icon: 'el-icon-chat-dot-square'
         },
-        component: () => import('@/views/comment/comment')
+        component: () => import('@/views/comment/comment-list')
     },
     // 系统管理
     {
@@ -98,7 +98,6 @@ export default [
                 component: () => import('@/views/system/role')
             },
             {
-                hide: true,
                 path: 'menu',
                 name: '菜单管理',
                 component: () => import('@/views/system/menu')

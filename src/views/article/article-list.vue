@@ -11,7 +11,6 @@
 				<el-button type="primary" size="mini" icon="el-icon-edit">编辑</el-button>
 			</router-link>
 		</template>
-
 		<!-- 封面 -->
 		<template #table-cover="{ row }">
 			<el-image
@@ -36,11 +35,11 @@
 		</template>
 		<!-- 点赞数 -->
 		<template #table-like_count="{ row }">
-			<el-button v-if="row" type="text">{{row.like_count}}</el-button>
+			<el-link v-if="row">{{row.like_count}}</el-link>
 		</template>
 		<!-- 评论数 -->
 		<template #table-comment_count="{ row }">
-			<el-button v-if="row" type="text">{{row.comment_count}}</el-button>
+			<el-link v-if="row">{{row.comment_count}}</el-link>
 		</template>
 		<!-- 状态 -->
 		<template #table-state="{ row }">

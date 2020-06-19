@@ -8,7 +8,7 @@
 		<!-- 评论对应文章 -->
 		<template #table-article_title="{ row }">
 			<router-link v-if="row" tag="span" :to="{name: '编辑文章', params: {aid: row.aid}}">
-				<el-link type="primary">{{row.article_title}}</el-link>
+				<el-link>{{row.article_title}}</el-link>
 			</router-link>
 		</template>
 	</comp-complex-table>

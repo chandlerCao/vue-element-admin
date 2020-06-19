@@ -1,11 +1,11 @@
 <!-- 导航菜单 -->
 <template>
 	<div id="nav-menu">
+		<!-- unique-opened -->
 		<el-menu
 			class="el-menu-vertical-demo"
 			:default-active="$route.fullPath"
 			router
-			unique-opened
 			background-color="#ebf1f6"
 			active-text-color="#409eff"
 			style="height: 100%"
