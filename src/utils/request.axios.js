@@ -15,26 +15,27 @@ axios.defaults.baseURL = serverName
 //     return config;
 // });
 
-import { Message } from 'element-ui';
+import { Notification } from 'element-ui';
 // 响应拦截器
 axios.interceptors.response.use(({ data }) => {
     if (data.c === 0) {
-        if (data.m) Message({
-            type: 'success',
-            message: data.m
+        if (data.m) Notification({
+            title: '成功',
+            message: data.m,
+            type: 'success'
         })
         return data.d
     }
     else {
-        Message({
-            type: 'error',
+        Notification.error({
+            title: '错误',
             message: data.m
         })
         return Promise.reject(data.m)
     }
 }, error => {
-    Message({
-        type: 'error',
+    Notification.error({
+        title: '错误',
         message: error
     })
     return Promise.reject(error)

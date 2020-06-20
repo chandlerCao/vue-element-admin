@@ -31,12 +31,12 @@ export default [
             {
                 path: 'list',
                 name: '文章列表',
-                component: () => import('@/views/article/article-list')
+                component: () => import('@/views/article/article-list/article-list')
             },
             {
                 path: 'dustbin',
                 name: '回收站',
-                component: () => import('@/views/article/article-dustbin')
+                component: () => import('@/views/article/article-list/article-dustbin')
             }
         ]
     },

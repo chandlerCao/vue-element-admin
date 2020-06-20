@@ -26,10 +26,6 @@
     margin-bottom: 10px;
 }
 
-.el-form-item:last-child {
-    margin-bottom: 0;
-}
-
 .el-menu-item.is-active, .el-menu-item:hover, .el-submenu__title:hover {
     background-color: #f5f8fb !important;
     color: #409eff;
