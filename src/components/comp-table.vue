@@ -10,15 +10,15 @@
                 stripe
             >
                 <!-- 表格序号 -->
-                <!-- <el-table-column type="index" label="序号"></el-table-column> -->
+                <el-table-column type="index" label="序号"></el-table-column>
                 <!-- 表格每一列 -->
                 <el-table-column
                     v-for="item in tableColumn"
                     :key="item.prop"
                     :prop="item.prop"
                     :label="item.label"
-                    show-overflow-tooltip
                     v-bind="item.attrs"
+                    show-overflow-tooltip
                 >
                     <template #default="{ row }">
                         <slot :name="`table-${item.prop}`" :row="row">{{row[item.prop]}}</slot>
@@ -29,7 +29,6 @@
                     v-if="Object.keys(tableHandleBtns).length"
                     label="操作"
                     :width="newTableHandleBtns.width"
-                    fixed="right"
                 >
                     <template #default="{$index, row}">
                         <!-- <slot name="handle-btns" :row="row"></slot> -->
@@ -37,12 +36,13 @@
                             v-for="(handleBtn, index) in tableHandleBtns.customBtns"
                             :key="index"
                             v-bind="handleBtn.btn.attrs"
+                            style="margin-right: 10px;"
                             @click="handleBtn.handler(row, handleBtn)"
                         >{{handleBtn.btn.name}}</el-button>
                         <!-- 删除 -->
                         <el-popconfirm
                             v-if="newTableHandleBtns.delete"
-                            style="margin-left: 10px; margin-right: 10px;"
+                            style="margin-right: 10px;"
                             :title="newTableHandleBtns.delete.btn.message || '确认删除？'"
                             @onConfirm="newTableHandleBtns.delete.handler({self: newTableHandleBtns.delete, row})"
                         >

@@ -24,7 +24,7 @@
                 >
                     <!-- <template #handle-btns="{row}">
                         <slot name="handle-btns" :row="row"></slot>
-                    </template> -->
+                    </template>-->
                     <template v-for="(slot, slotName) in tableSltos" #[slotName]="{row}">
                         <slot :name="slotName" :row="row"></slot>
                     </template>
@@ -80,10 +80,3 @@ export default {
     }
 }
 </script>
-
-<style lang="less">
-.comp-complex-table {
-    box-sizing: border-box;
-    padding: 10px 0 15px 15px;
-}
-</style>

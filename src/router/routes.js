@@ -7,11 +7,17 @@ export default [
         },
         component: () => import('@/views/admin/home')
     },
+    {
+        hide: true,
+        path: 'refresh',
+        name: '刷新路由',
+        component: () => import('@/views/admin/refresh')
+    },
     // 文章管理
     {
         path: 'article',
-        redirect: 'article/list',
         name: '文章管理',
+        redirect: 'article/list',
         meta: {
             icon: 'el-icon-notebook-2'
         },
@@ -43,8 +49,8 @@ export default [
     // 标签管理
     {
         path: 'tag',
-        redirect: 'tag/list',
         name: '标签管理',
+        redirect: 'tag/list',
         meta: {
             icon: 'el-icon-price-tag'
         },
@@ -70,18 +76,53 @@ export default [
     },
     // 评论管理
     {
-        path: 'comment/list',
-        name: '评论列表',
+        path: 'comment',
+        name: '评论管理',
+        redirect: 'comment/clist',
         meta: {
             icon: 'el-icon-chat-dot-square'
         },
-        component: () => import('@/views/comment/comment-list')
+        component: () => import('@/views/comment/comment'),
+        children: [
+            {
+                path: 'clist',
+                name: '评论列表',
+                component: () => import('@/views/comment/comment-list'),
+            },
+            {
+                path: 'rlist',
+                name: '回复列表',
+                component: () => import('@/views/comment/reply-list')
+            },
+        ]
+    },
+    // 留言管理
+    {
+        path: 'message',
+        name: '留言管理',
+        redirect: 'message/mlist',
+        meta: {
+            icon: 'el-icon-chat-dot-round'
+        },
+        component: () => import('@/views/message/message'),
+        children: [
+            {
+                path: 'mlist',
+                name: '留言列表',
+                component: () => import('@/views/message/message-list'),
+            },
+            {
+                path: 'mrlist',
+                name: '留言回复列表',
+                component: () => import('@/views/message/message-reply-list')
+            },
+        ]
     },
     // 系统管理
     {
         path: 'system',
-        redirect: 'system/user',
         name: '系统管理',
+        redirect: 'system/user',
         meta: {
             icon: 'el-icon-s-tools'
         },
@@ -101,7 +142,7 @@ export default [
                 path: 'menu',
                 name: '菜单管理',
                 component: () => import('@/views/system/menu')
-            }
+            },
         ]
     }
 ]

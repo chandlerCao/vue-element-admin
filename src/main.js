@@ -48,6 +48,11 @@ Vue.prototype.$req = request
 // 接口信息
 Vue.prototype.$api = api
 
+// 自定义指令
+import '@/directive/contextmenu'
+// 数组方法
+import '@/utils/Array'
+
 new Vue({
   router,
   store,

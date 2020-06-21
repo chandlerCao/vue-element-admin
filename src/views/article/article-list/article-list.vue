@@ -37,7 +37,7 @@ export default {
                 }
             },
             tableHandleBtns: {
-                width: 200,
+                width: 230,
                 // 删除功能
                 delete: {
                     btn: {
@@ -52,7 +52,7 @@ export default {
                 customBtns: [
                     {
                         btn: {
-                            name: '编辑',
+                            name: '编辑文章',
                             attrs: {
                                 type: 'primary',
                                 size: 'mini',

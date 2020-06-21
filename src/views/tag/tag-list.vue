@@ -31,7 +31,7 @@ export default {
             queryForm: {
                 formData: {
                     searchValue: {
-                        label: '内容',
+                        label: '信息',
                         attrs: {
                             placeholder: '支持：标签id/标签名称'
                         }
@@ -55,28 +55,21 @@ export default {
                 // 表头
                 tableColumn: [
                     {
-                        prop: 'tid',
-                        label: 'ID',
-                        attrs: {
-                            width: 80
-                        }
-                    },
-                    {
                         prop: 'tag_name',
-                        label: '标题'
+                        label: '标签名称'
                     },
                     {
                         prop: 'tag_icon',
-                        label: '图标'
+                        label: '标签图标'
                     }
                 ],
                 // 操作按钮
                 tableHandleBtns: {
-                    width: 200,
+                    width: 240,
                     // 删除功能
                     delete: {
                         btn: {
-                            name: '删除',
+                            name: '删除标签',
                             message: '确认删除当前标签吗？'
                         },
                         deleteReq: async args => {
@@ -87,7 +80,7 @@ export default {
                     customBtns: [
                         {
                             btn: {
-                                name: '编辑',
+                                name: '编辑标签',
                                 attrs: {
                                     type: 'primary',
                                     size: 'mini',

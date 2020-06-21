@@ -90,9 +90,9 @@ export default {
                 formData: Object.assign(
                     {
                         searchValue: {
-                            label: '内容',
+                            label: '信息',
                             attrs: {
-                                placeholder: '支持：id/标题/前言/内容'
+                                placeholder: '支持：id/标题/前言/信息'
                             }
                         },
                         tag: {

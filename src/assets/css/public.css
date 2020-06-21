@@ -7,6 +7,7 @@ html, body, p, ol, ul, li, dl, dt, dd, blockquote, figure, fieldset, legend, tex
 
 html, body {
     height: 100%;
+    overflow: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -72,4 +73,29 @@ a {
 
 .comp-container {
     height: 100%;
+}
+
+/* 右键菜单 */
+
+.comp-contextmenu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #fff;
+    padding: 8px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 18px rgba(145, 171, 213, 0.5);
+}
+
+.comp-contextmenu li {
+    font-size: 12px;
+    line-height: 30px;
+    color: #606266;
+    cursor: pointer;
+    padding: 0 20px;
+    background-color: #fff;
+}
+
+.comp-contextmenu li:hover {
+    background-color: #eee;
 }

@@ -3,52 +3,38 @@
         <comp-complex-table
             :form-data="queryForm"
             :table-data="tableData"
-            :request-method="async (args) => $req($api.comment.getCommentList, args)"
-        >
-            <!-- 评论对应文章 -->
-            <template #table-article_title="{ row }">
-                <router-link v-if="row" tag="span" :to="{name: '编辑文章', params: {aid: row.aid}}">
-                    <el-link>{{row.article_title}}</el-link>
-                </router-link>
-            </template>
-        </comp-complex-table>
-        <el-dialog title="回复列表" :visible.sync="crdDatas.visible" width="70%">
+            :request-method="async (args) => $req($api.message.getMessageList, args)"
+        ></comp-complex-table>
+        <!-- <el-dialog title="回复列表" :visible.sync="crdDatas.visible" width="70%">
             <div style="height: 500px;">
-                <reply-list v-if="crdDatas.visible" :cid="crdDatas.curCid"></reply-list>
+                <reply-list v-if="crdDatas.visible" :mid="crdDatas.curmid"></reply-list>
             </div>
             <span slot="footer" class="dialog-footer">
                 <el-button type="primary" @click="crdDatas.visible = false">关 闭</el-button>
             </span>
-        </el-dialog>
+        </el-dialog>-->
     </comp-container>
 </template>
 
 <script>
-import replyList from './reply-list'
+// import replyList from './reply-list'
 export default {
-    name: 'commentList',
+    name: 'messageList',
     inheritAttrs: false,
-    components: { replyList },
+    // components: { replyList },
     data() {
         return {
             // 表格查询表单
             queryForm: {
                 formData: {
                     searchValue: {
-                        label: '评论信息',
+                        label: '留言信息',
                         attrs: {
-                            placeholder: '支持：id/内容/评论人'
+                            placeholder: '支持：留言id/留言内容/留言留言人'
                         }
                     },
-                    articleInfo: {
-                        label: '文章信息',
-                        attrs: {
-                            placeholder: '支持：文章id/文章标题'
-                        },
-                        defaultValue: this.$attrs.aid || ''
-                    },
                     datePicker: {
-                        label: '评论时间段',
+                        label: '留言时间段',
                         el: 'el-date-picker',
                         attrs: {
                             type: 'daterange',
@@ -62,7 +48,7 @@ export default {
                     labelWidth: '90px'
                 },
                 submitBtn: {
-                    name: '查询评论'
+                    name: '查询留言'
                 },
                 resetBtn: {
                     name: '重置'
@@ -70,11 +56,11 @@ export default {
             },
             // 表格数据
             tableData: {
-                primaryKey: 'cid',
+                primaryKey: 'mid',
                 // 表头
                 tableColumn: [
                     {
-                        prop: 'cid',
+                        prop: 'mid',
                         label: 'ID',
                         attrs: {
                             width: 220
@@ -82,19 +68,19 @@ export default {
                     },
                     {
                         prop: 'content',
-                        label: '评论内容'
+                        label: '留言内容'
                     },
                     {
                         prop: 'user',
-                        label: '评论人'
+                        label: '留言人'
                     },
                     {
                         prop: 'uip',
-                        label: '评论人ip'
+                        label: '留言人ip'
                     },
                     {
                         prop: 'city',
-                        label: '评论人城市'
+                        label: '留言人城市'
                     },
                     {
                         prop: 'like_count',
@@ -106,14 +92,7 @@ export default {
                     },
                     {
                         prop: 'date',
-                        label: '评论日期'
-                    },
-                    {
-                        prop: 'article_title',
-                        label: '对应文章',
-                        attrs: {
-                            width: 260
-                        }
+                        label: '留言日期'
                     }
                 ],
                 // 操作按钮
@@ -122,13 +101,13 @@ export default {
                     // 删除功能
                     delete: {
                         btn: {
-                            name: '删除评论',
-                            message: '确认将当前评论吗？'
+                            name: '删除留言',
+                            message: '确认将当前留言吗？'
                         },
                         deleteReq: async args => {
                             // 表格删除接口
                             return this.$req(
-                                this.$api.comment.deleteComment,
+                                this.$api.message.deleteMessage,
                                 args
                             )
                         }
@@ -146,16 +125,16 @@ export default {
                             },
                             handler: row => {
                                 this.crdDatas.visible = true
-                                this.crdDatas.curCid = row.cid
+                                this.crdDatas.curmid = row.mid
                             }
                         }
                     ]
                 }
             },
-            // 评论对应回复弹框
+            // 留言对应回复弹框
             crdDatas: {
                 visible: false,
-                curCid: ''
+                curmid: ''
             }
         }
     }

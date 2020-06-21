@@ -10,42 +10,44 @@
             @keyup.enter.native="submitForm"
             @submit.native.prevent
         >
-            <!-- 表单元素 -->
+            <!-- 表单各个元素 -->
             <div class="comp-el-form-items">
-                <el-form-item
-                    v-for="(elm, key) in formData"
-                    :key="key"
-                    :prop="key"
-                    :label="elm.label"
-                >
-                    <component
-                        :is="`${elm.el || 'el-input'}`"
-                        clearable
-                        filterable
-                        v-model="formDataVal[key]"
-                        v-bind="elm.attrs"
+                <div class="comp-el-form-wrap">
+                    <el-form-item
+                        v-for="(elm, key) in formData"
+                        :key="key"
+                        :prop="key"
+                        :label="elm.label"
                     >
-                        <!-- 如果为下拉框 -->
-                        <template v-if="elm.el === 'el-select'">
-                            <el-option
-                                v-for="opt in elm.options"
-                                :key="opt.value"
-                                :label="opt.label"
-                                :value="opt.value"
-                            ></el-option>
-                        </template>
-                        <!-- 如果为上传 -->
-                        <template v-if="elm.el === 'el-upload'">
-                            <el-button type="primary">点击上传</el-button>
-                        </template>
-                    </component>
-                </el-form-item>
-                <slot name="form-items"></slot>
+                        <component
+                            :is="`${elm.el || 'el-input'}`"
+                            clearable
+                            filterable
+                            v-model="formDataVal[key]"
+                            v-bind="elm.attrs"
+                        >
+                            <!-- 如果为下拉框 -->
+                            <template v-if="elm.el === 'el-select'">
+                                <el-option
+                                    v-for="opt in elm.options"
+                                    :key="opt.value"
+                                    :label="opt.label"
+                                    :value="opt.value"
+                                ></el-option>
+                            </template>
+                            <!-- 如果为上传 -->
+                            <template v-if="elm.el === 'el-upload'">
+                                <el-button type="primary">点击上传</el-button>
+                            </template>
+                        </component>
+                    </el-form-item>
+                    <slot name="form-items"></slot>
+                </div>
             </div>
-            <!-- 表单提交按钮组 -->
+            <!-- 表单按钮组 -->
             <div class="comp-el-form-btns">
+                <!-- 提交按钮 -->
                 <el-form-item>
-                    <!-- 提交按钮 -->
                     <el-button
                         v-if="$attrs.submitBtn"
                         :loading="submitLoading"
@@ -157,12 +159,18 @@ export default {
         flex: 1;
         overflow-x: hidden;
         overflow-y: auto;
+        .comp-el-form-wrap {
+            padding-right: 10px;
+        }
     }
     .comp-el-form-btns {
         flex-shrink: 0;
-        padding: 10px 0;
         background-color: #fff;
+        padding-top: 10px;
         border-top: 1px solid #e4e7ed;
+        .el-form-item {
+            margin-bottom: 0;
+        }
     }
 }
 
