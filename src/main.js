@@ -8,9 +8,6 @@ import 'element-ui/lib/theme-chalk/index.css';
 import '@/assets/css/public.css'
 import '@/assets/css/reset-el.css'
 
-import request from './utils/request.axios'
-import api from './api'
-
 Vue.use(ElementUI);
 
 // mavonEditor
@@ -43,6 +40,9 @@ requireComponent.keys().forEach(fileName => {
 })
 
 Vue.config.productionTip = false
+
+import request from '@/ajax/request.axios'
+import api from '@/ajax/api'
 // 访问接口通用方法
 Vue.prototype.$req = request
 // 接口信息

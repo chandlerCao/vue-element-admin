@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const { serverName } = require('../../request.config')
+const { serverName } = require('./request.config')
 
 axios.defaults.baseURL = serverName
 

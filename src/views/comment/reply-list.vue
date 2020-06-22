@@ -105,7 +105,10 @@ export default {
 					},
 					{
 						prop: 'date',
-						label: '日期'
+						label: '回复日期',
+						attrs: {
+							width: 160
+						}
 					},
 					{
 						prop: 'article_title',

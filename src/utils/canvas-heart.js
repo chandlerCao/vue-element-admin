@@ -1,3 +1,4 @@
+// 登陆背景用的桃心
 export default class Heart {
     constructor(box, obj = {}) {
         this.box = box
