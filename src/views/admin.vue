@@ -30,7 +30,7 @@
 
 <script>
 import eventBus from '@/utils/event-bus'
-import navMenu from '@/views/admin/menu'
+import navMenu from '@/views/admin/nav-menu'
 import breadcrumb from '@/views/admin/breadcrumb'
 import tabs from '@/views/admin/tabs'
 export default {

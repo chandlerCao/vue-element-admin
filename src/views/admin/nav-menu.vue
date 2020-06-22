@@ -20,7 +20,7 @@
 import eventBus from '@/utils/event-bus'
 import routes from '@/router/routes'
 export default {
-    name: 'navMenu',
+    name: 'nav-menu',
     data() {
         return {
             routes,
