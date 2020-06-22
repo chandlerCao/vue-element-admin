@@ -55,7 +55,6 @@ a {
 }
 
 .slide-fade-enter, .slide-fade-leave-to {
-    position: absolute;
     transform: translateX(20px);
     opacity: 0;
 }

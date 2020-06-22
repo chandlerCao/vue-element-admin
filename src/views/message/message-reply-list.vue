@@ -91,7 +91,10 @@ export default {
                     },
                     {
                         prop: 'date',
-                        label: '留言日期'
+                        label: '回复日期',
+                        attrs: {
+                            width: 160
+                        }
                     }
                 ],
                 // 操作按钮
