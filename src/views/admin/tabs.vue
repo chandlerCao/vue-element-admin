@@ -2,6 +2,10 @@
 <template>
     <div class="tabs">
         <div class="tabs-box">
+            <div class="tabs-item" @click="$router.back()">
+                <i class="el-icon-back"></i>
+                返回
+            </div>
             <div
                 class="tabs-item"
                 :class="{'active': curRouter.name === '首页'}"

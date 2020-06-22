@@ -90,7 +90,7 @@ export default {
                 formData: Object.assign(
                     {
                         searchValue: {
-                            label: '信息',
+                            label: '文章信息',
                             attrs: {
                                 placeholder: '支持：id/标题/前言/信息'
                             }
@@ -101,7 +101,7 @@ export default {
                             options: [{ label: '全部', value: '' }]
                         },
                         datePicker: {
-                            label: '时间段',
+                            label: '发布时间段',
                             el: 'el-date-picker',
                             attrs: {
                                 type: 'daterange',
@@ -114,7 +114,7 @@ export default {
                 formAttrs: {
                     size: 'mini',
                     inline: true,
-                    labelWidth: '60px'
+                    labelWidth: '90px'
                 },
                 submitBtn: {
                     name: '查询文章'

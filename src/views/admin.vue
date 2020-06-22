@@ -9,7 +9,6 @@
                     <i v-show="isCollapse" class="el-icon-s-unfold"></i>
                     <i v-show="!isCollapse" class="el-icon-s-fold"></i>
                 </div>
-                <el-button type="text" icon="el-icon-back" @click="$router.back()">返回</el-button>
                 <breadcrumb style="margin-left: 15px;"></breadcrumb>
             </el-header>
             <el-main>
@@ -30,7 +29,7 @@
 
 <script>
 import eventBus from '@/utils/event-bus'
-import navMenu from '@/views/admin/menu'
+import navMenu from '@/views/admin/nav-menu'
 import breadcrumb from '@/views/admin/breadcrumb'
 import tabs from '@/views/admin/tabs'
 export default {
