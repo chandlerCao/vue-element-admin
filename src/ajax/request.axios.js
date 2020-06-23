@@ -28,10 +28,10 @@ axios.interceptors.response.use(({ data }) => {
     }
     else {
         Notification.error({
-            title: '错误',
+            title: '失败',
             message: data.m
         })
-        return Promise.reject(data.m)
+        return Promise.resolve(data.m)
     }
 }, error => {
     Notification.error({

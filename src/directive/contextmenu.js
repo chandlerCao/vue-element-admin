@@ -16,14 +16,13 @@ Vue.directive('contextmenu', {
                 isContextmenu = true
             }
             ul.innerHTML = ''
-            ul.style.cssText = `left: ${e.pageX}px; top: ${e.pageY}px;`;
             for (let i = 0; i < value.length; i++) {
                 const li = document.createElement('li');
                 li.innerText = value[i].text
                 li.onclick = value[i].handler.bind(null, el)
                 ul.appendChild(li)
             }
-
+            ul.style.cssText = `left: ${e.pageX}px; top: ${e.pageY}px;`;
         })
     }
 })
