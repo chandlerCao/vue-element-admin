@@ -9,7 +9,6 @@
                     <i v-show="isCollapse" class="el-icon-s-unfold"></i>
                     <i v-show="!isCollapse" class="el-icon-s-fold"></i>
                 </div>
-                <el-button type="text" icon="el-icon-back" @click="$router.back()">返回</el-button>
                 <breadcrumb style="margin-left: 15px;"></breadcrumb>
             </el-header>
             <el-main>

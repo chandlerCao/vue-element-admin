@@ -31,7 +31,7 @@ export default {
             queryForm: {
                 formData: {
                     searchValue: {
-                        label: '信息',
+                        label: '标签信息',
                         attrs: {
                             placeholder: '支持：标签id/标签名称'
                         }
@@ -40,7 +40,7 @@ export default {
                 formAttrs: {
                     size: 'mini',
                     inline: true,
-                    labelWidth: '60px'
+                    labelWidth: '70px'
                 },
                 submitBtn: {
                     name: '查询标签'

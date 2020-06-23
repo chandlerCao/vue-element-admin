@@ -6,7 +6,8 @@
             class="el-menu-vertical-demo"
             :default-active="$route.fullPath"
             router
-            background-color="#ebf1f6"
+            background-color="#304156"
+            text-color="rgb(191, 203, 217)"
             active-text-color="#409eff"
             style="height: 100%"
             :collapse="isCollapse"
