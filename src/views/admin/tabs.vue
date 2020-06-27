@@ -1,221 +1,217 @@
 <!-- tab标签页 -->
 <template>
-    <div class="tabs">
-        <div class="tabs-box">
-            <div class="tabs-item" @click="$router.back()">
-                <i class="el-icon-back"></i>
-                返回
-            </div>
-            <div
-                class="tabs-item"
-                :class="{'active': curRouter.name === '首页'}"
-                @click="$router.push('/admin/home')"
-                v-contextmenu="homeContextmenuData"
-            >首页</div>
+	<div class="tabs">
+		<div class="tabs-box">
+			<div class="tabs-item" @click="$router.back()">
+				<i class="el-icon-back"></i>
+				返回
+			</div>
+			<div
+				class="tabs-item"
+				:class="{'active': curRouter.name === '首页'}"
+				@click="$router.push('/admin/home')"
+				v-contextmenu="homeContextmenuData"
+			>首页</div>
 
-            <div
-                v-for="(tabItem, index) in tabList"
-                class="tabs-item"
-                :class="{'active': curRouter.name === tabItem.name}"
-                :key="tabItem.name"
-                @click="$router.push(tabItem.path)"
-                :data-index="index"
-                :data-name="tabItem.name"
-                v-contextmenu="contextmenuData"
-            >
-                {{tabItem.name}}
-                <div
-                    v-if="!tabItem.hideCloseIcon"
-                    class="tabs-close"
-                    @click.stop="closeTabItemHandle(index)"
-                >
-                    <i class="el-icon-close"></i>
-                </div>
-            </div>
-        </div>
-    </div>
+			<div
+				v-for="(tabItem, index) in tabList"
+				class="tabs-item"
+				:class="{'active': curRouter.name === tabItem.name}"
+				:key="tabItem.name"
+				@click="$router.push(tabItem.path)"
+				:data-index="index"
+				:data-name="tabItem.name"
+				v-contextmenu="contextmenuData"
+			>
+				{{tabItem.name}}
+				<div v-if="!tabItem.hideCloseIcon" class="tabs-close" @click.stop="closeTabItemHandle(index)">
+					<i class="el-icon-close"></i>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
 export default {
-    name: 'tabs',
-    data() {
-        return {
-            curRouter: { name: '', index: 0 },
-            tabList: [],
-            // 右键菜单数据
-            contextmenuData: [
-                {
-                    text: '刷新',
-                    handler: el => {
-                        this.$router.replace({
-                            name: '刷新路由',
-                            query: {
-                                redirect: this.tabList[el.dataset.index].path
-                            }
-                        })
-                    }
-                },
-                {
-                    text: '关闭',
-                    handler: el => {
-                        this.closeTabItemHandle(parseInt(el.dataset.index))
-                    }
-                },
-                {
-                    text: '关闭其他',
-                    handler: el => {
-                        this.tabList = this.tabList.filter(
-                            tab => tab.name === el.dataset.name
-                        )
+	name: 'tabs',
+	data() {
+		return {
+			curRouter: { name: '', index: 0 },
+			tabList: [],
+			// 右键菜单数据
+			contextmenuData: [
+				{
+					text: '刷新',
+					handler: el => {
+						this.$router.replace({
+							name: '刷新路由',
+							query: {
+								redirect: this.tabList[el.dataset.index].path
+							}
+						})
+					}
+				},
+				{
+					text: '关闭',
+					handler: el => {
+						this.closeTabItemHandle(parseInt(el.dataset.index))
+					}
+				},
+				{
+					text: '关闭其他',
+					handler: el => {
+						this.tabList = this.tabList.filter(
+							tab => tab.name === el.dataset.name
+						)
 
-                        this.$router.push(this.tabList[0].path)
-                    }
-                },
-                {
-                    text: '关闭左侧',
-                    handler: el => {
-                        const curIndex = parseInt(el.dataset.index)
-                        this.tabList = this.tabList.slice(
-                            curIndex,
-                            this.tabList.length
-                        )
-                        // 如果当前高亮的页签被关闭左侧时删除了
-                        if (this.curRouter.index < curIndex) {
-                            this.$router.push(
-                                this.tabList[
-                                    this.tabList.have(
-                                        tab => tab.name === el.dataset.name
-                                    )
-                                ].path
-                            )
-                        }
-                    }
-                },
-                {
-                    text: '关闭右侧',
-                    handler: el => {
-                        const curIndex = parseInt(el.dataset.index)
-                        this.tabList = this.tabList.slice(0, curIndex + 1)
-                        // 如果当前高亮的页签被关闭右侧时删除了
-                        if (this.curRouter.index > curIndex)
-                            this.$router.push(this.tabList[curIndex].path)
-                    }
-                }
-            ],
-            homeContextmenuData: [
-                {
-                    text: '刷新',
-                    handler: () => {
-                        this.$router.replace({
-                            name: '刷新路由',
-                            query: {
-                                redirect: '/admin/home'
-                            }
-                        })
-                    }
-                },
-                {
-                    text: '关闭其他',
-                    handler: () => {
-                        this.tabList = []
-                        this.$router.push('/admin/home')
-                    }
-                }
-            ]
-        }
-    },
-    watch: {
-        $route: {
-            handler(route) {
-                if (
-                    !this.tabList.some(item => item.name === route.name) &&
-                    route.name !== '首页' &&
-                    route.name !== '刷新路由'
-                ) {
-                    this.tabList.push({
-                        path: route.fullPath,
-                        name: route.name
-                    })
-                }
-                this.curRouter.name = route.name
-                this.curRouter.index = this.tabList.have(
-                    tab => tab.name === route.name
-                )
-            },
-            immediate: true
-        }
-    },
-    methods: {
-        closeTabItemHandle(index) {
-            // 如果删除的正好为高亮状态
-            if (this.tabList.splice(index, 1)[0].name === this.curRouter.name)
-                this.$router.push(
-                    this.tabList[index]
-                        ? this.tabList[index].path
-                        : this.tabList[index - 1]
-                        ? this.tabList[index - 1].path
-                        : '/admin/home'
-                )
-        }
-    }
+						this.$router.push(this.tabList[0].path)
+					}
+				},
+				{
+					text: '关闭左侧',
+					handler: el => {
+						const curIndex = parseInt(el.dataset.index)
+						this.tabList = this.tabList.slice(
+							curIndex,
+							this.tabList.length
+						)
+						// 如果当前高亮的页签被关闭左侧时删除了
+						if (this.curRouter.index < curIndex) {
+							this.$router.push(
+								this.tabList[
+									this.tabList.have(
+										tab => tab.name === el.dataset.name
+									)
+								].path
+							)
+						}
+					}
+				},
+				{
+					text: '关闭右侧',
+					handler: el => {
+						const curIndex = parseInt(el.dataset.index)
+						this.tabList = this.tabList.slice(0, curIndex + 1)
+						// 如果当前高亮的页签被关闭右侧时删除了
+						if (this.curRouter.index > curIndex)
+							this.$router.push(this.tabList[curIndex].path)
+					}
+				}
+			],
+			homeContextmenuData: [
+				{
+					text: '刷新',
+					handler: () => {
+						this.$router.replace({
+							name: '刷新路由',
+							query: {
+								redirect: '/admin/home'
+							}
+						})
+					}
+				},
+				{
+					text: '关闭其他',
+					handler: () => {
+						this.tabList = []
+						this.$router.push('/admin/home')
+					}
+				}
+			]
+		}
+	},
+	watch: {
+		$route: {
+			handler(route) {
+				if (
+					!this.tabList.some(item => item.name === route.name) &&
+					route.name !== '首页' &&
+					route.name !== '刷新路由'
+				) {
+					this.tabList.push({
+						path: route.fullPath,
+						name: route.name
+					})
+				}
+				this.curRouter.name = route.name
+				this.curRouter.index = this.tabList.have(
+					tab => tab.name === route.name
+				)
+			},
+			immediate: true
+		}
+	},
+	methods: {
+		closeTabItemHandle(index) {
+			// 如果删除的正好为高亮状态
+			if (this.tabList.splice(index, 1)[0].name === this.curRouter.name)
+				this.$router.push(
+					this.tabList[index]
+						? this.tabList[index].path
+						: this.tabList[index - 1]
+						? this.tabList[index - 1].path
+						: '/admin/home'
+				)
+		}
+	}
 }
 </script>
 
 <style lang="less">
 .tabs {
-    padding-bottom: 7px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #e4e7ed;
-    overflow: auto;
+	padding-bottom: 7px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #e4e7ed;
+	overflow: auto;
 }
 .tabs-box {
-    white-space: nowrap;
-    .tabs-item {
-        display: inline-block;
-        position: relative;
-        padding: 5px 10px;
-        margin-right: 5px;
-        border: 1px solid #e6edf6;
-        background-color: #fff;
-        font-size: 12px;
-        color: #666;
-        cursor: pointer;
-        &:hover,
-        &.active {
-            background-image: linear-gradient(#1585fe, #00a2ff);
-            color: #fff;
-        }
-        .tabs-close {
-            display: none;
-            width: 14px;
-            height: 14px;
-            line-height: 14px;
-            text-align: center;
-            border-radius: 50%;
-            &:hover {
-                background-color: #fff;
-                color: #303133;
-            }
-        }
-        &:hover {
-            .tabs-close {
-                display: inline-block;
-            }
-        }
-        &.active {
-            padding-left: 20px;
-            &:before {
-                content: '';
-                position: absolute;
-                width: 6px;
-                height: 6px;
-                border-radius: 50%;
-                background-color: #fff;
-                left: 9px;
-                top: 10px;
-            }
-        }
-    }
+	white-space: nowrap;
+	.tabs-item {
+		display: inline-block;
+		position: relative;
+		padding: 5px 10px;
+		margin-right: 5px;
+		border: 1px solid #e6edf6;
+		background-color: #fff;
+		font-size: 12px;
+		color: #666;
+		cursor: pointer;
+		&:hover,
+		&.active {
+			background-image: linear-gradient(#1585fe, #00a2ff);
+			color: #fff;
+		}
+		.tabs-close {
+			display: none;
+			width: 14px;
+			height: 14px;
+			line-height: 14px;
+			text-align: center;
+			border-radius: 50%;
+			&:hover {
+				background-color: #fff;
+				color: #303133;
+			}
+		}
+		&:hover {
+			.tabs-close {
+				display: inline-block;
+			}
+		}
+		&.active {
+			padding-left: 20px;
+			&:before {
+				content: '';
+				position: absolute;
+				width: 6px;
+				height: 6px;
+				border-radius: 50%;
+				background-color: #fff;
+				left: 9px;
+				top: 10px;
+			}
+		}
+	}
 }
 </style>
