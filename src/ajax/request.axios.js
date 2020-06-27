@@ -5,15 +5,10 @@ const { serverName } = require('./request.config')
 axios.defaults.baseURL = serverName
 
 // 请求拦截器
-// axios.interceptors.request.use(function (config) {
-//     const formdata = new FormData()
-//     for (const key in config.data) {
-//         formdata.append(key, config.data[key])
-//     }
-//     config.data = formdata
-//     // config.headers.Authorization = window.localStorage.getItem('token') || '';
-//     return config;
-// });
+axios.interceptors.request.use(config => {
+    config.headers.token = window.localStorage.getItem('token') || '';
+    return config;
+});
 
 import { Notification } from 'element-ui';
 // 响应拦截器

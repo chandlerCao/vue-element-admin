@@ -1,11 +1,13 @@
 <template>
     <component
         v-if="!navData.hide"
-        :is="navData.children && navData.children.length ? 'el-submenu' : 'el-menu-item'"
+        :is="navData.children && navData.children.length && navData.children.filter(item => !item.hide).length ? 'el-submenu' : 'el-menu-item'"
         :index="`${prevPath}/${navData.path}`"
     >
         <!-- 如果有子菜单 -->
-        <template v-if="navData.children && navData.children.length">
+        <template
+            v-if="navData.children && navData.children.length && navData.children.filter(item => !item.hide).length"
+        >
             <template slot="title">
                 <i v-if="navData.meta && navData.meta.icon" :class="navData.meta.icon"></i>
                 <span>{{navData.name}}</span>

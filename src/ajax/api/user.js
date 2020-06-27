@@ -1,6 +1,6 @@
 export default {
-    getUserList: {
+    login: {
         method: 'post',
-        url: 'getArticleDetail'
+        url: 'user/login'
     }
 }

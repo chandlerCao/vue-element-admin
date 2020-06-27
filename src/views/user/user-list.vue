@@ -1,5 +1,5 @@
 <template>
-	<div>角色管理</div>
+    <div id="user-list">用户列表</div>
 </template>
 
 <script>

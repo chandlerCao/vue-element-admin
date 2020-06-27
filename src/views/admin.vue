@@ -5,11 +5,14 @@
         </el-aside>
         <el-container>
             <el-header id="comp-header" class="comp-shadow" style="height: 50px;">
-                <div class="nav-menu-fold" @click="collapseHandle">
-                    <i v-show="isCollapse" class="el-icon-s-unfold"></i>
-                    <i v-show="!isCollapse" class="el-icon-s-fold"></i>
+                <div id="header-content">
+                    <div class="nav-menu-fold" @click="collapseHandle">
+                        <i v-show="isCollapse" class="el-icon-s-unfold"></i>
+                        <i v-show="!isCollapse" class="el-icon-s-fold"></i>
+                    </div>
+                    <breadcrumb style="margin-left: 15px;"></breadcrumb>
                 </div>
-                <breadcrumb style="margin-left: 15px;"></breadcrumb>
+                <user-bar></user-bar>
             </el-header>
             <el-main>
                 <el-container>
@@ -30,11 +33,13 @@
 <script>
 import eventBus from '@/utils/event-bus'
 import navMenu from '@/views/admin/nav-menu'
-import breadcrumb from '@/views/admin/breadcrumb'
+import breadcrumb from '@/views/admin/header/breadcrumb'
+import userBar from '@/views/admin/header/user-bar'
 import tabs from '@/views/admin/tabs'
 export default {
     name: 'app',
     components: {
+        userBar,
         navMenu,
         breadcrumb,
         tabs
@@ -57,6 +62,7 @@ export default {
 #comp-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding-left: 0;
 }
 // .el-main {
@@ -75,5 +81,9 @@ export default {
     &:hover {
         background-color: #f2f6fc;
     }
+}
+#header-content {
+    display: flex;
+    align-items: center;
 }
 </style>

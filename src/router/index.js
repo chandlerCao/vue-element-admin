@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './routes'
 
-import login from '@/views/login'
+import login from '@/views/login/login'
 import admin from '@/views/admin'
 
 Vue.use(VueRouter)

@@ -49,8 +49,14 @@
                 </template>
             </template>
         </comp-complex-table>
-        <el-dialog title="评论列表" :visible.sync="acdDatas.visible" width="70%">
-            <div style="height: 500px;">
+        <el-dialog
+            title="评论列表"
+            :visible.sync="acdDatas.visible"
+            width="90%"
+            top="50px"
+            append-to-body
+        >
+            <div style="height: 60vh;">
                 <comment-list v-if="acdDatas.visible" :aid="acdDatas.curAid"></comment-list>
             </div>
             <span slot="footer" class="dialog-footer">

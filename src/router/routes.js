@@ -118,31 +118,21 @@ export default [
             },
         ]
     },
-    // 系统管理
+    // 用户管理
     {
-        path: 'system',
-        name: '系统管理',
-        redirect: 'system/user',
+        path: 'user/list',
+        name: '用户管理',
         meta: {
-            icon: 'el-icon-s-tools'
+            icon: 'el-icon-user'
         },
-        component: () => import('@/views/system/system'),
+        component: () => import('@/views/user/user-list'),
         children: [
             {
-                path: 'user',
-                name: '用户管理',
-                component: () => import('@/views/system/user'),
-            },
-            {
-                path: 'role',
-                name: '角色管理',
-                component: () => import('@/views/system/role')
-            },
-            {
-                path: 'menu',
-                name: '菜单管理',
-                component: () => import('@/views/system/menu')
-            },
+                hide: true,
+                path: 'edit/:uid',
+                name: '用户编辑',
+                component: () => import('@/views/user/user-edit')
+            }
         ]
     }
 ]

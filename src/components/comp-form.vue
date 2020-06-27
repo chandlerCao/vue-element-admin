@@ -84,10 +84,7 @@ export default {
         // 表单数据
         formData: {
             required: true,
-            type: Object,
-            default() {
-                return {}
-            }
+            type: Object
         }
     },
     data() {
