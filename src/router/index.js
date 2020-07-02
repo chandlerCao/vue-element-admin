@@ -4,6 +4,7 @@ import routes from './routes'
 
 import login from '@/views/login/login'
 import admin from '@/views/admin'
+import register from '@/views/register'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ const router = new VueRouter({
             name: '后台',
             component: admin,
             children: routes
+        },
+        {
+            path: '/register',
+            name: '注册',
+            component: register
         }
     ]
 })

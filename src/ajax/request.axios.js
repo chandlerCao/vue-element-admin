@@ -26,7 +26,7 @@ axios.interceptors.response.use(({ data }) => {
             title: '失败',
             message: data.m
         })
-        return Promise.resolve(data.m)
+        return Promise.reject(data.m)
     }
 }, error => {
     Notification.error({

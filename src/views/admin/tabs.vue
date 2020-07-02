@@ -161,7 +161,6 @@ export default {
 <style lang="less">
 .tabs {
 	padding-bottom: 7px;
-	margin-bottom: 10px;
 	border-bottom: 1px solid #e4e7ed;
 	overflow: auto;
 }
