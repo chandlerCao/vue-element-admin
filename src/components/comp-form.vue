@@ -157,7 +157,7 @@ export default {
         overflow-x: hidden;
         overflow-y: auto;
         .comp-el-form-wrap {
-            padding-right: 10px;
+            padding-right: 30px;
         }
     }
     .comp-el-form-btns {
