@@ -107,7 +107,7 @@ export default {
 	height: 200px;
 	justify-content: center;
 	align-items: center;
-	background: #f5f7fa;
+	background: #f2f5fa;
 	color: #909399;
 	font-size: 30px;
 	cursor: pointer;
