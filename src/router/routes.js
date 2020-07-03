@@ -26,6 +26,9 @@ export default [
             {
                 path: 'add',
                 name: '新建文章',
+                meta: {
+                    icon: 'el-icon-document-add'
+                },
                 component: () => import('@/views/article/article-form/article-add')
             },
             {
@@ -37,11 +40,17 @@ export default [
             {
                 path: 'list',
                 name: '文章列表',
+                meta: {
+                    icon: 'el-icon-document'
+                },
                 component: () => import('@/views/article/article-list/article-list')
             },
             {
                 path: 'dustbin',
                 name: '回收站',
+                meta: {
+                    icon: 'el-icon-delete'
+                },
                 component: () => import('@/views/article/article-list/article-dustbin')
             }
         ]
@@ -59,6 +68,9 @@ export default [
             {
                 path: 'add',
                 name: '新建标签',
+                meta: {
+                    icon: 'el-icon-collection-tag'
+                },
                 component: () => import('@/views/tag/tag-form/tag-add')
             },
             {
@@ -70,6 +82,9 @@ export default [
             {
                 path: 'list',
                 name: '标签列表',
+                meta: {
+                    icon: 'el-icon-discount'
+                },
                 component: () => import('@/views/tag/tag-list')
             }
         ]
@@ -87,11 +102,17 @@ export default [
             {
                 path: 'clist',
                 name: '评论列表',
+                meta: {
+                    icon: 'el-icon-chat-line-square'
+                },
                 component: () => import('@/views/comment/comment-list'),
             },
             {
                 path: 'rlist',
                 name: '回复列表',
+                meta: {
+                    icon: 'el-icon-chat-line-square'
+                },
                 component: () => import('@/views/comment/reply-list')
             },
         ]
@@ -109,11 +130,17 @@ export default [
             {
                 path: 'mlist',
                 name: '留言列表',
+                meta: {
+                    icon: 'el-icon-chat-line-square'
+                },
                 component: () => import('@/views/message/message-list'),
             },
             {
                 path: 'mrlist',
                 name: '留言回复列表',
+                meta: {
+                    icon: 'el-icon-chat-line-square'
+                },
                 component: () => import('@/views/message/message-reply-list')
             },
         ]
