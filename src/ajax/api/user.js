@@ -14,5 +14,13 @@ export default {
     getUserInfo: {
         method: 'get',
         url: 'user/getUserInfo'
+    },
+    getUserList: {
+        method: 'post',
+        url: 'user/getUserList'
+    },
+    deleteUser: {
+        method: 'post',
+        url: 'user/deleteUser'
     }
 }

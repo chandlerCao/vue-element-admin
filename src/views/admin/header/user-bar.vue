@@ -75,7 +75,7 @@ export default {
 #username {
 	position: relative;
 	padding-right: 15px;
-	top: -5px;
+	top: -11px;
 	color: #909399;
 }
 </style>

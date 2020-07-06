@@ -11,7 +11,10 @@
 				:class="{'active': curRouter.name === '首页'}"
 				@click="$router.push('/admin/home')"
 				v-contextmenu="homeContextmenuData"
-			>首页</div>
+			>
+				<i class="el-icon-s-home"></i>
+				首页
+			</div>
 
 			<div
 				v-for="(tabItem, index) in tabList"
@@ -23,6 +26,7 @@
 				:data-name="tabItem.name"
 				v-contextmenu="contextmenuData"
 			>
+				<i :class="['tabs-icon', tabItem.icon]"></i>
 				{{tabItem.name}}
 				<div v-if="!tabItem.hideCloseIcon" class="tabs-close" @click.stop="closeTabItemHandle(index)">
 					<i class="el-icon-close"></i>
@@ -131,7 +135,8 @@ export default {
 				) {
 					this.tabList.push({
 						path: route.fullPath,
-						name: route.name
+						name: route.name,
+						icon: route.meta.icon
 					})
 				}
 				this.curRouter.name = route.name
@@ -176,6 +181,9 @@ export default {
 		font-size: 12px;
 		color: #666;
 		cursor: pointer;
+		.tabs-icon {
+			display: none;
+		}
 		&:hover,
 		&.active {
 			background-image: linear-gradient(#1585fe, #00a2ff);
@@ -199,16 +207,8 @@ export default {
 			}
 		}
 		&.active {
-			padding-left: 20px;
-			&:before {
-				content: '';
-				position: absolute;
-				width: 6px;
-				height: 6px;
-				border-radius: 50%;
-				background-color: #fff;
-				left: 9px;
-				top: 10px;
+			.tabs-icon {
+				display: inline-block;
 			}
 		}
 	}
