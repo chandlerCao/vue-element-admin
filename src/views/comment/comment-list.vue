@@ -117,7 +117,7 @@ export default {
 						prop: 'article_title',
 						label: '对应文章',
 						attrs: {
-							width: 260,
+							width: 200,
 							showOverflowTooltip: true
 						}
 					}

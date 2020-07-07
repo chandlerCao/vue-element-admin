@@ -135,7 +135,7 @@ export default {
 						prop: 'title',
 						label: '标题',
 						attrs: {
-							width: 260,
+							width: 200,
 							showOverflowTooltip: true
 						}
 					},

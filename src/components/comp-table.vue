@@ -4,7 +4,7 @@
 		<el-main>
 			<el-table :id="primaryKey" :data="tableData" height="100%" v-loading="tableDisabled">
 				<!-- 表格序号 -->
-				<el-table-column type="index" label="序号" fixed="left"></el-table-column>
+				<el-table-column type="index" label="序号"></el-table-column>
 				<!-- 表格每一列 -->
 				<el-table-column
 					v-for="item in tableColumn"

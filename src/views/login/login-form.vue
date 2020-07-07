@@ -3,11 +3,11 @@
 		<div id="login-title">系统登录</div>
 		<div class="comp-form-item">
 			<i class="el-icon-user-solid"></i>
-			<input type="text" v-model="loginInfo.username" maxlength="10" placeholder="用户名" autofocus />
+			<input type="text" v-model="loginInfo.username" maxlength="10" placeholder="用户名：admin" autofocus />
 		</div>
 		<div class="comp-form-item">
 			<i class="el-icon-lock"></i>
-			<input type="password" v-model="loginInfo.password" maxlength="16" placeholder="用户密码" />
+			<input type="password" v-model="loginInfo.password" maxlength="16" placeholder="密码：1" />
 		</div>
 		<el-button type="primary" style="width: 100%" @click="login" :loading="loginLoading">登录</el-button>
 	</form>
