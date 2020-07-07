@@ -93,11 +93,10 @@ export default {
 								}
 							},
 							handler: row => {
-								row
-								// this.$router.push({
-								// 	name: '编辑文章',
-								// 	params: { aid: row.aid }
-								// })
+								this.$router.push({
+									name: '用户编辑',
+									params: { uid: row.uid }
+								})
 							}
 						}
 					]

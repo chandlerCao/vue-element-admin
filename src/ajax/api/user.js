@@ -7,6 +7,10 @@ export default {
         method: 'post',
         url: 'user/register'
     },
+    editUserInfo: {
+        method: 'post',
+        url: 'user/editUserInfo'
+    },
     uploadUserAvatar: {
         method: 'post',
         url: 'user/uploadUserAvatar'

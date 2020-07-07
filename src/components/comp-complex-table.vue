@@ -83,7 +83,8 @@ export default {
 
 <style lang="less" scoped>
 .comp-complex-query-form {
-	height: 94px !important;
+	height: auto !important;
+	max-height: 94px !important;
 	overflow: auto;
 }
 </style>

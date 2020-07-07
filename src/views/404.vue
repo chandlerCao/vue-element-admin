@@ -12,7 +12,7 @@
 					<p>
 						<span>
 							页面自动
-							<router-link :to="{name: '首页'}">跳转</router-link>
+							<el-button type="text" @click="$router.back()">返回</el-button>
 						</span>
 						<span>
 							等待
@@ -30,7 +30,7 @@ export default {
 	name: 'page-404',
 	data() {
 		return {
-			second: 6
+			second: 7
 		}
 	},
 	created() {
@@ -39,8 +39,8 @@ export default {
 	methods: {
 		go() {
 			this.second--
-			if (this.second === -1) {
-				this.$router.push({ name: '首页' })
+			if (this.second === 0) {
+				this.$router.back()
 				return
 			}
 			setTimeout(() => {

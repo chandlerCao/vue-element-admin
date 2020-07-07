@@ -153,13 +153,15 @@ export default [
             icon: 'el-icon-user'
         },
         component: () => import('@/views/user/user-list'),
-        children: [
-            {
-                hide: true,
-                path: 'edit/:uid',
-                name: '用户编辑',
-                component: () => import('@/views/user/user-edit')
-            }
-        ]
+    },
+    // 用户编辑
+    {
+        hide: true,
+        path: 'user/edit/:uid',
+        name: '用户编辑',
+        meta: {
+            icon: 'el-icon-user'
+        },
+        component: () => import('@/views/user/user-edit')
     }
 ]
