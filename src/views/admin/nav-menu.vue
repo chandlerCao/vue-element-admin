@@ -42,7 +42,7 @@ export default {
 	height: 100%;
 	box-sizing: border-box;
 	padding: 10px 15px 0;
-	border-right: 1px solid #dcdfe6;
+	border-right: 1px solid #e6edf6;
 	overflow: auto;
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {

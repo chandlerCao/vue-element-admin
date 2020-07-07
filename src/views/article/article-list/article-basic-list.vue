@@ -30,15 +30,11 @@
 			</template>
 			<!-- 点赞数 -->
 			<template #table-like_count="{ row }">
-				<el-link v-if="row">{{row.like_count}}</el-link>
+				<comp-link v-if="row">{{row.like_count}}</comp-link>
 			</template>
 			<!-- 评论数 -->
 			<template #table-comment_count="{ row }">
-				<el-link
-					v-if="row"
-					style="padding: 0 10px;"
-					@click="showCommentByAid(row.aid)"
-				>{{row.comment_count}}</el-link>
+				<comp-link v-if="row" @click="showCommentByAid(row.aid)">{{row.comment_count}}</comp-link>
 			</template>
 			<!-- 状态 -->
 			<template #table-state="{ row }">
@@ -139,7 +135,8 @@ export default {
 						prop: 'title',
 						label: '标题',
 						attrs: {
-							width: 260
+							width: 260,
+							showOverflowTooltip: true
 						}
 					},
 					{
@@ -157,11 +154,13 @@ export default {
 					},
 					{
 						prop: 'like_count',
-						label: '点赞数'
+						label: '点赞数',
+						attrs: { width: 90, sortable: true }
 					},
 					{
 						prop: 'comment_count',
-						label: '评论数'
+						label: '评论数',
+						attrs: { width: 90, sortable: true }
 					},
 					{
 						prop: 'state',
@@ -171,7 +170,8 @@ export default {
 						prop: 'date',
 						label: '发布日期',
 						attrs: {
-							width: 151
+							width: 151,
+							sortable: true
 						}
 					}
 				],

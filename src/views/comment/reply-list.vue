@@ -6,9 +6,10 @@
 	>
 		<!-- 回复对应文章 -->
 		<template #table-article_title="{ row }">
-			<router-link v-if="row" tag="span" :to="{name: '编辑文章', params: {aid: row.aid}}">
-				<el-link>{{row.article_title}}</el-link>
-			</router-link>
+			<comp-link
+				v-if="row"
+				@click="$router.push({name: '编辑文章', params: {aid: row.aid}})"
+			>{{row.article_title}}</comp-link>
 		</template>
 	</comp-complex-table>
 </template>
@@ -107,14 +108,16 @@ export default {
 						prop: 'date',
 						label: '回复日期',
 						attrs: {
-							width: 160
+							width: 160,
+							sortable: true
 						}
 					},
 					{
 						prop: 'article_title',
 						label: '对应文章',
 						attrs: {
-							width: 260
+							width: 260,
+							showOverflowTooltip: true
 						}
 					}
 				],

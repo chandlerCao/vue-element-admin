@@ -181,9 +181,9 @@ export default {
 		font-size: 12px;
 		color: #666;
 		cursor: pointer;
-		.tabs-icon {
-			display: none;
-		}
+		// .tabs-icon {
+		// 	display: none;
+		// }
 		&:hover,
 		&.active {
 			background-image: linear-gradient(#1585fe, #00a2ff);
@@ -206,11 +206,11 @@ export default {
 				display: inline-block;
 			}
 		}
-		&.active {
-			.tabs-icon {
-				display: inline-block;
-			}
-		}
+		// &.active {
+		// 	.tabs-icon {
+		// 		display: inline-block;
+		// 	}
+		// }
 	}
 }
 </style>

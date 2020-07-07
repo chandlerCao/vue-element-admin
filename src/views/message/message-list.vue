@@ -84,17 +84,20 @@ export default {
 					},
 					{
 						prop: 'like_count',
-						label: '点赞数'
+						label: '点赞数',
+						attrs: { width: 90, sortable: true }
 					},
 					{
 						prop: 'reply_count',
-						label: '回复数'
+						label: '回复数',
+						attrs: { width: 90, sortable: true }
 					},
 					{
 						prop: 'date',
 						label: '留言日期',
 						attrs: {
-							width: 160
+							width: 160,
+							sortable: true
 						}
 					}
 				],

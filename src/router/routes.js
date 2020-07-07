@@ -1,4 +1,5 @@
 export default [
+    // 首页
     {
         path: 'home',
         name: '首页',
@@ -7,6 +8,7 @@ export default [
         },
         component: () => import('@/views/admin/home')
     },
+    // 刷新组件
     {
         hide: true,
         path: 'refresh',
@@ -34,6 +36,9 @@ export default [
             {
                 path: 'edit/:aid',
                 name: '编辑文章',
+                meta: {
+                    icon: 'el-icon-edit'
+                },
                 hide: true,
                 component: () => import('@/views/article/article-form/article-edit')
             },
@@ -76,6 +81,9 @@ export default [
             {
                 path: 'edit/:tid',
                 name: '编辑标签',
+                meta: {
+                    icon: 'el-icon-collection-tag'
+                },
                 hide: true,
                 component: () => import('@/views/tag/tag-form/tag-edit')
             },

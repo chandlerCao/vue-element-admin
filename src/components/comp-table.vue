@@ -4,7 +4,7 @@
 		<el-main>
 			<el-table :id="primaryKey" :data="tableData" height="100%" v-loading="tableDisabled">
 				<!-- 表格序号 -->
-				<el-table-column type="index" label="序号"></el-table-column>
+				<el-table-column type="index" label="序号" fixed="left"></el-table-column>
 				<!-- 表格每一列 -->
 				<el-table-column
 					v-for="item in tableColumn"
@@ -12,7 +12,6 @@
 					:prop="item.prop"
 					:label="item.label"
 					v-bind="item.attrs"
-					show-overflow-tooltip
 				>
 					<template #default="{ row }">
 						<slot :name="`table-${item.prop}`" :row="row">{{row[item.prop]}}</slot>

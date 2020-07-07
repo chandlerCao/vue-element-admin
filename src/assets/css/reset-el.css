@@ -74,3 +74,7 @@
 .el-menu-item.is-active {
     background-color: #f2f5fa !important;
 }
+
+.el-avatar>img {
+    width: 100%;
+}
