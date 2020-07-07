@@ -177,12 +177,10 @@ export default {
 		padding: 5px 10px;
 		margin-right: 5px;
 		border: 1px solid #e6edf6;
-		background-color: #fff;
 		font-size: 12px;
-		color: #666;
-		cursor: pointer;
 		background-color: #fff;
-		transition: 0.2s background;
+		color: #606266;
+		cursor: pointer;
 		&:hover,
 		&.active {
 			background-color: #429eff;
@@ -191,12 +189,10 @@ export default {
 		.tabs-close {
 			display: inline-block;
 			width: 0;
-			height: 0;
+			height: 14px;
 			line-height: 14px;
-			text-align: center;
-			border-radius: 50%;
 			transition: 0.2s;
-			transform: scale(0);
+			transform: scaleX(0);
 			&:hover {
 				background-color: #fff;
 				color: #303133;
@@ -205,8 +201,7 @@ export default {
 		&:hover {
 			.tabs-close {
 				width: 14px;
-				height: 14px;
-				transform: scale(1);
+				transform: scaleX(1);
 			}
 		}
 		// &.active {
