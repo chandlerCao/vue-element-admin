@@ -1,6 +1,6 @@
 <!-- 导航菜单 -->
 <template>
-	<div id="nav-menu">
+	<div id="nav-menu" :class="{padding: !isCollapse}">
 		<!-- unique-opened -->
 		<el-menu
 			class="el-menu-vertical-demo"
@@ -38,12 +38,14 @@ export default {
 <style lang="less" scoped>
 #nav-menu {
 	position: relative;
-	width: 240px;
 	height: 100%;
 	box-sizing: border-box;
-	padding: 10px 15px 0;
 	border-right: 1px solid #e6edf6;
 	overflow: auto;
+	transition: 0.15s;
+	&.padding {
+		padding: 10px 15px 0;
+	}
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
 	width: 210px;
