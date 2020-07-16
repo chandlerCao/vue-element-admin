@@ -15,15 +15,12 @@
 				<i class="el-icon-s-home"></i>
 				首页
 			</div>
-
-			<div
+			<router-link
 				v-for="(tabItem, index) in tabList"
-				class="tabs-item"
-				:class="{'active': curRouter.name === tabItem.name}"
+				tag="div"
+				:to="tabItem.path"
+				:class="['tabs-item', {'active': curRouter.name === tabItem.name}]"
 				:key="tabItem.name"
-				@click="$router.push(tabItem.path)"
-				:data-index="index"
-				:data-name="tabItem.name"
 				v-contextmenu="contextmenuData"
 			>
 				<i :class="['tabs-icon', tabItem.icon]"></i>
@@ -31,7 +28,7 @@
 				<div v-if="!tabItem.hideCloseIcon" class="tabs-close" @click.stop="closeTabItemHandle(index)">
 					<i class="el-icon-close"></i>
 				</div>
-			</div>
+			</router-link>
 		</div>
 	</div>
 </template>
