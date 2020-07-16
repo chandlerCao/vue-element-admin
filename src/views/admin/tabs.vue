@@ -191,6 +191,8 @@ export default {
 			width: 0;
 			height: 14px;
 			line-height: 14px;
+			border-radius: 50%;
+			text-align: center;
 			transition: 0.2s;
 			transform: scaleX(0);
 			&:hover {
