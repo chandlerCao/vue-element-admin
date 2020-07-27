@@ -10,6 +10,7 @@
 			</span>
 			<el-dropdown-menu slot="dropdown">
 				<el-dropdown-item command="home">首页</el-dropdown-item>
+				<el-dropdown-item command="edituser">修改资料</el-dropdown-item>
 				<el-dropdown-item command="github">项目地址</el-dropdown-item>
 				<el-dropdown-item command="register">用户注册</el-dropdown-item>
 				<el-dropdown-item divided command="loginOut">退出登陆</el-dropdown-item>
@@ -47,6 +48,12 @@ export default {
 			switch (command) {
 				case 'home':
 					this.$router.push({ name: '首页' })
+					break
+				case 'edituser':
+					this.$router.push({
+						name: '用户编辑',
+						params: { uid: window.localStorage.getItem('uid') }
+					})
 					break
 				case 'github':
 					window.open('https://www.baidu.com')

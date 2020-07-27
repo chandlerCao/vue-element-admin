@@ -6,15 +6,15 @@
 				<i class="el-icon-back"></i>
 				返回
 			</div>
-			<div
-				class="tabs-item"
-				:class="{'active': curRouter.name === '首页'}"
-				@click="$router.push('/admin/home')"
+			<router-link
+				tag="div"
+				:class="['tabs-item', {'active': curRouter.name === '首页'}]"
+				to="/admin/home"
 				v-contextmenu="homeContextmenuData"
 			>
 				<i class="el-icon-s-home"></i>
 				首页
-			</div>
+			</router-link>
 
 			<router-link
 				v-for="(tabItem, index) in tabList"
@@ -24,6 +24,7 @@
 				:class="['tabs-item', {'active': curRouter.name === tabItem.name}]"
 				:data-index="index"
 				:data-name="tabItem.name"
+				:data-path="tabItem.path"
 				v-contextmenu="contextmenuData"
 			>
 				<i :class="['tabs-icon', tabItem.icon]"></i>
@@ -51,7 +52,7 @@ export default {
 						this.$router.replace({
 							name: '刷新路由',
 							query: {
-								redirect: this.tabList[el.dataset.index].path
+								redirect: el.dataset.path
 							}
 						})
 					}
@@ -69,7 +70,7 @@ export default {
 							tab => tab.name === el.dataset.name
 						)
 
-						this.$router.push(this.tabList[0].path)
+						this.$router.push(el.dataset.path)
 					}
 				},
 				{
@@ -81,15 +82,8 @@ export default {
 							this.tabList.length
 						)
 						// 如果当前高亮的页签被关闭左侧时删除了
-						if (this.curRouter.index < curIndex) {
-							this.$router.push(
-								this.tabList[
-									this.tabList.have(
-										tab => tab.name === el.dataset.name
-									)
-								].path
-							)
-						}
+						if (this.curRouter.index < curIndex)
+							this.$router.push(el.dataset.path)
 					}
 				},
 				{
@@ -99,7 +93,7 @@ export default {
 						this.tabList = this.tabList.slice(0, curIndex + 1)
 						// 如果当前高亮的页签被关闭右侧时删除了
 						if (this.curRouter.index > curIndex)
-							this.$router.push(this.tabList[curIndex].path)
+							this.$router.push(el.dataset.path)
 					}
 				}
 			],

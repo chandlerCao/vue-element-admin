@@ -184,20 +184,22 @@ export default {
 		async reloadTableHandler() {
 			this.tableDisabled = true
 
-			const { pagination, tableData } = await this.requestMethod({
+			this.requestMethod({
 				pagination: {
 					currentPage: this.pagination.currentPage,
 					pageSize: this.pagination.pageSize
 				},
 				params: this.queryFormVal
 			})
-
-			this.pagination.currentPage = pagination.currentPage
-			this.pagination.total = pagination.total
-			this.pagination.pageSize = pagination.pageSize
-			this.tableData = tableData
-
-			this.tableDisabled = false
+				.then(({ pagination, tableData }) => {
+					this.pagination.currentPage = pagination.currentPage
+					this.pagination.total = pagination.total
+					this.pagination.pageSize = pagination.pageSize
+					this.tableData = tableData
+				})
+				.finally(() => {
+					this.tableDisabled = false
+				})
 		},
 		// 合并表格操作按钮
 		mergeTableHandleBtns() {
