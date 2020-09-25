@@ -1,4 +1,6 @@
-<!-- tab标签页 -->
+// DATE 2020-09-22
+// ANCHOR 曹德健
+
 <template>
 	<div class="tabs">
 		<div class="tabs-box">
