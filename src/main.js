@@ -49,7 +49,13 @@ Vue.prototype.$req = request
 Vue.prototype.$api = api
 
 // 自定义指令
-import '@/directive/contextmenu'
+import directive from '@/directive'
+
+for (const key in directive) {
+  Vue.directive(key, directive[key])
+}
+
+
 // 数组方法
 import '@/utils/Array'
 
