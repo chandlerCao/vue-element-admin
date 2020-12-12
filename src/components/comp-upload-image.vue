@@ -61,6 +61,7 @@ export default {
 		},
 		// 删除图片
 		clearImage() {
+			// 重新加载一遍input-file框 否则如果选择同一张图片无法触发change事件
 			this.inputFile = false
 			this.imgUrl = ''
 			setTimeout(() => {
