@@ -170,7 +170,7 @@ export default {
 						prop: 'date',
 						label: '发布日期',
 						attrs: {
-							width: 151,
+							width: 160,
 							sortable: true
 						}
 					}
