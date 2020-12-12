@@ -1,7 +1,5 @@
-import Vue from 'vue'
-
 let [ul, isContextmenu] = [null, false]
-Vue.directive('contextmenu', {
+export default {
     inserted: (el, { value }) => {
         el.addEventListener('contextmenu', e => {
             e.preventDefault()
@@ -25,4 +23,4 @@ Vue.directive('contextmenu', {
             ul.style.cssText = `left: ${e.pageX}px; top: ${e.pageY}px;`;
         })
     }
-})
+}
