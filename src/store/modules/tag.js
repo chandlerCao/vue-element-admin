@@ -6,7 +6,7 @@ export default {
     }),
     getters: {
         // 改变tagList的字段名
-        newTagList: state => state.tagList.map(tag => ({
+        formTagList: state => state.tagList.map(tag => ({
             label: tag.tag_name,
             value: tag.tid
         })),

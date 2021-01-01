@@ -128,13 +128,13 @@ export default {
     },
     computed: {
         ...mapGetters({
-            newTagList: 'tag/newTagList',
+            formTagList: 'tag/formTagList',
         }),
     },
     watch: {
-        newTagList: {
-            handler(newTagList) {
-                this.articleFormData.formData.tag_id.options = newTagList
+        formTagList: {
+            handler(formTagList) {
+                this.articleFormData.formData.tag_id.options = formTagList
             },
             immediate: true,
         },
