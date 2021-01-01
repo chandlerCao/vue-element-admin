@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import commentList from '@/views/comment/comment-list'
 export default {
     name: 'articleList',
@@ -113,9 +114,7 @@ export default {
                         tag: {
                             label: '标签',
                             el: 'el-select',
-                            options: this.$store.getters[
-                                'tag/queryFormTagList'
-                            ],
+                            options: [],
                         },
                         datePicker: {
                             label: '发布时间段',
@@ -216,6 +215,19 @@ export default {
                 curAid: '',
             },
         }
+    },
+    computed: {
+        ...mapGetters({
+            queryFormTagList: 'tag/queryFormTagList',
+        }),
+    },
+    watch: {
+        queryFormTagList: {
+            handler(queryFormTagList) {
+                this.queryForm.formData.tag.options = queryFormTagList
+            },
+            immediate: true,
+        },
     },
     methods: {
         // 获取当前文章评论列表

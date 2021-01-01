@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
     name: 'article-add',
     props: {
@@ -80,7 +81,7 @@ export default {
                                 trigger: 'submit',
                             },
                         ],
-                        options: this.$store.getters['tag/newTagList'],
+                        options: [],
                     },
                     state: {
                         label: '是否上线',
@@ -125,7 +126,18 @@ export default {
             },
         }
     },
+    computed: {
+        ...mapGetters({
+            newTagList: 'tag/newTagList',
+        }),
+    },
     watch: {
+        newTagList: {
+            handler(newTagList) {
+                this.articleFormData.formData.tag_id.options = newTagList
+            },
+            immediate: true,
+        },
         articleData(articleData) {
             // 初始化文章字段值
             this.setArticleDefaultVal(articleData)

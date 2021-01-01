@@ -41,7 +41,6 @@ import breadcrumb from '@/views/admin/header/breadcrumb'
 import userBar from '@/views/admin/header/user-bar'
 import tabs from '@/views/admin/tabs'
 
-import { mapActions } from 'vuex'
 export default {
     name: 'app',
     components: {
@@ -55,18 +54,11 @@ export default {
             isCollapse: false,
         }
     },
-    created() {
-        // 获取所有标签
-        this.getTagList()
-    },
     methods: {
         collapseHandle() {
             this.isCollapse = !this.isCollapse
             eventBus.$emit('collapseHandle', this.isCollapse)
         },
-        ...mapActions({
-            getTagList: 'tag/getTagList',
-        }),
     },
 }
 </script>
