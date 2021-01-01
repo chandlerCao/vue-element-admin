@@ -5,11 +5,12 @@ export default {
         tagList: []
     }),
     getters: {
-        // 改变tagList的字段名
+        // 用于新增或编辑文章的  文章标签列表
         formTagList: state => state.tagList.map(tag => ({
             label: tag.tag_name,
             value: tag.tid
         })),
+        // 用于查询文章的 文章标签列表
         queryFormTagList: state => [{ label: '全部', value: '' }].concat(state.tagList.map(tag => ({
             label: tag.tag_name,
             value: tag.tid
