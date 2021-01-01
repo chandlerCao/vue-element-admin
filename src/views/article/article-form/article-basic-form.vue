@@ -80,7 +80,7 @@ export default {
                                 trigger: 'submit',
                             },
                         ],
-                        options: [],
+                        options: this.$store.getters['tag/newTagList'],
                     },
                     state: {
                         label: '是否上线',
@@ -131,22 +131,7 @@ export default {
             this.setArticleDefaultVal(articleData)
         },
     },
-    created() {
-        // 获取标签下拉框数据
-        this.getAllTag()
-    },
     methods: {
-        // 获取标签下拉框数据
-        async getAllTag() {
-            this.articleFormData.formData.tag_id.options = (
-                await this.$req(this.$api.tag.getAllTag)
-            ).map((tag) => {
-                return {
-                    label: tag.tag_name,
-                    value: tag.tid,
-                }
-            })
-        },
         // 初始化文章表单
         setArticleDefaultVal(articleData) {
             for (const formName in this.articleFormData.formData) {
