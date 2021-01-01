@@ -5,18 +5,8 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 export default {
     name: 'app',
-    created() {
-        // 获取所有标签
-        this.getTagList()
-    },
-    methods: {
-        ...mapActions({
-            getTagList: 'tag/getTagList',
-        }),
-    },
 }
 </script>
 

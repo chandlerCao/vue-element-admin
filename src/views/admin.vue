@@ -4,22 +4,26 @@
             <nav-menu></nav-menu>
         </el-aside>
         <el-container>
-            <el-header id="comp-header" class="comp-shadow" style="height: 50px;">
+            <el-header
+                id="comp-header"
+                class="comp-shadow"
+                style="height: 50px"
+            >
                 <div id="header-content">
                     <div class="nav-menu-fold" @click="collapseHandle">
                         <i v-show="isCollapse" class="el-icon-s-unfold"></i>
                         <i v-show="!isCollapse" class="el-icon-s-fold"></i>
                     </div>
-                    <breadcrumb style="margin-left: 15px;"></breadcrumb>
+                    <breadcrumb style="margin-left: 15px"></breadcrumb>
                 </div>
                 <user-bar></user-bar>
             </el-header>
             <el-main>
                 <el-container>
-                    <el-header style="height: auto; padding: 10px 15px 0;">
+                    <el-header style="height: auto; padding: 10px 15px 0">
                         <tabs></tabs>
                     </el-header>
-                    <el-main style="padding: 10px 0 15px 15px;">
+                    <el-main style="padding: 10px 0 15px 15px">
                         <transition name="slide-fade">
                             <router-view></router-view>
                         </transition>
@@ -36,25 +40,34 @@ import navMenu from '@/views/admin/nav-menu'
 import breadcrumb from '@/views/admin/header/breadcrumb'
 import userBar from '@/views/admin/header/user-bar'
 import tabs from '@/views/admin/tabs'
+
+import { mapActions } from 'vuex'
 export default {
     name: 'app',
     components: {
         userBar,
         navMenu,
         breadcrumb,
-        tabs
+        tabs,
     },
     data() {
         return {
-            isCollapse: false
+            isCollapse: false,
         }
+    },
+    created() {
+        // 获取所有标签
+        this.getTagList()
     },
     methods: {
         collapseHandle() {
             this.isCollapse = !this.isCollapse
             eventBus.$emit('collapseHandle', this.isCollapse)
-        }
-    }
+        },
+        ...mapActions({
+            getTagList: 'tag/getTagList',
+        }),
+    },
 }
 </script>
 
