@@ -33,7 +33,13 @@ axios.interceptors.response.use(({ config, data }) => {
         title: response.data.m,
         message: `"${config.url}"接口调用失败`
     })
-    if (response.status === 401) router.push('/login')
+    console.log(router.history.current.fullPath)
+    if (response.status === 401 && router.history.current.name !== '登陆') router.push({
+        path: '/login',
+        query: {
+            redirect: router.history.current.fullPath
+        }
+    })
     return Promise.reject(response.data.m)
 })
 
