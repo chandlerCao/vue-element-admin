@@ -1,4 +1,5 @@
 import axios from 'axios'
+import router from '@/router'
 
 const { serverName } = require('./request.config')
 
@@ -12,28 +13,28 @@ axios.interceptors.request.use(config => {
 
 import { Notification } from 'element-ui';
 // 响应拦截器
-axios.interceptors.response.use(({ data }) => {
+axios.interceptors.response.use(({ config, data }) => {
     if (data.c === 0) {
-        if (data.m) Notification({
-            title: '成功',
-            message: data.m,
-            type: 'success'
+        if (data.m) Notification.success({
+            title: data.m,
+            message: '成功',
         })
         return data.d
     }
     else {
         Notification.error({
-            title: '失败',
-            message: data.m
+            title: data.m,
+            message: `"${config.url}"接口调用失败`
         })
         return Promise.reject(data.m)
     }
-}, error => {
+}, ({ config, response }) => {
     Notification.error({
-        title: '错误',
-        message: error
+        title: response.data.m,
+        message: `"${config.url}"接口调用失败`
     })
-    return Promise.reject(error)
+    if (response.status === 401) router.push('/login')
+    return Promise.reject(response.data.m)
 })
 
 export default async (requestObj, args) => {
