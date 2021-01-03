@@ -91,7 +91,6 @@
 </template>
 
 <script>
-import objUtils from '@/utils/obj-utils'
 export default {
     name: 'comp-table',
     props: {
@@ -197,10 +196,6 @@ export default {
             this.$emit('update:disabled', tableDisabled)
         },
     },
-    created() {
-        // 合并表格操作按钮
-        this.mergeTableHandleBtns()
-    },
     methods: {
         // 重载表格
         async reloadTableHandler() {
@@ -222,22 +217,6 @@ export default {
                 .finally(() => {
                     this.tableDisabled = false
                 })
-        },
-        // 合并表格操作按钮
-        mergeTableHandleBtns() {
-            if (Object.keys(this.tableHandleBtns).length) {
-                const localTableHandleBtns = {}
-                for (const key in this.tableHandleBtns) {
-                    if (this.enumTableHandleBtns[key])
-                        localTableHandleBtns[key] = this.enumTableHandleBtns[
-                            key
-                        ]
-                }
-                this.newTableHandleBtns = objUtils.assign(
-                    localTableHandleBtns,
-                    this.tableHandleBtns
-                )
-            }
         },
     },
 }
