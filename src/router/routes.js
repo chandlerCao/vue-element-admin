@@ -40,7 +40,8 @@ export default [
                     icon: 'el-icon-edit'
                 },
                 hide: true,
-                component: () => import('@/views/article/article-form/article-edit')
+                component: () => import('@/views/article/article-form/article-edit'),
+                props: true
             },
             {
                 path: 'list',

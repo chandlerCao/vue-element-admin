@@ -40,14 +40,26 @@
                             ) in tableHandleBtns.customBtns"
                             :key="index"
                             v-bind="handleBtn.btn.attrs"
-                            style="margin-right: 10px"
-                            @click="handleBtn.handler(row, handleBtn)"
+                            @click="handleBtn.handler(row, index, handleBtn)"
                             >{{ handleBtn.btn.name }}</el-button
                         >
-                        <!-- 删除 -->
+                        <!-- 点击出现弹框按钮 -->
+                        <el-button
+                            v-for="(
+                                btnItem, index
+                            ) in newTableHandleBtns.dialogBtns"
+                            :key="index"
+                            v-bind="btnItem.btn.attrs"
+                            @click="
+                                dialogVisible = true
+                                dialogIndex = index
+                                btnItem.handler && btnItem.handler(row, btnItem)
+                            "
+                            >{{ btnItem.btn.name }}</el-button
+                        >
+                        <!-- 单行删除按钮 -->
                         <el-popconfirm
                             v-if="newTableHandleBtns.delete"
-                            style="margin-right: 10px"
                             :title="
                                 newTableHandleBtns.delete.btn.message ||
                                 '确认删除？'
@@ -87,6 +99,29 @@
                 ></el-pagination>
             </div>
         </el-footer>
+        <!-- 表格单行点击出现的弹框 -->
+        <el-dialog
+            v-if="newTableHandleBtns.dialogBtns.length"
+            :title="newTableHandleBtns.dialogBtns[dialogIndex].dialog.title"
+            :visible.sync="dialogVisible"
+            width="90%"
+            top="50px"
+            append-to-body
+        >
+            <div style="height: 60vh">
+                <component
+                    :is="newTableHandleBtns.dialogBtns[dialogIndex].dialog.el"
+                    v-bind="
+                        newTableHandleBtns.dialogBtns[dialogIndex].dialog.bind
+                    "
+                ></component>
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="dialogVisible = false"
+                    >关 闭</el-button
+                >
+            </span>
+        </el-dialog>
     </el-container>
 </template>
 
@@ -133,37 +168,36 @@ export default {
             },
             // 表格loading
             tableDisabled: this.$attrs.disabled || false,
+            // 弹框的索引值
+            dialogIndex: 0,
+            // 弹框状态
+            dialogVisible: false,
             // 枚举表格操作按钮
             enumTableHandleBtns: {
                 // 编辑功能
-                edit: {
-                    btn: {
-                        name: '编辑',
-                        attrs: {
-                            type: 'primary',
-                            size: 'mini',
-                            icon: 'el-icon-edit',
-                            loading: false,
+                dialogBtns: [
+                    {
+                        btn: {
+                            name: '编辑',
+                            attrs: {
+                                type: 'primary',
+                                size: 'mini',
+                                icon: 'el-icon-edit',
+                            },
+                        },
+                        dialog: {
+                            title: '编辑',
+                            arguments: [],
+                            bind: {},
+                            el: 'div',
+                        },
+                        handler(row, self) {
+                            self.dialog.arguments.forEach((item) => {
+                                self.dialog.bind[item] = row[item]
+                            })
                         },
                     },
-                    modal: {
-                        title: '编辑',
-                        visible: false,
-                    },
-                    async handler({ self, row }) {
-                        self.btn.attrs.loading = true
-                        await self.getRowInfoReq({
-                            currentPage: 2,
-                            pageSize: 10,
-                        })
-                        self.modal.visible = true
-                        for (const formKey in self.form.formData) {
-                            self.form.formData[formKey].defaultValue =
-                                row[formKey]
-                        }
-                        self.btn.attrs.loading = false
-                    },
-                },
+                ],
                 // 删除功能
                 delete: {
                     btn: {

@@ -23,6 +23,10 @@ button, input, select, textarea {
     margin: 0;
 }
 
+button+span, button+button {
+    margin-left: 10px;
+}
+
 img, embed, object, audio, video {
     height: auto;
     max-width: 100%;

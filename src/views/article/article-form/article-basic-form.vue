@@ -11,7 +11,7 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-    name: 'article-add',
+    name: 'article-basic-form',
     props: {
         articleData: {
             type: Object,
@@ -24,6 +24,9 @@ export default {
         return {
             articleFormData: {
                 formData: {
+                    aid: {
+                        hide: true,
+                    },
                     title: {
                         label: '标题',
                         attrs: {

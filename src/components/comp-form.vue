@@ -14,42 +14,38 @@
             <div class="comp-el-custom-form-items">
                 <div class="comp-el-form-wrap">
                     <!-- 表单各个元素 -->
-                    <el-form-item
-                        v-for="(elm, key) in formData"
-                        :key="key"
-                        :prop="key"
-                        :label="elm.label"
-                    >
-                        <component
-                            :is="`${elm.el || 'el-input'}`"
-                            clearable
-                            filterable
-                            v-model="formDataVal[key]"
-                            v-bind="elm.attrs"
+                    <template v-for="(elm, key) in formData">
+                        <el-form-item
+                            v-if="!elm.hide"
+                            :key="key"
+                            :prop="key"
+                            :label="elm.label"
                         >
-                            <!-- 如果为下拉框 -->
-                            <template v-if="elm.el === 'el-select'">
-                                <el-option
-                                    v-for="opt in elm.options"
-                                    :key="opt.value"
-                                    :label="opt.label"
-                                    :value="opt.value"
-                                ></el-option>
-                            </template>
-                            <!-- 如果为上传 -->
-                            <template v-if="elm.el === 'el-upload'">
-                                <el-button type="primary">点击上传</el-button>
-                            </template>
-                        </component>
-                    </el-form-item>
-                    <!-- 自定义表单组件 -->
-                    <el-form-item
-                        v-for="(slot, index) in customFormItems"
-                        :key="index"
-                        :label="slot.data.attrs.label"
-                    >
-                        <RenderDom :vNode="slot"></RenderDom>
-                    </el-form-item>
+                            <component
+                                :is="`${elm.el || 'el-input'}`"
+                                clearable
+                                filterable
+                                v-model="formDataVal[key]"
+                                v-bind="elm.attrs"
+                            >
+                                <!-- 如果为下拉框 -->
+                                <template v-if="elm.el === 'el-select'">
+                                    <el-option
+                                        v-for="opt in elm.options"
+                                        :key="opt.value"
+                                        :label="opt.label"
+                                        :value="opt.value"
+                                    ></el-option>
+                                </template>
+                                <!-- 如果为上传 -->
+                                <template v-if="elm.el === 'el-upload'">
+                                    <el-button type="primary"
+                                        >点击上传</el-button
+                                    >
+                                </template>
+                            </component>
+                        </el-form-item>
+                    </template>
                     <!-- 表单按钮容器 -->
                     <!-- 提交按钮 -->
                     <el-form-item v-if="$attrs.formAttrs.inline">
@@ -122,21 +118,11 @@
         </el-form>
     </div>
 </template>
+
 <script>
 export default {
     name: 'compForm',
     inheritAttrs: false,
-    components: {
-        RenderDom: {
-            props: {
-                vNode: [Array, String, Object, Number], // 这里为什么要这么写其实报一个类型检测不通过我补一个的，一开始我只写了数组和字符串。因为我这里其实不一定是vnode，毕竟直接传字符串和数字也可以，干嘛非得是vnode
-            },
-            render(h) {
-                if (typeof this.vNode === 'object') return this.vNode
-                return h('div', this.vNode)
-            },
-        },
-    },
     props: {
         // 流体布局
         flex: {
@@ -202,7 +188,10 @@ export default {
             this.$refs.compForm.validate((valid) => {
                 if (!valid) return
                 this.submitLoading = true
-                this.$emit('submit-form-handler', this.formDataVal)
+                this.$emit(
+                    'submit-form-handler',
+                    Object.assign({}, this.formDataVal)
+                )
             })
         },
         // 重置表单
