@@ -113,6 +113,7 @@
         >
             <div style="height: 60vh">
                 <component
+                    v-if="dialogVisible"
                     :is="newTableHandleBtns.dialogBtns[dialogIndex].dialog.el"
                     v-bind="
                         newTableHandleBtns.dialogBtns[dialogIndex].dialog.bind

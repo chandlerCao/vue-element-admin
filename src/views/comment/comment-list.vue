@@ -1,47 +1,25 @@
 <template>
-    <comp-container>
-        <comp-complex-table
-            :form-data="queryForm"
-            :table-data="tableData"
-            :request-method="
-                async (args) => $req($api.comment.getCommentList, args)
-            "
-        >
-            <!-- 评论对应文章 -->
-            <template #table-article_title="{ row }">
-                <comp-link
-                    v-if="row"
-                    @click="
-                        $router.push({
-                            name: '编辑文章',
-                            params: { aid: row.aid },
-                        })
-                    "
-                    >{{ row.article_title }}</comp-link
-                >
-            </template>
-        </comp-complex-table>
-        <!-- 对应的回复列表，以dialog展示 -->
-        <el-dialog
-            title="回复列表"
-            :visible.sync="crdDatas.visible"
-            width="90%"
-            top="50px"
-            append-to-body
-        >
-            <div style="height: 60vh">
-                <reply-list
-                    v-if="crdDatas.visible"
-                    :cid="crdDatas.curCid"
-                ></reply-list>
-            </div>
-            <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="crdDatas.visible = false"
-                    >关 闭</el-button
-                >
-            </span>
-        </el-dialog>
-    </comp-container>
+    <comp-complex-table
+        :form-data="queryForm"
+        :table-data="tableData"
+        :request-method="
+            async (args) => $req($api.comment.getCommentList, args)
+        "
+    >
+        <!-- 评论对应文章 -->
+        <template #table-article_title="{ row }">
+            <comp-link
+                v-if="row"
+                @click="
+                    $router.push({
+                        name: '编辑文章',
+                        params: { aid: row.aid },
+                    })
+                "
+                >{{ row.article_title }}</comp-link
+            >
+        </template>
+    </comp-complex-table>
 </template>
 
 <script>
@@ -49,7 +27,6 @@ import replyList from './reply-list'
 export default {
     name: 'commentList',
     inheritAttrs: false,
-    components: { replyList },
     data() {
         return {
             // 表格查询表单
@@ -145,6 +122,18 @@ export default {
                 // 操作按钮
                 tableHandleBtns: {
                     width: 240,
+                    dialogBtns: [
+                        {
+                            btn: {
+                                name: '对应回复',
+                            },
+                            dialog: {
+                                title: '回复列表',
+                                arguments: ['cid'],
+                                el: replyList,
+                            },
+                        },
+                    ],
                     // 删除功能
                     delete: {
                         btn: {
@@ -159,7 +148,7 @@ export default {
                             )
                         },
                     },
-                    customBtns: [
+                    /* customBtns: [
                         {
                             btn: {
                                 name: '对应回复',
@@ -175,13 +164,8 @@ export default {
                                 this.crdDatas.curCid = row.cid
                             },
                         },
-                    ],
+                    ], */
                 },
-            },
-            // 评论对应回复弹框
-            crdDatas: {
-                visible: false,
-                curCid: '',
             },
         }
     },
