@@ -55,9 +55,6 @@ for (const key in directive) {
   Vue.directive(key, directive[key])
 }
 
-// 数组方法
-import '@/utils/Array'
-
 new Vue({
   router,
   store,

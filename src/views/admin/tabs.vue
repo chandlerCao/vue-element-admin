@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import { findIndex } from 'lodash'
 export default {
     name: 'tabs',
     data() {
@@ -144,7 +145,8 @@ export default {
                     })
                 }
                 this.curRouter.name = route.name
-                this.curRouter.index = this.tabList.have(
+                this.curRouter.index = findIndex(
+                    this.tabList,
                     (tab) => tab.name === route.name
                 )
             },
