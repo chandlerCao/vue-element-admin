@@ -101,7 +101,10 @@
         </el-footer>
         <!-- 表格单行点击出现的弹框 -->
         <el-dialog
-            v-if="newTableHandleBtns.dialogBtns.length"
+            v-if="
+                newTableHandleBtns.dialogBtns &&
+                newTableHandleBtns.dialogBtns.length
+            "
             :title="newTableHandleBtns.dialogBtns[dialogIndex].dialog.title"
             :visible.sync="dialogVisible"
             width="90%"
