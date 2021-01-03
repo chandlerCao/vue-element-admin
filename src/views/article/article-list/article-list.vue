@@ -28,11 +28,11 @@ export default {
                             value: '',
                         },
                         {
-                            label: '上线',
+                            label: '已上线',
                             value: '1',
                         },
                         {
-                            label: '未上线',
+                            label: '草稿箱',
                             value: '0',
                         },
                     ],

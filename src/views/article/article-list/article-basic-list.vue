@@ -45,8 +45,10 @@
             <!-- 状态 -->
             <template #table-state="{ row }">
                 <template v-if="row">
-                    <el-tag v-if="row.state === 1" type="success">上线</el-tag>
-                    <el-tag v-if="row.state === 0" type="info">未上线</el-tag>
+                    <el-tag v-if="row.state === 1" type="success"
+                        >已上线</el-tag
+                    >
+                    <el-tag v-if="row.state === 0" type="info">草稿箱</el-tag>
                     <el-tag v-if="row.state === -1" type="danger"
                         >回收站</el-tag
                     >

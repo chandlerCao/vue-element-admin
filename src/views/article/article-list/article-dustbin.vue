@@ -14,7 +14,7 @@ export default {
     components: { articleBasicList },
     data() {
         return {
-            requestMethod: async args =>
+            requestMethod: async (args) =>
                 this.$req(this.$api.article.getDustbinList, args),
             tableHandleBtns: {
                 width: 220,
@@ -22,12 +22,12 @@ export default {
                 delete: {
                     btn: {
                         name: '彻底删除',
-                        message: '确认彻底删除当前文章吗？'
+                        message: '确认彻底删除当前文章吗？',
                     },
-                    deleteReq: async args => {
+                    deleteReq: async (args) => {
                         // 表格删除接口
                         return this.$req(this.$api.article.articleDel, args)
-                    }
+                    },
                 },
                 customBtns: [
                     {
@@ -37,22 +37,22 @@ export default {
                                 type: 'success',
                                 size: 'mini',
                                 icon: 'el-icon-refresh-left',
-                                loading: false
-                            }
+                                loading: false,
+                            },
                         },
                         handler: async (row, handleBtn) => {
                             handleBtn.btn.attrs.loading = true
                             await this.$req(this.$api.article.articleRecovery, {
-                                aid: [row.aid]
+                                aid: [row.aid],
                             })
                             // 重载表格
                             this.$refs.articleDustbin.$refs.compComplexTable.reloadTableHandler()
                             handleBtn.btn.attrs.loading = false
-                        }
-                    }
-                ]
-            }
+                        },
+                    },
+                ],
+            },
         }
-    }
+    },
 }
 </script>

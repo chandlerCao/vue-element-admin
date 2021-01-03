@@ -33,17 +33,17 @@
                     fixed="right"
                 >
                     <template #default="{ row }">
-                        <!-- <slot name="handle-btns" :row="row"></slot> -->
+                        <!-- 自定义按钮 -->
                         <el-button
                             v-for="(
-                                handleBtn, index
+                                btnItem, index
                             ) in tableHandleBtns.customBtns"
                             :key="index"
-                            v-bind="handleBtn.btn.attrs"
-                            @click="handleBtn.handler(row, index, handleBtn)"
-                            >{{ handleBtn.btn.name }}</el-button
+                            v-bind="btnItem.btn.attrs"
+                            @click="btnItem.handler(row, btnItem)"
+                            >{{ btnItem.btn.name }}</el-button
                         >
-                        <!-- 点击出现弹框按钮 -->
+                        <!-- 弹框按钮 -->
                         <el-button
                             v-for="(
                                 btnItem, index
