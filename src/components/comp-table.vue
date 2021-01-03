@@ -182,7 +182,7 @@ export default {
                 dialogBtns: [
                     {
                         btn: {
-                            name: '编辑',
+                            name: '点击出现弹框',
                             attrs: {
                                 type: 'primary',
                                 size: 'mini',
@@ -190,7 +190,7 @@ export default {
                             },
                         },
                         dialog: {
-                            title: '编辑',
+                            title: '弹框来咯',
                             arguments: [],
                             bind: {},
                             el: 'div',

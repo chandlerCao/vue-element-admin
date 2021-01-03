@@ -126,6 +126,9 @@ export default {
                         {
                             btn: {
                                 name: '对应回复',
+                                attrs: {
+                                    icon: 'el-icon-chat-line-square',
+                                },
                             },
                             dialog: {
                                 title: '回复列表',

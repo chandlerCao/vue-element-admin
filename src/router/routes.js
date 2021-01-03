@@ -86,7 +86,8 @@ export default [
                     icon: 'el-icon-collection-tag'
                 },
                 hide: true,
-                component: () => import('@/views/tag/tag-form/tag-edit')
+                component: () => import('@/views/tag/tag-form/tag-edit'),
+                props: true
             },
             {
                 path: 'list',
@@ -171,6 +172,7 @@ export default [
         meta: {
             icon: 'el-icon-user'
         },
-        component: () => import('@/views/user/user-edit')
+        component: () => import('@/views/user/user-edit'),
+        props: true
     }
 ]
