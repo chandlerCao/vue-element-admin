@@ -40,7 +40,7 @@ export default {
                 formAttrs: {
                     size: 'mini',
                     inline: true,
-                    labelWidth: '70px',
+                    labelWidth: '90px',
                 },
                 submitBtn: {
                     name: '查询标签',
