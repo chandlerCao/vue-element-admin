@@ -1,7 +1,7 @@
 <template>
     <comp-container class="comp-complex-table">
         <el-container>
-            <el-header class="comp-complex-query-form">
+            <el-header class="comp-complex__item comp-complex__queryform">
                 <!-- 表格查询表单 -->
                 <comp-form
                     v-if="$attrs['form-data']"
@@ -20,7 +20,7 @@
                 <div class="table-head-btns"></div>
             </el-header>
             <!-- 表格 -->
-            <el-main>
+            <el-main class="comp-complex__item comp-complex__table">
                 <comp-table
                     ref="compTable"
                     v-bind="$attrs['table-data']"
@@ -87,9 +87,19 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.comp-complex-query-form {
+.comp-complex__item {
+    margin-right: 15px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(131, 131, 146, 0.3);
+}
+.comp-complex__queryform {
     height: auto !important;
-    max-height: 94px !important;
-    overflow: auto;
+    box-sizing: border-box;
+    padding-top: 15px;
+}
+.comp-complex__table {
+    padding: 15px;
 }
 </style>

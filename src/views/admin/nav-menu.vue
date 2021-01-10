@@ -1,14 +1,16 @@
 <!-- 导航菜单 -->
 <template>
-    <div id="nav-menu" :class="{ padding: !isCollapse }">
+    <!-- :class="{ padding: !isCollapse }" -->
+    <div id="nav-menu">
         <el-menu
             class="el-menu-vertical-demo"
             :default-active="$route.fullPath"
-            router
-            text-color="#6c748a"
-            active-text-color="#6c748a"
-            style="height: 100%"
             :collapse="isCollapse"
+            router
+            background-color="#212528"
+            text-color="#fff"
+            active-text-color="#409eff"
+            style="height: 100%"
         >
             <comp-navmenu
                 v-for="item in routes"

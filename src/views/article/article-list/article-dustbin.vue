@@ -17,7 +17,7 @@ export default {
             requestMethod: async (args) =>
                 this.$req(this.$api.article.getDustbinList, args),
             tableHandleBtns: {
-                width: 220,
+                width: 230,
                 // 删除功能
                 delete: {
                     btn: {

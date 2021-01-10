@@ -7,7 +7,6 @@
                 :data="tableData"
                 height="100%"
                 v-loading="tableDisabled"
-                stripe
             >
                 <!-- 表格序号 -->
                 <el-table-column type="index" label="序号"></el-table-column>
@@ -20,9 +19,9 @@
                     v-bind="item.attrs"
                 >
                     <template #default="{ row }">
-                        <slot :name="`table-${item.prop}`" :row="row">{{
-                            row[item.prop]
-                        }}</slot>
+                        <slot :name="`table-${item.prop}`" :row="row">
+                            {{ row[item.prop] }}
+                        </slot>
                     </template>
                 </el-table-column>
                 <!-- 表格操作列 -->
@@ -107,8 +106,7 @@
             "
             :title="newTableHandleBtns.dialogBtns[dialogIndex].dialog.title"
             :visible.sync="dialogVisible"
-            width="90%"
-            top="50px"
+            v-bind="newTableHandleBtns.dialogBtns[dialogIndex].dialog.attrs"
             append-to-body
         >
             <div style="height: 60vh">
@@ -176,32 +174,36 @@ export default {
             dialogIndex: 0,
             // 弹框状态
             dialogVisible: false,
+            // 枚举弹框表格值
+            dialogBtnDemo: {
+                btn: {
+                    name: '点击出现弹框',
+                    attrs: {
+                        type: 'primary',
+                        size: 'mini',
+                        icon: 'el-icon-edit',
+                    },
+                },
+                dialog: {
+                    title: '弹框来咯',
+                    arguments: [],
+                    attrs: {
+                        width: '90%',
+                        top: '50px',
+                    },
+                    bind: {},
+                    el: 'div',
+                },
+                handler(row, self) {
+                    self.dialog.arguments.forEach((item) => {
+                        self.dialog.bind[item] = row[item]
+                    })
+                },
+            },
             // 枚举表格操作按钮
             enumTableHandleBtns: {
                 // 编辑功能
-                dialogBtns: [
-                    {
-                        btn: {
-                            name: '点击出现弹框',
-                            attrs: {
-                                type: 'primary',
-                                size: 'mini',
-                                icon: 'el-icon-edit',
-                            },
-                        },
-                        dialog: {
-                            title: '弹框来咯',
-                            arguments: [],
-                            bind: {},
-                            el: 'div',
-                        },
-                        handler(row, self) {
-                            self.dialog.arguments.forEach((item) => {
-                                self.dialog.bind[item] = row[item]
-                            })
-                        },
-                    },
-                ],
+                dialogBtns: [],
                 // 删除功能
                 delete: {
                     btn: {
@@ -271,6 +273,15 @@ export default {
                             key
                         ]
                 }
+
+                this.tableHandleBtns.dialogBtns &&
+                    this.tableHandleBtns.dialogBtns.length &&
+                    this.tableHandleBtns.dialogBtns.forEach(() => {
+                        localTableHandleBtns.dialogBtns.push(
+                            Object.assign({}, this.dialogBtnDemo)
+                        )
+                    })
+
                 this.newTableHandleBtns = objUtils.assign(
                     localTableHandleBtns,
                     this.tableHandleBtns

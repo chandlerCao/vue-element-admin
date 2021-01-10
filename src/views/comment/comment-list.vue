@@ -75,7 +75,7 @@ export default {
                         prop: 'cid',
                         label: 'ID',
                         attrs: {
-                            width: 220,
+                            width: 230,
                         },
                     },
                     {

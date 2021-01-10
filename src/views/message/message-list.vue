@@ -54,7 +54,7 @@ export default {
                         prop: 'mid',
                         label: 'ID',
                         attrs: {
-                            width: 220,
+                            width: 230,
                         },
                     },
                     {

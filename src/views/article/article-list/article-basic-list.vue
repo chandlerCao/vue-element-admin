@@ -151,7 +151,7 @@ export default {
                         prop: 'aid',
                         label: 'ID',
                         attrs: {
-                            width: 220,
+                            width: 230,
                         },
                     },
                     {

@@ -2,6 +2,18 @@
     padding: 8px 0;
 } */
 
+.el-table {
+    color: #49556c;
+    font-family: 微软雅黑;
+}
+
+.el-table th {
+    background-color: #ecf1f8;
+    font-size: 14px;
+    color: #878d99;
+    font-weight: bold;
+}
+
 .el-main, .el-container {
     height: 100%;
     overflow: hidden;
@@ -13,7 +25,8 @@
 
 .el-input__inner, .el-date-editor .el-range-input, .el-textarea__inner {
     border: none !important;
-    background-color: #f2f5fa !important;
+    background-color: #ecf1f8 !important;
+    color: #99a3aa;
 }
 
 .el-select {
@@ -32,8 +45,8 @@
 }
 
 .el-menu-item.is-active, .el-menu-item:hover, .el-submenu__title:hover {
-    background-color: #f5f8fb !important;
-    color: #409eff;
+    /* background-color: #f5f8fb !important;
+    color: #409eff; */
 }
 
 .el-date-editor--daterange.el-input__inner {
@@ -68,11 +81,11 @@
 }
 
 .el-submenu__title:hover, .el-menu-item:hover {
-    background-color: #f9fafd !important;
+    /* background-color: #f9fafd !important; */
 }
 
 .el-menu-item.is-active {
-    background-color: #f2f5fa !important;
+    /* background-color: #f2f5fa !important; */
 }
 
 .el-avatar>img {

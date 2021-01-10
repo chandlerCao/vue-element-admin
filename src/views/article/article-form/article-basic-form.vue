@@ -167,3 +167,9 @@ export default {
     },
 }
 </script>
+
+<style lang="less" scoped>
+#article-form {
+    background-color: #fff;
+}
+</style>

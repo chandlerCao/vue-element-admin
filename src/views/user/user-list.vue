@@ -57,7 +57,7 @@ export default {
                         prop: 'uid',
                         label: 'ID',
                         attrs: {
-                            width: 220,
+                            width: 230,
                         },
                     },
                     {

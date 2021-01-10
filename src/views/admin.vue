@@ -18,12 +18,12 @@
                 </div>
                 <user-bar></user-bar>
             </el-header>
-            <el-main>
+            <el-main id="admin-main">
                 <el-container>
                     <el-header style="height: auto; padding: 10px 15px 0">
                         <tabs></tabs>
                     </el-header>
-                    <el-main style="padding: 10px 0 15px 15px">
+                    <el-main style="padding: 10px 0 0 15px">
                         <transition name="slide-fade">
                             <router-view></router-view>
                         </transition>
@@ -90,5 +90,8 @@ export default {
 #header-content {
     display: flex;
     align-items: center;
+}
+#admin-main {
+    background-color: #f5f8fa;
 }
 </style>

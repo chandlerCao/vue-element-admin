@@ -64,7 +64,7 @@ export default {
                         prop: 'rid',
                         label: 'ID',
                         attrs: {
-                            width: 220,
+                            width: 230,
                         },
                     },
                     {
