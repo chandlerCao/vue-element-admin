@@ -91,7 +91,4 @@ export default {
     display: flex;
     align-items: center;
 }
-#admin-main {
-    background-color: #f5f8fa;
-}
 </style>
