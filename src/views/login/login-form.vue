@@ -37,8 +37,8 @@ export default {
         return {
             loginLoading: false,
             loginInfo: {
-                username: '',
-                password: '',
+                username: 'admin',
+                password: '1',
             },
         }
     },
@@ -54,7 +54,8 @@ export default {
                     window.localStorage.setItem('token', loginRes.token)
                     window.localStorage.setItem('uid', loginRes.uid)
                     this.$router.push({
-                        path: this.$route.query.redirect || 'admin/home',
+                        path:
+                            this.$route.query.redirect || 'admin/article/list',
                     })
                 })
                 .finally(() => {

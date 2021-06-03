@@ -2,6 +2,7 @@
 <template>
     <!-- :class="{ padding: !isCollapse }" -->
     <div id="nav-menu">
+        <h1 id="logo">曹德健的Blog</h1>
         <el-menu
             class="el-menu-vertical-demo"
             :default-active="$route.fullPath"
@@ -41,12 +42,23 @@ export default {
 </script>
 
 <style lang="less" scoped>
+#logo {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: rgb(33, 37, 40);
+    color: #409eff;
+    border-bottom: 1px solid #dcdfe6;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 #nav-menu {
     position: relative;
     height: 100%;
     box-sizing: border-box;
     border-right: 1px solid #e6edf6;
-    overflow: auto;
+    overflow: hidden;
     transition: 0.15s;
     &.padding {
         padding: 10px 15px 0;

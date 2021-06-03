@@ -109,7 +109,7 @@
             v-bind="newTableHandleBtns.dialogBtns[dialogIndex].dialog.attrs"
             append-to-body
         >
-            <div style="height: 60vh">
+            <div style="height: 70vh">
                 <component
                     v-if="dialogVisible"
                     :is="newTableHandleBtns.dialogBtns[dialogIndex].dialog.el"
