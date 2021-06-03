@@ -7,6 +7,12 @@
             class="el-menu-vertical-demo"
             :default-active="$route.fullPath"
             :collapse="isCollapse"
+            :default-openeds="[
+                '/admin/article',
+                '/admin/tag',
+                '/admin/comment',
+                '/admin/message',
+            ]"
             router
             background-color="#212528"
             text-color="#fff"
