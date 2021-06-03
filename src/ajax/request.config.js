@@ -1,4 +1,4 @@
 module.exports = {
-    serverUrl: 'http://localhost:7070',
+    serverUrl: 'http://116.62.113.105:7070',
     serverName: '/backend/'
 }

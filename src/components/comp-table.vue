@@ -63,7 +63,7 @@
                                 newTableHandleBtns.delete.btn.message ||
                                 '确认删除？'
                             "
-                            @onConfirm="
+                            @confirm="
                                 newTableHandleBtns.delete.handler({
                                     self: newTableHandleBtns.delete,
                                     row,
